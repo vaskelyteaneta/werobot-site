@@ -69,7 +69,10 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type HomepageDocumentDataSlicesSlice = HeroBannerSlice;
+type HomepageDocumentDataSlicesSlice =
+  | GraphicSlice
+  | EventinfoSlice
+  | HeroBannerSlice;
 
 /**
  * Content for Homepage documents

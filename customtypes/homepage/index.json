@@ -11,6 +11,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "graphic": {
+              "type": "SharedSlice"
+            },
+            "eventinfo": {
+              "type": "SharedSlice"
+            },
             "hero_banner": {
               "type": "SharedSlice"
             }
