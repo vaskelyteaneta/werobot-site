@@ -1,0 +1,28 @@
+{
+  "id": "hero_banner",
+  "type": "SharedSlice",
+  "name": "Herotext",
+  "description": "HeroBanner",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "WeRobot 2026",
+            "allowTargetBlank": true,
+            "multi": "heading1,strong"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

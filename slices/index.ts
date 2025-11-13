@@ -2,4 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-export const components = {};
+export const components = {
+  eventinfo: dynamic(() => import("./Eventinfo")),
+  graphic: dynamic(() => import("./Graphic")),
+  hero_banner: dynamic(() => import("./Herotext")),
+};
