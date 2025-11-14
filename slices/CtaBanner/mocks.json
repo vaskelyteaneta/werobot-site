@@ -1,0 +1,23 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"button_text": {
+				"__TYPE__": "FieldContent",
+				"value": "straw",
+				"type": "Text"
+			},
+			"button_link": {
+				"__TYPE__": "LinkContent",
+				"key": "b1c0cf60-97a5-4e9d-a6eb-2e13c72433fd",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "extra"
+				}
+			}
+		},
+		"items": []
+	}
+]

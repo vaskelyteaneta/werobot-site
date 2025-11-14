@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  cta_banner: dynamic(() => import("./CtaBanner")),
   eventinfo: dynamic(() => import("./Eventinfo")),
   graphic: dynamic(() => import("./Graphic")),
   hero_banner: dynamic(() => import("./Herotext")),

@@ -140,6 +140,67 @@ export type HomepageDocument<Lang extends string = string> =
 export type AllDocumentTypes = HomepageDocument;
 
 /**
+ * Primary content in *CtaBanner → Default → Primary*
+ */
+export interface CtaBannerSliceDefaultPrimary {
+  /**
+   * Button Text field in *CtaBanner → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: GET THE TICKET
+   * - **API ID Path**: cta_banner.default.primary.button_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  button_text: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *CtaBanner → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_banner.default.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Default variation for CtaBanner Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CtaBannerSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CtaBannerSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *CtaBanner*
+ */
+type CtaBannerSliceVariation = CtaBannerSliceDefault;
+
+/**
+ * CtaBanner Shared Slice
+ *
+ * - **API ID**: `cta_banner`
+ * - **Description**: CtaBanner
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CtaBannerSlice = prismic.SharedSlice<
+  "cta_banner",
+  CtaBannerSliceVariation
+>;
+
+/**
  * Primary content in *Eventinfo → Default → Primary*
  */
 export interface EventinfoSliceDefaultPrimary {
@@ -343,6 +404,10 @@ declare module "@prismicio/client" {
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      CtaBannerSlice,
+      CtaBannerSliceDefaultPrimary,
+      CtaBannerSliceVariation,
+      CtaBannerSliceDefault,
       EventinfoSlice,
       EventinfoSliceDefaultPrimary,
       EventinfoSliceVariation,
