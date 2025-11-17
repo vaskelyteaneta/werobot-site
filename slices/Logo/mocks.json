@@ -1,0 +1,62 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"logo": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1531771686035-25f47595c87a",
+					"width": 3024,
+					"height": 3778
+				},
+				"url": "https://images.unsplash.com/photo-1531771686035-25f47595c87a",
+				"width": 3024,
+				"height": 3778,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "unhappy",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"text": {
+				"__TYPE__": "FieldContent",
+				"value": "already",
+				"type": "Text"
+			},
+			"desktop_offset_x": {
+				"__TYPE__": "FieldContent",
+				"value": 100,
+				"type": "Number"
+			},
+			"desktop_offset_y": {
+				"__TYPE__": "FieldContent",
+				"value": 1280,
+				"type": "Number"
+			},
+			"desktop_width": {
+				"__TYPE__": "FieldContent",
+				"value": 360,
+				"type": "Number"
+			},
+			"z_index": {
+				"__TYPE__": "FieldContent",
+				"value": 3,
+				"type": "Number"
+			},
+			"rotation": {
+				"__TYPE__": "FieldContent",
+				"value": -2,
+				"type": "Number"
+			}
+		},
+		"items": []
+	}
+]

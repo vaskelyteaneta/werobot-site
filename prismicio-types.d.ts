@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type HomepageDocumentDataSlicesSlice =
+  | LogoSlice
   | SectionTitleSlice
   | BannerSlice
   | CtaBannerSlice
@@ -425,6 +426,83 @@ export type HeroBannerSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Logo → Default → Primary*
+ */
+export interface LogoSliceDefaultPrimary {
+  /**
+   * LOGO  field in *Logo → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: logo.default.primary.logo
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
+   * TEXT  field in *Logo → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: TRALIALIA
+   * - **API ID Path**: logo.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Desktop offset X (px) field in *Logo → Default → Primary*
+   */
+  desktop_offset_x: prismic.NumberField;
+
+  /**
+   * Desktop offset Y (px) field in *Logo → Default → Primary*
+   */
+  desktop_offset_y: prismic.NumberField;
+
+  /**
+   * Desktop width (px) field in *Logo → Default → Primary*
+   */
+  desktop_width: prismic.NumberField;
+
+  /**
+   * Layer order (z-index) field in *Logo → Default → Primary*
+   */
+  z_index: prismic.NumberField;
+
+  /**
+   * Rotation (degrees) field in *Logo → Default → Primary*
+   */
+  rotation: prismic.NumberField;
+}
+
+/**
+ * Default variation for Logo Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LogoSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LogoSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Logo*
+ */
+type LogoSliceVariation = LogoSliceDefault;
+
+/**
+ * Logo Shared Slice
+ *
+ * - **API ID**: `logo`
+ * - **Description**: Logo
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LogoSlice = prismic.SharedSlice<"logo", LogoSliceVariation>;
+
+/**
  * Primary content in *SectionTitle → Default → Primary*
  */
 export interface SectionTitleSliceDefaultPrimary {
@@ -514,6 +592,10 @@ declare module "@prismicio/client" {
       HeroBannerSliceDefaultPrimary,
       HeroBannerSliceVariation,
       HeroBannerSliceDefault,
+      LogoSlice,
+      LogoSliceDefaultPrimary,
+      LogoSliceVariation,
+      LogoSliceDefault,
       SectionTitleSlice,
       SectionTitleSliceDefaultPrimary,
       SectionTitleSliceVariation,

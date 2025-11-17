@@ -1,0 +1,71 @@
+{
+  "id": "logo",
+  "type": "SharedSlice",
+  "name": "Logo",
+  "description": "Logo",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "logo": {
+          "type": "Image",
+          "config": {
+            "label": "LOGO ",
+            "constraint": {
+              "width": null
+            },
+            "thumbnails": []
+          }
+        },
+        "text": {
+          "type": "Text",
+          "config": {
+            "label": "TEXT ",
+            "placeholder": "TRALIALIA"
+          }
+        },
+        "desktop_offset_x": {
+          "type": "Number",
+          "config": {
+            "label": "Desktop offset X (px)",
+            "placeholder": "e.g. 80"
+          }
+        },
+        "desktop_offset_y": {
+          "type": "Number",
+          "config": {
+            "label": "Desktop offset Y (px)",
+            "placeholder": "e.g. 120"
+          }
+        },
+        "desktop_width": {
+          "type": "Number",
+          "config": {
+            "label": "Desktop width (px)",
+            "placeholder": "e.g. 320"
+          }
+        },
+        "z_index": {
+          "type": "Number",
+          "config": {
+            "label": "Layer order (z-index)",
+            "placeholder": "Higher numbers appear on top"
+          }
+        },
+        "rotation": {
+          "type": "Number",
+          "config": {
+            "label": "Rotation (degrees)",
+            "placeholder": "e.g. -5"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
