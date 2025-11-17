@@ -11,18 +11,25 @@ export type BannerProps = SliceComponentProps<Content.BannerSlice>;
  * Component for "Banner" Slices.
  */
 const Banner: FC<BannerProps> = ({ slice }) => {
+  const label = slice.primary.button_text || "WHAT WEROBOT OFFERS";
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="w-full flex justify-center py-12 px-4"
     >
-      Placeholder component for banner (variation: {slice.variation}) slices.
-      <br />
-      <strong>You can edit this slice directly in your code editor.</strong>
-      {/**
-       * 💡 Use the Prismic MCP server with your code editor
-       * 📚 Docs: https://prismic.io/docs/ai#code-with-prismics-mcp-server
-       */}
+      <div
+        className="inline-flex rounded-full shadow-[12px_12px_0_#000000] uppercase font-mono"
+        style={{
+          backgroundColor: "#F5FF6B",
+          padding: "22px 80px",
+          letterSpacing: "0.15em",
+          fontSize: "22px",
+        }}
+      >
+        {label}
+      </div>
     </section>
   );
 };

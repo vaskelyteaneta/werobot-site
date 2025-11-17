@@ -146,7 +146,7 @@ export type AllDocumentTypes = HomepageDocument;
  */
 export interface BannerSliceDefaultPrimary {
   /**
-   * Button text field in *Banner → Default → Primary*
+   * button text field in *Banner → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*

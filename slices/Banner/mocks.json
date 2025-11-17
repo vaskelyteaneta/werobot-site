@@ -5,10 +5,15 @@
 		"primary": {
 			"button_text": {
 				"__TYPE__": "FieldContent",
-				"value": "win",
+				"value": "funny",
 				"type": "Text"
 			}
 		},
-		"items": []
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

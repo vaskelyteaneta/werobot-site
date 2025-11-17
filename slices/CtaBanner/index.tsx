@@ -39,7 +39,6 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             letterSpacing: "0.15em",
             textTransform: "uppercase",
             textDecoration: "none",
-            border: "3px solid #000000",
           }}
         >
           {label}
@@ -52,7 +51,6 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             backgroundColor: "#888888",
             color: "#000000",
             borderRadius: "999px",
-            border: "3px solid #000000",
             fontFamily: "monospace",
             fontSize: "22px",
             letterSpacing: "0.15em",

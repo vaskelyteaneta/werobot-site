@@ -15,7 +15,7 @@
         "button_text": {
           "type": "Text",
           "config": {
-            "label": "Button text",
+            "label": "button text",
             "placeholder": ""
           }
         }
