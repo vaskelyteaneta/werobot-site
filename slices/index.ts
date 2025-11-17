@@ -9,5 +9,6 @@ export const components = {
   graphic: dynamic(() => import("./Graphic")),
   hero_banner: dynamic(() => import("./Herotext")),
   logo: dynamic(() => import("./Logo")),
+  logo_row: dynamic(() => import("./LogoRow")),
   section_title: dynamic(() => import("./SectionTitle")),
 };

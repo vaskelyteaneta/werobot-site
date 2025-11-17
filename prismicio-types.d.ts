@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type HomepageDocumentDataSlicesSlice =
+  | LogoRowSlice
   | LogoSlice
   | SectionTitleSlice
   | BannerSlice
@@ -451,26 +452,51 @@ export interface LogoSliceDefaultPrimary {
 
   /**
    * Desktop offset X (px) field in *Logo → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: e.g. 80
+   * - **API ID Path**: logo.default.primary.desktop_offset_x
+   * - **Documentation**: https://prismic.io/docs/fields/number
    */
   desktop_offset_x: prismic.NumberField;
 
   /**
    * Desktop offset Y (px) field in *Logo → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: e.g. 120
+   * - **API ID Path**: logo.default.primary.desktop_offset_y
+   * - **Documentation**: https://prismic.io/docs/fields/number
    */
   desktop_offset_y: prismic.NumberField;
 
   /**
    * Desktop width (px) field in *Logo → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: e.g. 320
+   * - **API ID Path**: logo.default.primary.desktop_width
+   * - **Documentation**: https://prismic.io/docs/fields/number
    */
   desktop_width: prismic.NumberField;
 
   /**
    * Layer order (z-index) field in *Logo → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: Higher numbers appear on top
+   * - **API ID Path**: logo.default.primary.z_index
+   * - **Documentation**: https://prismic.io/docs/fields/number
    */
   z_index: prismic.NumberField;
 
   /**
    * Rotation (degrees) field in *Logo → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: e.g. -5
+   * - **API ID Path**: logo.default.primary.rotation
+   * - **Documentation**: https://prismic.io/docs/fields/number
    */
   rotation: prismic.NumberField;
 }
@@ -501,6 +527,66 @@ type LogoSliceVariation = LogoSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type LogoSlice = prismic.SharedSlice<"logo", LogoSliceVariation>;
+
+/**
+ * Item in *LogoRow → Default → Primary → LOGO*
+ */
+export interface LogoRowSliceDefaultPrimaryLogoItem {
+  /**
+   * logo field in *LogoRow → Default → Primary → LOGO*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: logo_row.default.primary.logo[].logo
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  logo: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *LogoRow → Default → Primary*
+ */
+export interface LogoRowSliceDefaultPrimary {
+  /**
+   * LOGO field in *LogoRow → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: logo_row.default.primary.logo[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  logo: prismic.GroupField<Simplify<LogoRowSliceDefaultPrimaryLogoItem>>;
+}
+
+/**
+ * Default variation for LogoRow Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LogoRowSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LogoRowSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *LogoRow*
+ */
+type LogoRowSliceVariation = LogoRowSliceDefault;
+
+/**
+ * LogoRow Shared Slice
+ *
+ * - **API ID**: `logo_row`
+ * - **Description**: LogoRow
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LogoRowSlice = prismic.SharedSlice<
+  "logo_row",
+  LogoRowSliceVariation
+>;
 
 /**
  * Primary content in *SectionTitle → Default → Primary*
@@ -596,6 +682,11 @@ declare module "@prismicio/client" {
       LogoSliceDefaultPrimary,
       LogoSliceVariation,
       LogoSliceDefault,
+      LogoRowSlice,
+      LogoRowSliceDefaultPrimaryLogoItem,
+      LogoRowSliceDefaultPrimary,
+      LogoRowSliceVariation,
+      LogoRowSliceDefault,
       SectionTitleSlice,
       SectionTitleSliceDefaultPrimary,
       SectionTitleSliceVariation,
