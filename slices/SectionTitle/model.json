@@ -16,7 +16,7 @@
           "type": "StructuredText",
           "config": {
             "label": "title",
-            "placeholder": "",
+            "placeholder": "HOSTING ORGANISATIONS",
             "allowTargetBlank": true,
             "multi": "paragraph"
           }

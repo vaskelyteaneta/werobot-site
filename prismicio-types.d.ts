@@ -432,7 +432,7 @@ export interface SectionTitleSliceDefaultPrimary {
    * title field in *SectionTitle → Default → Primary*
    *
    * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
+   * - **Placeholder**: HOSTING ORGANISATIONS
    * - **API ID Path**: section_title.default.primary.title
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
