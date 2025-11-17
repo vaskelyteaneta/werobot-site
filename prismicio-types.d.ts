@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type HomepageDocumentDataSlicesSlice =
+  | SectionTitleSlice
   | BannerSlice
   | CtaBannerSlice
   | GraphicSlice
@@ -423,6 +424,51 @@ export type HeroBannerSlice = prismic.SharedSlice<
   HeroBannerSliceVariation
 >;
 
+/**
+ * Primary content in *SectionTitle → Default → Primary*
+ */
+export interface SectionTitleSliceDefaultPrimary {
+  /**
+   * title field in *SectionTitle → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section_title.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+}
+
+/**
+ * Default variation for SectionTitle Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionTitleSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SectionTitleSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SectionTitle*
+ */
+type SectionTitleSliceVariation = SectionTitleSliceDefault;
+
+/**
+ * SectionTitle Shared Slice
+ *
+ * - **API ID**: `section_title`
+ * - **Description**: SectionTitle
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionTitleSlice = prismic.SharedSlice<
+  "section_title",
+  SectionTitleSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -468,6 +514,10 @@ declare module "@prismicio/client" {
       HeroBannerSliceDefaultPrimary,
       HeroBannerSliceVariation,
       HeroBannerSliceDefault,
+      SectionTitleSlice,
+      SectionTitleSliceDefaultPrimary,
+      SectionTitleSliceVariation,
+      SectionTitleSliceDefault,
     };
   }
 }

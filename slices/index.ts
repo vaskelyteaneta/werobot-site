@@ -8,4 +8,5 @@ export const components = {
   eventinfo: dynamic(() => import("./Eventinfo")),
   graphic: dynamic(() => import("./Graphic")),
   hero_banner: dynamic(() => import("./Herotext")),
+  section_title: dynamic(() => import("./SectionTitle")),
 };
