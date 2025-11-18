@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { PrismicLink, SliceComponentProps } from "@prismicio/react";
 
 /**
@@ -38,7 +38,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
             const pillClass =
               "inline-flex items-center justify-center rounded-[999px] bg-white px-8 py-3 shadow-[10px_10px_0_#000000]";
 
-            return item.link?.url ? (
+            const hasLink = item.link && isFilled.link(item.link);
+
+            return hasLink ? (
               <PrismicLink
                 key={`${item.text}-${index}`}
                 field={item.link}
