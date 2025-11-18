@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicLink, SliceComponentProps } from "@prismicio/react";
 
 /**
  * Props for `NamePills`.
@@ -11,19 +11,58 @@ export type NamePillsProps = SliceComponentProps<Content.NamePillsSlice>;
  * Component for "NamePills" Slices.
  */
 const NamePills: FC<NamePillsProps> = ({ slice }) => {
+  const pills = slice.primary.pills ?? [];
+  const hasTitle = Boolean(slice.primary.section_title);
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="w-full flex flex-col items-center gap-8 py-12 px-4"
     >
-      Placeholder component for name_pills (variation: {slice.variation})
-      slices.
-      <br />
-      <strong>You can edit this slice directly in your code editor.</strong>
-      {/**
-       * 💡 Use the Prismic MCP server with your code editor
-       * 📚 Docs: https://prismic.io/docs/ai#code-with-prismics-mcp-server
-       */}
+      {hasTitle && (
+        <p className="font-mono text-base tracking-[0.35em] uppercase text-center">
+          {slice.primary.section_title}
+        </p>
+      )}
+
+      <div className="w-full max-w-5xl flex flex-wrap justify-center gap-6">
+        {pills.length > 0 ? (
+          pills.map((item, index) => {
+            const content = (
+              <span className="font-mono text-sm tracking-[0.1em]">
+                {item.text || "Name"}
+              </span>
+            );
+
+            const pillClass =
+              "inline-flex items-center justify-center rounded-[999px] bg-white px-8 py-3 shadow-[10px_10px_0_#000000]";
+
+            return item.link?.url ? (
+              <PrismicLink
+                key={`${item.text}-${index}`}
+                field={item.link}
+                className={pillClass}
+                style={{ minWidth: "180px" }}
+              >
+                {content}
+              </PrismicLink>
+            ) : (
+              <div
+                key={`${item.text || index}-static`}
+                className={pillClass}
+                style={{ minWidth: "180px" }}
+              >
+                {content}
+              </div>
+            );
+          })
+        ) : (
+          <p className="text-sm text-gray-500 font-mono uppercase tracking-[0.2em]">
+            Add names to the NamePills slice in Prismic.
+          </p>
+        )}
+      </div>
     </section>
   );
 };
