@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type HomepageDocumentDataSlicesSlice =
+  | NamePillsSlice
   | LogoRowSlice
   | LogoSlice
   | SectionTitleSlice
@@ -589,6 +590,86 @@ export type LogoRowSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *NamePills → Default → Primary → pills*
+ */
+export interface NamePillsSliceDefaultPrimaryPillsItem {
+  /**
+   * Text field in *NamePills → Default → Primary → pills*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: name_pills.default.primary.pills[].text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Link field in *NamePills → Default → Primary → pills*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: name_pills.default.primary.pills[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *NamePills → Default → Primary*
+ */
+export interface NamePillsSliceDefaultPrimary {
+  /**
+   * section_title field in *NamePills → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: name_pills.default.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  section_title: prismic.KeyTextField;
+
+  /**
+   * pills field in *NamePills → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: name_pills.default.primary.pills[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  pills: prismic.GroupField<Simplify<NamePillsSliceDefaultPrimaryPillsItem>>;
+}
+
+/**
+ * Default variation for NamePills Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type NamePillsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<NamePillsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *NamePills*
+ */
+type NamePillsSliceVariation = NamePillsSliceDefault;
+
+/**
+ * NamePills Shared Slice
+ *
+ * - **API ID**: `name_pills`
+ * - **Description**: NamePills
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type NamePillsSlice = prismic.SharedSlice<
+  "name_pills",
+  NamePillsSliceVariation
+>;
+
+/**
  * Primary content in *SectionTitle → Default → Primary*
  */
 export interface SectionTitleSliceDefaultPrimary {
@@ -687,6 +768,11 @@ declare module "@prismicio/client" {
       LogoRowSliceDefaultPrimary,
       LogoRowSliceVariation,
       LogoRowSliceDefault,
+      NamePillsSlice,
+      NamePillsSliceDefaultPrimaryPillsItem,
+      NamePillsSliceDefaultPrimary,
+      NamePillsSliceVariation,
+      NamePillsSliceDefault,
       SectionTitleSlice,
       SectionTitleSliceDefaultPrimary,
       SectionTitleSliceVariation,

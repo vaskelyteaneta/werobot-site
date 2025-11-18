@@ -11,28 +11,46 @@ export type LogoProps = SliceComponentProps<Content.LogoSlice>;
  * Component for "Logo" Slices.
  */
 const Logo: FC<LogoProps> = ({ slice }) => {
-  const offsetX = slice.primary.desktop_offset_x ?? 0;
-  const offsetY = slice.primary.desktop_offset_y ?? 0;
+  const rawOffsetX = slice.primary.desktop_offset_x;
+  const rawOffsetY = slice.primary.desktop_offset_y;
   const width = slice.primary.desktop_width ?? 360;
   const zIndex = slice.primary.z_index ?? 1;
   const rotation = slice.primary.rotation ?? 0;
   const hasText = Boolean(slice.primary.text);
 
+  const useAbsolute =
+    typeof rawOffsetX === "number" && typeof rawOffsetY === "number";
+
+  const offsetX = rawOffsetX ?? 0;
+  const offsetY = rawOffsetY ?? 0;
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex justify-center py-10 px-4 lg:px-0 relative lg:absolute"
-      style={{
-        top: offsetY,
-        left: offsetX,
-        width: `${width}px`,
-        zIndex,
-      }}
+      className={[
+        "w-full",
+        "py-10 px-4",
+        useAbsolute
+          ? "lg:px-0 relative lg:absolute flex justify-center lg:justify-start"
+          : "flex justify-center",
+      ].join(" ")}
+      style={
+        useAbsolute
+          ? {
+              top: offsetY,
+              left: offsetX,
+              width: `${width}px`,
+              zIndex,
+            }
+          : undefined
+      }
     >
       <div
-        className="w-full rounded-[32px] bg-white shadow-[14px_14px_0_#000000] border border-black/5 px-10 py-6 flex flex-col items-center gap-3"
+        className="rounded-[32px] bg-white shadow-[14px_14px_0_#000000] border border-black/5 px-10 py-6 flex flex-col items-center gap-3"
         style={{
+          width: useAbsolute ? "100%" : "auto",
+          maxWidth: useAbsolute ? "100%" : `${width}px`,
           transform: rotation ? `rotate(${rotation}deg)` : undefined,
           transformOrigin: "center",
         }}

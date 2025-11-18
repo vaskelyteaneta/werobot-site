@@ -10,5 +10,6 @@ export const components = {
   hero_banner: dynamic(() => import("./Herotext")),
   logo: dynamic(() => import("./Logo")),
   logo_row: dynamic(() => import("./LogoRow")),
+  name_pills: dynamic(() => import("./NamePills")),
   section_title: dynamic(() => import("./SectionTitle")),
 };

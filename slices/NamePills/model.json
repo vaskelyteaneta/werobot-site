@@ -1,0 +1,53 @@
+{
+  "id": "name_pills",
+  "type": "SharedSlice",
+  "name": "NamePills",
+  "description": "NamePills",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "section_title": {
+          "type": "Text",
+          "config": {
+            "label": "section_title",
+            "placeholder": ""
+          }
+        },
+        "pills": {
+          "type": "Group",
+          "config": {
+            "label": "pills",
+            "repeat": true,
+            "fields": {
+              "text": {
+                "type": "Text",
+                "config": {
+                  "label": "Text",
+                  "placeholder": ""
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
