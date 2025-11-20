@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
-import { revalidateTag, revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
   try {
-    // Revalidate the Prismic cache tag
-    revalidateTag("prismic");
-    
-    // Also revalidate the homepage path
-    revalidatePath("/");
+    // Revalidate the homepage path (this will clear all cached data for the page)
+    await revalidatePath("/");
 
     return NextResponse.json({ 
       revalidated: true, 
