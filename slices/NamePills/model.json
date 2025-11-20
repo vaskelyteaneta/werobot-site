@@ -19,6 +19,17 @@
             "placeholder": ""
           }
         },
+        "layout": {
+          "type": "Select",
+          "config": {
+            "label": "Layout",
+            "options": [
+              "wrap",
+              "columns"
+            ],
+            "default_value": "wrap"
+          }
+        },
         "pills": {
           "type": "Group",
           "config": {

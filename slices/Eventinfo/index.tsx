@@ -33,7 +33,7 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
         className={[
           "inline-flex max-w-[90vw]",
           "px-10 py-4",
-          "rounded-[999px]",
+          "rounded-lg",
           "bg-white",
           "border border-black/5",
           alignClasses,

@@ -20,7 +20,7 @@ const Banner: FC<BannerProps> = ({ slice }) => {
       className="w-full flex justify-center py-12 px-4"
     >
       <div
-        className="inline-flex rounded-full shadow-[12px_12px_0_#000000] uppercase font-mono"
+        className="inline-flex rounded-lg shadow-[12px_12px_0_#000000] uppercase font-mono"
         style={{
           backgroundColor: "#F5FF6B",
           padding: "22px 80px",

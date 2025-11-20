@@ -20,7 +20,7 @@ const Herotext = ({ slice }: HerotextProps) => {
       data-slice-variation={slice.variation}
       className="flex justify-center pt-24 pb-12"
     >
-      <div className="bg-[#F5FF6D] px-10 py-4 rounded-full shadow-[8px_8px_0px_#000000]">
+      <div className="bg-[#F5FF6D] px-10 py-4 rounded-lg shadow-[8px_8px_0px_#000000]">
         <PrismicRichText
           field={slice.primary.title}
           components={{
