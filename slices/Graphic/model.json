@@ -20,6 +20,25 @@
             "thumbnails": []
           }
         },
+        "position": {
+          "type": "Select",
+          "config": {
+            "label": "Position",
+            "placeholder": "",
+            "options": [
+              "center",
+              "absolute-left",
+              "absolute-right",
+              "absolute-top-left",
+              "absolute-top-right",
+              "absolute-bottom-left",
+              "absolute-bottom-right",
+              "float-left",
+              "float-right"
+            ],
+            "default_value": "center"
+          }
+        },
         "alignment": {
           "type": "Select",
           "config": {

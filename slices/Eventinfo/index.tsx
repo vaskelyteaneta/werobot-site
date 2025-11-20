@@ -23,29 +23,36 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
   const alignClasses = alignmentClasses[alignment] ?? alignmentClasses.center;
   const showShadow = slice.primary.show_shadow ?? false;
 
+  // Determine container width based on alignment
+  const containerClasses = 
+    alignment === "left" || alignment === "right"
+      ? "w-full max-w-[90vw] md:max-w-[45vw]"
+      : "w-full max-w-[90vw] md:max-w-[700px]";
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex justify-center mt-8"
+      className={`w-full flex ${alignment === "left" ? "justify-start" : alignment === "right" ? "justify-end" : "justify-center"} mt-8 px-4 md:px-8 relative`}
     >
       <div
         className={[
-          "inline-flex max-w-[90vw]",
-          "px-10 py-4",
+          containerClasses,
+          "px-10 py-6",
           "rounded-lg",
           "bg-white",
-          "border border-black/5",
+          "relative",
+          "z-0",
           alignClasses,
-          showShadow ? "shadow-[10px_10px_0_0_rgba(0,0,0,1)]" : "",
+          showShadow ? "shadow-[10px_10px_0_0_rgba(0,0,0,1)]" : "shadow-[10px_10px_0_0_rgba(0,0,0,1)]",
         ].join(" ")}
       >
         {slice.primary.text ? (
-          <div className="font-mono text-xs tracking-[0.25em] uppercase">
+          <div className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed">
             <PrismicRichText field={slice.primary.text} />
           </div>
         ) : (
-          <p className="font-mono text-xs tracking-[0.25em] uppercase">
+          <p className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed">
             COMING NEXT SPRING: April 23 – 25, 2026 · Berlin, Germany
           </p>
         )}
