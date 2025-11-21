@@ -33,7 +33,7 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`w-full flex ${alignment === "left" ? "justify-start" : alignment === "right" ? "justify-end" : "justify-center"} mt-8 px-4 md:px-8 relative`}
+      className={`w-full flex ${alignment === "left" ? "justify-start" : alignment === "right" ? "justify-end" : "justify-center"} my-4 md:my-6 px-4 md:px-8 relative`}
     >
       <div
         className={[

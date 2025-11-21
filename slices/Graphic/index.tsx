@@ -60,7 +60,7 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -top-8 md:-top-12 left-4 md:left-8 z-20 pointer-events-none"
+        className="absolute -top-4 md:-top-6 -left-4 md:-left-6 z-20 pointer-events-none"
       >
         {imageContent}
       </section>
@@ -72,7 +72,7 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -top-8 md:-top-12 right-4 md:right-8 z-20 pointer-events-none"
+        className="absolute -top-4 md:-top-6 -right-4 md:-right-6 z-20 pointer-events-none"
       >
         {imageContent}
       </section>
@@ -84,7 +84,7 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -bottom-8 md:-bottom-12 left-4 md:left-8 z-20 pointer-events-none"
+        className="absolute -bottom-4 md:-bottom-6 -left-4 md:-left-6 z-20 pointer-events-none"
       >
         {imageContent}
       </section>
@@ -96,7 +96,7 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -bottom-8 md:-bottom-12 right-4 md:right-8 z-20 pointer-events-none"
+        className="absolute -bottom-4 md:-bottom-6 -right-4 md:-right-6 z-20 pointer-events-none"
       >
         {imageContent}
       </section>
