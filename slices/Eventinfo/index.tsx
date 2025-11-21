@@ -39,12 +39,13 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
         className={[
           containerClasses,
           "px-10 py-6",
-          "rounded-lg",
+          "rounded-xl",
           "bg-white",
           "relative",
           "z-0",
           alignClasses,
-          showShadow ? "shadow-[10px_10px_0_0_rgba(0,0,0,1)]" : "shadow-[10px_10px_0_0_rgba(0,0,0,1)]",
+          "transition-shadow duration-300",
+          "hover:shadow-[10px_10px_0_0_rgba(0,0,0,1)]",
         ].join(" ")}
       >
         {slice.primary.text ? (

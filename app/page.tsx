@@ -19,11 +19,14 @@ export default async function Page() {
     const nextSlice = page.data.slices[i + 1];
     
     // If current is Eventinfo and next is Graphic with absolute positioning
-    if (
+    const nextPosition = (nextSlice?.primary as any)?.position;
+    const shouldGroup = 
       currentSlice.slice_type === "eventinfo" &&
       nextSlice?.slice_type === "graphic" &&
-      (nextSlice.primary as any)?.position?.startsWith("absolute")
-    ) {
+      nextPosition &&
+      (nextPosition.startsWith("absolute") || nextPosition.includes("absolute"));
+    
+    if (shouldGroup) {
       processedSlices.push({
         type: "grouped",
         slices: [currentSlice, nextSlice],
@@ -41,7 +44,7 @@ export default async function Page() {
         if ((sliceOrGroup as any).type === "grouped") {
           const group = sliceOrGroup as { type: string; slices: SliceLike[] };
           return (
-            <div key={`group-${index}`} className="relative w-full overflow-visible">
+            <div key={`group-${index}`} className="relative w-full">
               <SliceZone slices={group.slices} components={components} />
             </div>
           );

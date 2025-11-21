@@ -62,8 +62,8 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          top: '1rem', 
-          left: '1rem',
+          top: '2rem', 
+          left: '2rem',
           transform: 'translate(-50%, -50%)'
         }}
       >
@@ -79,8 +79,8 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          top: '1rem', 
-          right: '1rem',
+          top: '2rem', 
+          right: '2rem',
           transform: 'translate(50%, -50%)'
         }}
       >
@@ -96,8 +96,8 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          bottom: '1rem', 
-          left: '1rem',
+          bottom: '2rem', 
+          left: '2rem',
           transform: 'translate(-50%, 50%)'
         }}
       >
@@ -113,8 +113,8 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          bottom: '1rem', 
-          right: '1rem',
+          bottom: '2rem', 
+          right: '2rem',
           transform: 'translate(50%, 50%)'
         }}
       >
