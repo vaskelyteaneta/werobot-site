@@ -27,13 +27,13 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
       {link ? (
         <PrismicLink
           field={link}
+          className="transition-shadow duration-300 hover:shadow-[12px_12px_0px_#000000]"
           style={{
             display: "inline-block",
             padding: "22px 80px",
             backgroundColor: "#F5FF6B",
             color: "#000000",
-            borderRadius: "0.5rem",
-            boxShadow: "12px 12px 0px #000000",
+            borderRadius: "0.75rem",
             fontFamily: "monospace",
             fontSize: "22px",
             letterSpacing: "0.15em",
@@ -50,7 +50,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             padding: "22px 80px",
             backgroundColor: "#888888",
             color: "#000000",
-            borderRadius: "0.5rem",
+            borderRadius: "0.75rem",
             fontFamily: "monospace",
             fontSize: "22px",
             letterSpacing: "0.15em",
