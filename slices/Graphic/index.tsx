@@ -60,7 +60,12 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -top-2 -left-2 md:-top-3 md:-left-3 z-20 pointer-events-none"
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          top: '1rem', 
+          left: '1rem',
+          transform: 'translate(-50%, -50%)'
+        }}
       >
         {imageContent}
       </section>
@@ -72,7 +77,12 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -top-2 -right-2 md:-top-3 md:-right-3 z-20 pointer-events-none"
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          top: '1rem', 
+          right: '1rem',
+          transform: 'translate(50%, -50%)'
+        }}
       >
         {imageContent}
       </section>
@@ -84,7 +94,12 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -bottom-2 -left-2 md:-bottom-3 md:-left-3 z-20 pointer-events-none"
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          bottom: '1rem', 
+          left: '1rem',
+          transform: 'translate(-50%, 50%)'
+        }}
       >
         {imageContent}
       </section>
@@ -96,7 +111,12 @@ const Graphic = ({ slice }: GraphicProps) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="absolute -bottom-2 -right-2 md:-bottom-3 md:-right-3 z-20 pointer-events-none"
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          bottom: '1rem', 
+          right: '1rem',
+          transform: 'translate(50%, 50%)'
+        }}
       >
         {imageContent}
       </section>
