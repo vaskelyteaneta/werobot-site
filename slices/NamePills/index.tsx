@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicLink, SliceComponentProps } from "@prismicio/react";
@@ -15,6 +17,18 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
   const hasTitle = Boolean(slice.primary.section_title);
   const layout = (slice.primary as any).layout || "wrap";
   const isColumnLayout = layout === "columns";
+
+  // Define the 5 colors from the palette
+  const hoverColors = [
+    "#FFF461", // bright pale yellow
+    "#DEAE54", // warm golden-brown
+    "#FFB366", // light orange/peach (estimated)
+    "#DE548B", // muted rose/dusty pink
+    "#C06DFA", // vibrant light purple
+  ];
+
+  // Get hover color for a specific index
+  const getHoverColor = (index: number) => hoverColors[index % hoverColors.length];
 
   return (
     <section
@@ -39,8 +53,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const pillClass =
-                "inline-flex items-center justify-center rounded-lg bg-yellow-400 px-8 py-3 shadow-[10px_10px_0_#000000]";
+              const hoverColor = getHoverColor(index);
+              const basePillClass = "inline-flex items-center justify-center rounded-lg px-8 py-3 shadow-[10px_10px_0_#000000] transition-colors duration-300";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -48,14 +62,32 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 <PrismicLink
                   key={`${item.text}-${index}`}
                   field={item.link}
-                  className={pillClass}
+                  className={basePillClass}
+                  style={{
+                    backgroundColor: "#FACC15", // yellow-400
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = hoverColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#FACC15";
+                  }}
                 >
                   {content}
                 </PrismicLink>
               ) : (
                 <div
                   key={`${item.text || index}-static`}
-                  className={pillClass}
+                  className={basePillClass}
+                  style={{
+                    backgroundColor: "#FACC15", // yellow-400
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = hoverColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#FACC15";
+                  }}
                 >
                   {content}
                 </div>
@@ -78,8 +110,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const pillClass =
-                "inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 shadow-[10px_10px_0_#000000]";
+              const hoverColor = getHoverColor(index);
+              const basePillClass = "inline-flex items-center justify-center rounded-lg px-8 py-3 shadow-[10px_10px_0_#000000] transition-colors duration-300";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -87,16 +119,34 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 <PrismicLink
                   key={`${item.text}-${index}`}
                   field={item.link}
-                  className={pillClass}
-                  style={{ minWidth: "180px" }}
+                  className={basePillClass}
+                  style={{ 
+                    minWidth: "180px",
+                    backgroundColor: "#FFFFFF",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = hoverColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#FFFFFF";
+                  }}
                 >
                   {content}
                 </PrismicLink>
               ) : (
                 <div
                   key={`${item.text || index}-static`}
-                  className={pillClass}
-                  style={{ minWidth: "180px" }}
+                  className={basePillClass}
+                  style={{ 
+                    minWidth: "180px",
+                    backgroundColor: "#FFFFFF",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = hoverColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#FFFFFF";
+                  }}
                 >
                   {content}
                 </div>
