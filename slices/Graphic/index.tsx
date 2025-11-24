@@ -55,6 +55,8 @@ const Graphic = ({ slice }: GraphicProps) => {
     );
   }
 
+  // All absolute positions position relative to the Eventinfo white box
+  // Using negative values to position outside the box, ensuring text is never covered
   if (position === "absolute-top-left") {
     return (
       <section
@@ -62,8 +64,25 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          top: '2rem', 
-          left: '2rem',
+          top: '-2rem', 
+          left: '-2rem',
+          transform: 'translate(-50%, -50%)'
+        }}
+      >
+        {imageContent}
+      </section>
+    );
+  }
+
+  if (position === "absolute-top-middle") {
+    return (
+      <section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          top: '-2rem', 
+          left: '50%',
           transform: 'translate(-50%, -50%)'
         }}
       >
@@ -79,8 +98,42 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          top: '2rem', 
-          right: '2rem',
+          top: '-2rem', 
+          right: '-2rem',
+          transform: 'translate(50%, -50%)'
+        }}
+      >
+        {imageContent}
+      </section>
+    );
+  }
+
+  if (position === "absolute-left-middle") {
+    return (
+      <section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          top: '50%', 
+          left: '-2rem',
+          transform: 'translate(-50%, -50%)'
+        }}
+      >
+        {imageContent}
+      </section>
+    );
+  }
+
+  if (position === "absolute-right-middle") {
+    return (
+      <section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          top: '50%', 
+          right: '-2rem',
           transform: 'translate(50%, -50%)'
         }}
       >
@@ -96,8 +149,25 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          bottom: '2rem', 
-          left: '2rem',
+          bottom: '-2rem', 
+          left: '-2rem',
+          transform: 'translate(-50%, 50%)'
+        }}
+      >
+        {imageContent}
+      </section>
+    );
+  }
+
+  if (position === "absolute-bottom-middle") {
+    return (
+      <section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        className="absolute z-20 pointer-events-none"
+        style={{ 
+          bottom: '-2rem', 
+          left: '50%',
           transform: 'translate(-50%, 50%)'
         }}
       >
@@ -113,8 +183,8 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="absolute z-20 pointer-events-none"
         style={{ 
-          bottom: '2rem', 
-          right: '2rem',
+          bottom: '-2rem', 
+          right: '-2rem',
           transform: 'translate(50%, 50%)'
         }}
       >

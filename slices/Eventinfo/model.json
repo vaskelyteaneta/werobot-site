@@ -42,6 +42,84 @@
             "placeholder_true": "Hover shadow",
             "default_value": false
           }
+        },
+        "graphic_image": {
+          "type": "Image",
+          "config": {
+            "label": "Graphic image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "graphic_position": {
+          "type": "Select",
+          "config": {
+            "label": "Graphic position",
+            "placeholder": "",
+            "options": [
+              "absolute-top-left",
+              "absolute-top-middle",
+              "absolute-top-right",
+              "absolute-left-middle",
+              "absolute-right-middle",
+              "absolute-bottom-left",
+              "absolute-bottom-middle",
+              "absolute-bottom-right"
+            ],
+            "default_value": "absolute-top-right"
+          }
+        },
+        "graphic_size": {
+          "type": "Select",
+          "config": {
+            "label": "Graphic size",
+            "placeholder": "",
+            "options": [
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "small"
+          }
+        },
+        "graphic_image_2": {
+          "type": "Image",
+          "config": {
+            "label": "Graphic image 2",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "graphic_position_2": {
+          "type": "Select",
+          "config": {
+            "label": "Graphic position 2",
+            "placeholder": "",
+            "options": [
+              "absolute-top-left",
+              "absolute-top-middle",
+              "absolute-top-right",
+              "absolute-left-middle",
+              "absolute-right-middle",
+              "absolute-bottom-left",
+              "absolute-bottom-middle",
+              "absolute-bottom-right"
+            ],
+            "default_value": "absolute-bottom-left"
+          }
+        },
+        "graphic_size_2": {
+          "type": "Select",
+          "config": {
+            "label": "Graphic size 2",
+            "placeholder": "",
+            "options": [
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "small"
+          }
         }
       },
       "items": {}

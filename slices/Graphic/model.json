@@ -30,8 +30,12 @@
               "absolute-left",
               "absolute-right",
               "absolute-top-left",
+              "absolute-top-middle",
               "absolute-top-right",
+              "absolute-left-middle",
+              "absolute-right-middle",
               "absolute-bottom-left",
+              "absolute-bottom-middle",
               "absolute-bottom-right",
               "float-left",
               "float-right"

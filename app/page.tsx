@@ -44,7 +44,7 @@ export default async function Page() {
         if ((sliceOrGroup as any).type === "grouped") {
           const group = sliceOrGroup as { type: string; slices: SliceLike[] };
           return (
-            <div key={`group-${index}`} className="relative w-full">
+            <div key={`group-${index}`} className="relative w-full overflow-visible">
               <SliceZone slices={group.slices} components={components} />
             </div>
           );
