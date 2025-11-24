@@ -1,7 +1,10 @@
+"use client";
+
 // slices/Eventinfo/index.tsx
-import type { JSX } from "react";
+import { useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { gsap } from "gsap";
 
 /**
  * Props for `Eventinfo`.
@@ -18,7 +21,7 @@ const alignmentClasses: Record<string, string> = {
 /**
  * White rounded rectangle with the event info text.
  */
-const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
+const Eventinfo = ({ slice }: EventinfoProps) => {
   const alignment = slice.primary.alignment || "center";
   const alignClasses = alignmentClasses[alignment] ?? alignmentClasses.center;
   const showShadow = slice.primary.show_shadow ?? false;
@@ -28,6 +31,87 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
   const graphicImage2 = (slice.primary as any).graphic_image_2;
   const graphicPosition2 = (slice.primary as any).graphic_position_2 || "absolute-bottom-left";
   const graphicSize2 = (slice.primary as any).graphic_size_2 || "small";
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const graphic1Ref = useRef<HTMLDivElement>(null);
+  const graphic2Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Animate first graphic
+            if (graphic1Ref.current && graphicImage?.url) {
+              gsap.fromTo(
+                graphic1Ref.current,
+                {
+                  opacity: 0,
+                  scale: 0.5,
+                  rotation: -180,
+                },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  rotation: 0,
+                  duration: 1.5,
+                  ease: "power2.out",
+                  delay: 0.3,
+                }
+              );
+            }
+
+            // Animate second graphic with more delay if both graphics exist
+            if (graphic2Ref.current && graphicImage2?.url) {
+              // Check if graphics are positioned near each other
+              const positionsNearEachOther = 
+                (graphicPosition === "absolute-top-left" && graphicPosition2 === "absolute-top-right") ||
+                (graphicPosition === "absolute-top-right" && graphicPosition2 === "absolute-top-left") ||
+                (graphicPosition === "absolute-bottom-left" && graphicPosition2 === "absolute-bottom-right") ||
+                (graphicPosition === "absolute-bottom-right" && graphicPosition2 === "absolute-bottom-left") ||
+                (graphicPosition === "absolute-top-middle" && graphicPosition2 === "absolute-bottom-middle") ||
+                (graphicPosition === "absolute-left-middle" && graphicPosition2 === "absolute-right-middle");
+              
+              const delay = positionsNearEachOther ? 1.2 : 0.8;
+              
+              gsap.fromTo(
+                graphic2Ref.current,
+                {
+                  opacity: 0,
+                  scale: 0.5,
+                  rotation: 180,
+                },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  rotation: 0,
+                  duration: 1.5,
+                  ease: "power2.out",
+                  delay: delay,
+                }
+              );
+            }
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -100px 0px",
+      }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [graphicImage, graphicImage2]);
 
   // Size mappings for graphics
   const sizeClasses = {
@@ -52,31 +136,32 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
 
     switch (position) {
       case "absolute-top-left":
-        return { ...baseStyle, top: "-2rem", left: "-2rem", transform: "translate(-50%, -50%)" };
+        return { ...baseStyle, top: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, -50%)" };
       case "absolute-top-middle":
-        return { ...baseStyle, top: "-2rem", left: "50%", transform: "translate(-50%, -50%)" };
+        return { ...baseStyle, top: "-1.5rem", left: "50%", transform: "translate(-50%, -50%)" };
       case "absolute-top-right":
-        return { ...baseStyle, top: "-2rem", right: "-2rem", transform: "translate(50%, -50%)" };
+        return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)" };
       case "absolute-left-middle":
-        return { ...baseStyle, top: "50%", left: "-2rem", transform: "translate(-50%, -50%)" };
+        return { ...baseStyle, top: "50%", left: "-1.5rem", transform: "translate(-50%, -50%)" };
       case "absolute-right-middle":
-        return { ...baseStyle, top: "50%", right: "-2rem", transform: "translate(50%, -50%)" };
+        return { ...baseStyle, top: "50%", right: "-1.5rem", transform: "translate(50%, -50%)" };
       case "absolute-bottom-left":
-        return { ...baseStyle, bottom: "-2rem", left: "-2rem", transform: "translate(-50%, 50%)" };
+        return { ...baseStyle, bottom: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, 50%)" };
       case "absolute-bottom-middle":
-        return { ...baseStyle, bottom: "-2rem", left: "50%", transform: "translate(-50%, 50%)" };
+        return { ...baseStyle, bottom: "-1.5rem", left: "50%", transform: "translate(-50%, 50%)" };
       case "absolute-bottom-right":
-        return { ...baseStyle, bottom: "-2rem", right: "-2rem", transform: "translate(50%, 50%)" };
+        return { ...baseStyle, bottom: "-1.5rem", right: "-1.5rem", transform: "translate(50%, 50%)" };
       default:
-        return { ...baseStyle, top: "-2rem", right: "-2rem", transform: "translate(50%, -50%)" };
+        return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)" };
     }
   };
 
   return (
     <section
+      ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`w-full flex ${alignment === "left" ? "justify-start" : alignment === "right" ? "justify-end" : "justify-center"} mb-6 md:mb-8 px-4 md:px-8 relative`}
+      className={`w-full flex ${alignment === "left" ? "justify-start" : alignment === "right" ? "justify-end" : "justify-center"} mb-6 md:mb-8 px-4 md:px-8 relative overflow-visible`}
     >
       <div
         className={[
@@ -86,25 +171,24 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
           "bg-white",
           "relative",
           "z-0",
-          "overflow-visible",
-          alignClasses,
+          "items-start text-left",
           "transition-shadow duration-300",
           "hover:shadow-[10px_10px_0_0_rgba(0,0,0,1)]",
         ].join(" ")}
       >
         {slice.primary.text ? (
-          <div className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed">
+          <div className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-left">
             <PrismicRichText field={slice.primary.text} />
           </div>
         ) : (
-          <p className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed">
+          <p className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-left">
             COMING NEXT SPRING: April 23 – 25, 2026 · Berlin, Germany
           </p>
         )}
 
         {/* Render first graphic if provided */}
         {graphicImage?.url && (
-          <div style={getGraphicStyle(graphicPosition)}>
+          <div ref={graphic1Ref} style={getGraphicStyle(graphicPosition)}>
             <img
               src={graphicImage.url}
               alt={graphicImage.alt || ""}
@@ -115,7 +199,7 @@ const Eventinfo = ({ slice }: EventinfoProps): JSX.Element => {
 
         {/* Render second graphic if provided */}
         {graphicImage2?.url && (
-          <div style={getGraphicStyle(graphicPosition2)}>
+          <div ref={graphic2Ref} style={getGraphicStyle(graphicPosition2)}>
             <img
               src={graphicImage2.url}
               alt={graphicImage2.alt || ""}
