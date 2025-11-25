@@ -3,8 +3,8 @@ import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
   try {
-    // Revalidate the homepage path (this will clear all cached data for the page)
-    await revalidatePath("/");
+    // Revalidate the homepage path (this will clear all cached data for the page including Prismic)
+    await revalidatePath("/", "page");
 
     return NextResponse.json({ 
       revalidated: true, 
