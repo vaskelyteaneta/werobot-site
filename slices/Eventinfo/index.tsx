@@ -33,6 +33,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
   const graphicSize2 = (slice.primary as any).graphic_size_2 || "small";
   
   const sectionRef = useRef<HTMLElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
   const graphic1Ref = useRef<HTMLDivElement>(null);
   const graphic2Ref = useRef<HTMLDivElement>(null);
 
@@ -43,6 +44,23 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Animate the white box with fly-in/fade-in
+            if (boxRef.current) {
+              gsap.fromTo(
+                boxRef.current,
+                {
+                  opacity: 0,
+                  y: 60,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 1.2,
+                  ease: "power2.out",
+                }
+              );
+            }
+
             // Animate first graphic
             if (graphic1Ref.current && graphicImage?.url) {
               gsap.fromTo(
@@ -111,7 +129,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, [graphicImage, graphicImage2]);
+  }, [graphicImage, graphicImage2, graphicPosition, graphicPosition2]);
 
   // Size mappings for graphics
   const sizeClasses = {
@@ -164,6 +182,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
       className={`w-full flex ${alignment === "left" ? "justify-start" : alignment === "right" ? "justify-end" : "justify-center"} mb-6 md:mb-8 px-4 md:px-8 relative overflow-visible`}
     >
       <div
+        ref={boxRef}
         className={[
           containerClasses,
           "px-10 py-6",
@@ -171,17 +190,17 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
           "bg-white",
           "relative",
           "z-0",
-          "items-start text-left",
+          "items-center text-center",
           "transition-shadow duration-300",
           "hover:shadow-[10px_10px_0_0_rgba(0,0,0,1)]",
         ].join(" ")}
       >
         {slice.primary.text ? (
-          <div className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-left">
+          <div className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-center">
             <PrismicRichText field={slice.primary.text} />
           </div>
         ) : (
-          <p className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-left">
+          <p className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-center">
             COMING NEXT SPRING: April 23 – 25, 2026 · Berlin, Germany
           </p>
         )}
