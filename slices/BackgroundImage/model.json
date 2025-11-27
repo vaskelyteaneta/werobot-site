@@ -1,0 +1,76 @@
+{
+  "id": "background_image",
+  "type": "SharedSlice",
+  "name": "BackgroundImage",
+  "description": "Background overlay image with reduced brightness",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "position": {
+          "type": "Select",
+          "config": {
+            "label": "Position",
+            "placeholder": "",
+            "options": [
+              "top-left",
+              "top-center",
+              "top-right",
+              "center-left",
+              "center",
+              "center-right",
+              "bottom-left",
+              "bottom-center",
+              "bottom-right"
+            ],
+            "default_value": "center"
+          }
+        },
+        "opacity": {
+          "type": "Select",
+          "config": {
+            "label": "Opacity",
+            "placeholder": "",
+            "options": [
+              "10",
+              "20",
+              "30",
+              "40",
+              "50"
+            ],
+            "default_value": "30"
+          }
+        },
+        "size": {
+          "type": "Select",
+          "config": {
+            "label": "Size",
+            "placeholder": "",
+            "options": [
+              "small",
+              "medium",
+              "large",
+              "full"
+            ],
+            "default_value": "medium"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
+

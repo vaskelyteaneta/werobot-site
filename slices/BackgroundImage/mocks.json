@@ -1,0 +1,23 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "background_image",
+    "items": [],
+    "primary": {
+      "image": {
+        "dimensions": {
+          "width": 800,
+          "height": 600
+        },
+        "alt": "Background overlay image",
+        "copyright": null,
+        "url": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=600&fit=crop"
+      },
+      "position": "center",
+      "opacity": "30",
+      "size": "medium"
+    }
+  }
+]
+
