@@ -2,7 +2,7 @@
 
 :root {
   /* Set the global background to blue to match the desired design */
-  --background: #2e7de9; /* adjust this hex if you want a different blue */
+  --background: #2563eb; /* vibrant blue */
   --foreground: #000000;
 }
 
@@ -16,7 +16,7 @@
 /* Keep the same background in dark mode so the page stays blue */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #2e7de9;
+    --background: #2563eb;
     --foreground: #000000;
   }
 }
@@ -28,13 +28,32 @@ body {
   position: relative;
 }
 
-/* Ensure content is above Unicorn Studio background */
+/* Ensure content is above Unicorn Studio background and blue filter */
 main {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
-/* Hide default cursor for gooey cursor effect */
-* {
-  cursor: none !important;
+
+/* Hide Unicorn Studio attribution - links */
+a[href*="unicorn.studio"],
+a[href*="unicornstudio"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Additional selectors for Unicorn Studio attribution */
+[class*="unicorn"][class*="attribution"],
+[id*="unicorn"][id*="attribution"],
+div[style*="unicorn"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }

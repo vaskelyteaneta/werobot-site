@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import GooeyCursor from "@/components/GooeyCursor";
+import HideUnicornAttribution from "@/components/HideUnicornAttribution";
+import UnicornBackground from "@/components/UnicornBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,27 +28,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ backgroundColor: "#2563eb" }}
       >
-        {/* Unicorn Studio Background */}
-        <div 
-          data-us-project="XqSpkUNuFa3STasqny3T" 
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            zIndex: 0,
-            pointerEvents: "none"
-          }}
-        />
-        <script 
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `!function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.36/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();`
-          }}
-        />
-        <GooeyCursor />
+        <UnicornBackground />
+        <HideUnicornAttribution />
         {children}
       </body>
     </html>
