@@ -86,7 +86,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               );
 
               const hoverColor = getHoverColor(index);
-              const basePillClass = "inline-flex items-center justify-center rounded-lg px-8 py-3 shadow-[10px_10px_0_0_rgba(0,0,0,0)] hover:shadow-[10px_10px_0_#000000] transition-all duration-300";
+              const basePillClass = "inline-flex items-center justify-center rounded-3xl px-8 py-3 shadow-[10px_10px_0_0_rgba(0,0,0,0)] hover:shadow-[10px_10px_0_#000000] transition-all duration-300";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -143,7 +143,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               );
 
               const hoverColor = getHoverColor(index);
-              const basePillClass = "inline-flex items-center justify-center rounded-lg px-8 py-3 shadow-[10px_10px_0_0_rgba(0,0,0,0)] hover:shadow-[10px_10px_0_#000000] transition-all duration-300";
+              const basePillClass = "inline-flex items-center justify-center rounded-3xl px-8 py-3 shadow-[10px_10px_0_0_rgba(0,0,0,0)] hover:shadow-[10px_10px_0_#000000] transition-all duration-300";
 
               const hasLink = item.link && isFilled.link(item.link);
 
