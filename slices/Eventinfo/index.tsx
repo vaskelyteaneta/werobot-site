@@ -194,7 +194,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
         className={[
           containerClasses,
           "px-10 py-6",
-          "rounded-2xl",
+          "rounded-3xl",
           "bg-white",
           "relative",
           "z-0",
