@@ -50,7 +50,9 @@ export default function UnicornBackground() {
           width: "100vw",
           height: "100vh",
           zIndex: 0,
-          pointerEvents: "none"
+          pointerEvents: "none",
+          transform: "scale(1.2)",
+          transformOrigin: "center center"
         }}
       />
       {/* Blue filter overlay */}
