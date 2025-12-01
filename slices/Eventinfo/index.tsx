@@ -26,10 +26,10 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
   const alignClasses = alignmentClasses[alignment] ?? alignmentClasses.center;
   const showShadow = slice.primary.show_shadow ?? false;
   const graphicImage = (slice.primary as any).graphic_image;
-  const graphicPosition = (slice.primary as any).graphic_position || "absolute-top-right";
+  const graphicPosition = (slice.primary as any)?.graphic_position;
   const graphicSize = (slice.primary as any).graphic_size || "small";
   const graphicImage2 = (slice.primary as any).graphic_image_2;
-  const graphicPosition2 = (slice.primary as any).graphic_position_2 || "absolute-bottom-left";
+  const graphicPosition2 = (slice.primary as any)?.graphic_position_2;
   const graphicSize2 = (slice.primary as any).graphic_size_2 || "small";
   
   const sectionRef = useRef<HTMLElement>(null);
@@ -61,20 +61,18 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               );
             }
 
-            // Animate first graphic
+            // Animate first graphic - simple fade/fly in
             if (graphic1Ref.current && graphicImage?.url) {
               gsap.fromTo(
                 graphic1Ref.current,
                 {
                   opacity: 0,
-                  scale: 0.5,
-                  rotation: -180,
+                  y: 30,
                 },
                 {
                   opacity: 1,
-                  scale: 1,
-                  rotation: 0,
-                  duration: 1.5,
+                  y: 0,
+                  duration: 1.2,
                   ease: "power2.out",
                   delay: 0.3,
                 }
@@ -98,14 +96,12 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
                 graphic2Ref.current,
                 {
                   opacity: 0,
-                  scale: 0.5,
-                  rotation: 180,
+                  y: 30,
                 },
                 {
                   opacity: 1,
-                  scale: 1,
-                  rotation: 0,
-                  duration: 1.5,
+                  y: 0,
+                  duration: 1.2,
                   ease: "power2.out",
                   delay: delay,
                 }
@@ -145,33 +141,45 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
       : "w-full max-w-[90vw] md:max-w-[700px]";
 
   // Get graphic positioning styles
-  const getGraphicStyle = (position: string) => {
+  const getGraphicStyle = (position: string | undefined) => {
     const baseStyle: React.CSSProperties = {
       position: "absolute",
       zIndex: 20,
       pointerEvents: "none",
     };
 
-    switch (position) {
-      case "absolute-top-left":
-        return { ...baseStyle, top: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, -50%)" };
-      case "absolute-top-middle":
-        return { ...baseStyle, top: "-1.5rem", left: "50%", transform: "translate(-50%, -50%)" };
-      case "absolute-top-right":
-        return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)" };
-      case "absolute-left-middle":
-        return { ...baseStyle, top: "50%", left: "-1.5rem", transform: "translate(-50%, -50%)" };
-      case "absolute-right-middle":
-        return { ...baseStyle, top: "50%", right: "-1.5rem", transform: "translate(50%, -50%)" };
-      case "absolute-bottom-left":
-        return { ...baseStyle, bottom: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, 50%)" };
-      case "absolute-bottom-middle":
-        return { ...baseStyle, bottom: "-1.5rem", left: "50%", transform: "translate(-50%, 50%)" };
-      case "absolute-bottom-right":
-        return { ...baseStyle, bottom: "-1.5rem", right: "-1.5rem", transform: "translate(50%, 50%)" };
-      default:
-        return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)" };
+    // Normalize position string (trim and lowercase for comparison)
+    const normalizedPosition = (position || "").trim().toLowerCase();
+
+    // Map positions to styles - ensuring correct mapping
+    if (normalizedPosition === "absolute-top-left") {
+      return { ...baseStyle, top: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
     }
+    if (normalizedPosition === "absolute-top-middle") {
+      return { ...baseStyle, top: "-1.5rem", left: "50%", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
+    }
+    if (normalizedPosition === "absolute-top-right") {
+      return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
+    }
+    if (normalizedPosition === "absolute-left-middle") {
+      return { ...baseStyle, top: "50%", left: "-1.5rem", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
+    }
+    if (normalizedPosition === "absolute-right-middle") {
+      return { ...baseStyle, top: "50%", right: "-1.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
+    }
+    if (normalizedPosition === "absolute-bottom-left") {
+      return { ...baseStyle, bottom: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, 50%)", top: "auto", right: "auto" };
+    }
+    if (normalizedPosition === "absolute-bottom-middle") {
+      return { ...baseStyle, bottom: "-1.5rem", left: "50%", transform: "translate(-50%, 50%)", top: "auto", right: "auto" };
+    }
+    if (normalizedPosition === "absolute-bottom-right") {
+      return { ...baseStyle, bottom: "-1.5rem", right: "-1.5rem", transform: "translate(50%, 50%)", top: "auto", left: "auto" };
+    }
+    
+    // Fallback: log the actual value for debugging
+    console.warn("Unknown graphic position:", position, "normalized:", normalizedPosition, "using default top-right");
+    return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
   };
 
   return (
@@ -190,24 +198,34 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
           "bg-white",
           "relative",
           "z-0",
-          "items-center text-center",
+          "items-start text-left",
           "transition-shadow duration-300",
           "hover:shadow-[10px_10px_0_0_rgba(0,0,0,1)]",
+          "overflow-visible",
         ].join(" ")}
+        style={{ position: "relative" }}
       >
         {slice.primary.text ? (
-          <div className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-center">
+              <div className="text-xs md:text-sm tracking-[0.25em] leading-relaxed text-left">
             <PrismicRichText field={slice.primary.text} />
           </div>
         ) : (
-          <p className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase leading-relaxed text-center">
-            COMING NEXT SPRING: April 23 – 25, 2026 · Berlin, Germany
+              <p className="text-xs md:text-sm tracking-[0.25em] leading-relaxed text-left">
+            Coming next spring: April 23 – 25, 2026 · Berlin, Germany
           </p>
         )}
 
         {/* Render first graphic if provided */}
         {graphicImage?.url && (
-          <div ref={graphic1Ref} style={getGraphicStyle(graphicPosition)}>
+          <div 
+            ref={graphic1Ref} 
+            style={{
+              ...getGraphicStyle(graphicPosition),
+              position: "absolute",
+              zIndex: 20,
+              pointerEvents: "none",
+            }}
+          >
             <img
               src={graphicImage.url}
               alt={graphicImage.alt || ""}
@@ -218,7 +236,15 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
 
         {/* Render second graphic if provided */}
         {graphicImage2?.url && (
-          <div ref={graphic2Ref} style={getGraphicStyle(graphicPosition2)}>
+          <div 
+            ref={graphic2Ref} 
+            style={{
+              ...getGraphicStyle(graphicPosition2),
+              position: "absolute",
+              zIndex: 20,
+              pointerEvents: "none",
+            }}
+          >
             <img
               src={graphicImage2.url}
               alt={graphicImage2.alt || ""}

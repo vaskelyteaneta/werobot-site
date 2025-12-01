@@ -1,6 +1,9 @@
+"use client";
+
 // slices/Herotext/index.tsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
+import { gsap } from "gsap";
 
 /**
  * Props for `Herotext`.
@@ -13,9 +16,39 @@ export type HerotextProps = SliceComponentProps<any>;
  * Hero text slice – the yellow capsule that says “WeRobot 2026”.
  */
 const Herotext = ({ slice }: HerotextProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              sectionRef.current,
+              { opacity: 0, y: 40 },
+              { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="flex justify-center pt-24 pb-12"

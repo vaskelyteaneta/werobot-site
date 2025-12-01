@@ -17,6 +17,35 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
   const logos = slice.primary.logo || [];
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Tween | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              sectionRef.current,
+              { opacity: 0, y: 40 },
+              { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || logos.length === 0) return;
@@ -52,6 +81,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
 
   return (
     <section
+      ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-12 px-4"
@@ -80,7 +110,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
             </div>
           </div>
         ) : (
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-center text-gray-500">
+              <p className="text-xs uppercase tracking-[0.25em] text-left text-gray-500">
             Add sponsor logos in Prismic
           </p>
         )}

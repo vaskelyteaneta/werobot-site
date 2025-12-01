@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicLink } from "@prismicio/react";
+import { gsap } from "gsap";
 
 /**
  * Props for `CtaBanner`.
@@ -12,9 +16,39 @@ export type CtaBannerProps = SliceComponentProps<Content.CtaBannerSlice>;
 const CtaBanner = ({ slice }: CtaBannerProps) => {
   const label = slice.primary.button_text || "GET THE TICKET";
   const link = slice.primary.button_link;
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              sectionRef.current,
+              { opacity: 0, y: 40 },
+              { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       style={{

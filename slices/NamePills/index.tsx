@@ -1,8 +1,9 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicLink, SliceComponentProps } from "@prismicio/react";
+import { gsap } from "gsap";
 
 /**
  * Props for `NamePills`.
@@ -30,14 +31,45 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
   // Get hover color for a specific index
   const getHoverColor = (index: number) => hoverColors[index % hoverColors.length];
 
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              sectionRef.current,
+              { opacity: 0, y: 40 },
+              { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="w-full flex flex-col items-center gap-8 py-12 px-4"
     >
       {hasTitle && (
-        <p className="font-mono text-base tracking-[0.35em] uppercase text-center">
+            <p className="text-base tracking-[0.35em] uppercase text-left">
           {slice.primary.section_title}
         </p>
       )}
@@ -48,7 +80,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
           {pills.length > 0 ? (
             pills.map((item, index) => {
               const content = (
-                <span className="font-mono text-sm tracking-[0.1em]">
+                    <span className="text-sm tracking-[0.1em]">
                   {item.text || "Name"}
                 </span>
               );
@@ -94,7 +126,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               );
             })
           ) : (
-            <p className="text-sm text-gray-500 font-mono uppercase tracking-[0.2em] col-span-3 text-center">
+                <p className="text-sm text-gray-500 uppercase tracking-[0.2em] col-span-3 text-left">
               Add names to the NamePills slice in Prismic.
             </p>
           )}
@@ -105,7 +137,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
           {pills.length > 0 ? (
             pills.map((item, index) => {
               const content = (
-                <span className="font-mono text-sm tracking-[0.1em]">
+                    <span className="text-sm tracking-[0.1em]">
                   {item.text || "Name"}
                 </span>
               );
@@ -153,7 +185,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               );
             })
           ) : (
-            <p className="text-sm text-gray-500 font-mono uppercase tracking-[0.2em]">
+                <p className="text-sm text-gray-500 uppercase tracking-[0.2em]">
               Add names to the NamePills slice in Prismic.
             </p>
           )}

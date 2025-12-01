@@ -69,7 +69,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
           <p className="text-sm text-gray-500">Upload a logo</p>
         )}
         {hasText && (
-          <p className="font-mono text-xs uppercase tracking-[0.35em] text-center">
+          <p className="text-xs uppercase tracking-[0.35em] text-left">
             {slice.primary.text}
           </p>
         )}
