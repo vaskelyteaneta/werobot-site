@@ -47,7 +47,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
       }
     >
       <div
-        className="rounded-3xl bg-white shadow-[14px_14px_0_#000000] border border-black/5 px-10 py-6 flex flex-col items-center gap-3"
+        className="rounded-[32px] bg-white shadow-[14px_14px_0_#000000] border border-black/5 px-10 py-6 flex flex-col items-center gap-3"
         style={{
           width: useAbsolute ? "100%" : "auto",
           maxWidth: useAbsolute ? "100%" : `${width}px`,

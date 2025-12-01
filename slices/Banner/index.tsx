@@ -53,7 +53,7 @@ const Banner: FC<BannerProps> = ({ slice }) => {
       className="w-full flex justify-center py-12 px-4"
     >
       <div
-        className="inline-flex rounded-3xl transition-shadow duration-300 hover:shadow-[12px_12px_0_#000000] uppercase"
+        className="inline-flex rounded-[32px] transition-shadow duration-300 hover:shadow-[12px_12px_0_#000000] uppercase"
         style={{
           backgroundColor: "#F5FF6B",
           padding: "22px 80px",
