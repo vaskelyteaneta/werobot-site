@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Prevent flash of unstyled content - set background immediately */
+html {
+  background-color: #2563eb;
+}
+
 :root {
   /* Set the global background to blue to match the desired design */
   --background: #2563eb; /* vibrant blue */
@@ -9,8 +14,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
 }
 
 /* Keep the same background in dark mode so the page stays blue */
@@ -24,8 +28,15 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
   position: relative;
+}
+
+/* Apply Inter font to all elements */
+* {
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
 }
 
 /* Ensure content is above Unicorn Studio background and blue filter */
@@ -36,6 +47,7 @@ main {
 
 
 /* Hide Unicorn Studio attribution - links */
+a[href*="unicorn"],
 a[href*="unicorn.studio"],
 a[href*="unicornstudio"] {
   display: none !important;
@@ -47,11 +59,12 @@ a[href*="unicornstudio"] {
   pointer-events: none !important;
   position: absolute !important;
   left: -9999px !important;
+  z-index: -9999 !important;
 }
 
 /* Additional selectors for Unicorn Studio attribution */
-[class*="unicorn"][class*="attribution"],
-[id*="unicorn"][id*="attribution"],
+[class*="unicorn"],
+[id*="unicorn"],
 div[style*="unicorn"] {
   display: none !important;
   visibility: hidden !important;
