@@ -19,13 +19,14 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
   const layout = (slice.primary as any).layout || "wrap";
   const isColumnLayout = layout === "columns";
 
-  // Define the 5 colors from the palette
+  // Define the 5 colors - blue-toned to complement the purple/orange background
+  // Arranged so similar colors are spaced apart
   const hoverColors = [
-    "#FFF461", // bright pale yellow
-    "#DEAE54", // warm golden-brown
-    "#FFB366", // light orange/peach (estimated)
-    "#DE548B", // muted rose/dusty pink
-    "#C06DFA", // vibrant light purple
+    "#3B82F6", // Bright blue
+    "#06B6D4", // Cyan blue
+    "#8B5CF6", // Blue-purple (matches background)
+    "#14B8A6", // Teal blue
+    "#6366F1", // Indigo blue (tech feel)
   ];
 
   // Get hover color for a specific index
@@ -97,6 +98,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   className={basePillClass}
                   style={{
                     backgroundColor: "#FACC15", // yellow-400
+                    border: "2px dashed rgba(0, 0, 0, 0.3)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = hoverColor;

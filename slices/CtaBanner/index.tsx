@@ -73,6 +73,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             letterSpacing: "0.15em",
             textTransform: "uppercase",
             textDecoration: "none",
+            border: "2px dashed rgba(0, 0, 0, 0.4)",
           }}
         >
           {label}
