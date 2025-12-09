@@ -49,9 +49,9 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
           alt={image.alt || ""}
           className="w-full h-full object-contain"
           style={{
-            opacity: opacityValue,
-            filter: "brightness(0.6) contrast(0.85) saturate(0.8)",
-            mixBlendMode: "overlay",
+            opacity: opacityValue * 0.3, // More subtle for refined look
+            filter: "grayscale(0.3) brightness(0.9) contrast(0.9)",
+            mixBlendMode: "normal",
           }}
         />
       </div>

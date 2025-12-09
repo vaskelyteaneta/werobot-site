@@ -195,24 +195,24 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
         ref={boxRef}
         className={[
           containerClasses,
-          "px-10 py-6",
-          "rounded-[32px]",
-          "bg-white",
+          "px-8 py-8 md:px-12 md:py-10",
+          "border border-[#e5e5e5]",
+          "bg-transparent",
           "relative",
           "z-0",
           "items-start text-left",
-          "transition-shadow duration-300",
-          "hover:shadow-[10px_10px_0_0_rgba(0,0,0,1)]",
+          "transition-all duration-300",
+          "hover:border-[#1a1a1a]",
           "overflow-visible",
         ].join(" ")}
         style={{ position: "relative" }}
       >
         {slice.primary.text ? (
-              <div className="text-xs md:text-sm tracking-[0.25em] leading-relaxed text-left">
+              <div className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-left text-[#1a1a1a] font-light">
             <PrismicRichText field={slice.primary.text} />
           </div>
         ) : (
-              <p className="text-xs md:text-sm tracking-[0.25em] leading-relaxed text-left">
+              <p className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-left text-[#1a1a1a] font-light">
             Coming next spring: April 23 – 25, 2026 · Berlin, Germany
           </p>
         )}

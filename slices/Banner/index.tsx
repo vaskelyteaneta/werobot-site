@@ -50,13 +50,13 @@ const Banner: FC<BannerProps> = ({ slice }) => {
       ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex justify-center py-12 px-4"
+      className="w-full flex justify-center py-16 px-4"
     >
       <div
-        className="inline-flex rounded-[32px] transition-shadow duration-300 hover:shadow-[12px_12px_0_#000000] uppercase px-6 py-4 md:px-20 md:py-5 text-base md:text-xl"
+        className="inline-flex border border-[#1a1a1a] bg-transparent transition-all duration-300 hover:bg-[#1a1a1a] hover:text-[#fafafa] uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
         style={{
-          backgroundColor: "#F5FF6B",
-          letterSpacing: "0.15em",
+          letterSpacing: "0.2em",
+          color: "#1a1a1a",
         }}
       >
         {label}

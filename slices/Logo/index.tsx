@@ -47,7 +47,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
       }
     >
       <div
-        className="rounded-[32px] bg-white shadow-[14px_14px_0_#000000] border border-black/5 px-10 py-6 flex flex-col items-center gap-3"
+        className="border border-[#e5e5e5] bg-transparent px-10 py-6 flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#1a1a1a]"
         style={{
           width: useAbsolute ? "100%" : "auto",
           maxWidth: useAbsolute ? "100%" : `${width}px`,
@@ -66,10 +66,10 @@ const Logo: FC<LogoProps> = ({ slice }) => {
             }}
           />
         ) : (
-          <p className="text-sm text-gray-500">Upload a logo</p>
+          <p className="text-sm text-[#6b6b6b] font-light">Upload a logo</p>
         )}
         {hasText && (
-          <p className="text-xs uppercase tracking-[0.35em] text-left">
+          <p className="text-xs uppercase tracking-[0.2em] text-left font-light text-[#6b6b6b]">
             {slice.primary.text}
           </p>
         )}

@@ -47,22 +47,23 @@ export default function IntroScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-700 ${
         isAnimating ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       style={{
-        backgroundColor: "#F6FF75", // light yellow/lime
+        backgroundColor: "#fafafa",
       }}
       onClick={() => {
         setIsAnimating(true);
-        setTimeout(() => setIsVisible(false), 500);
+        setTimeout(() => setIsVisible(false), 700);
       }}
     >
       <h1
-        className="text-6xl md:text-8xl font-bold uppercase tracking-wider"
+        className="text-5xl md:text-7xl font-light uppercase tracking-[0.15em]"
         style={{
-          color: "#000000",
+          color: "#1a1a1a",
           fontFamily: "var(--font-inter)",
+          letterSpacing: "0.2em",
         }}
       >
         WEROBOT

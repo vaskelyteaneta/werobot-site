@@ -58,14 +58,14 @@ const SectionTitle: FC<SectionTitleProps> = ({ slice }) => {
             field={slice.primary.title}
             components={{
               paragraph: ({ children }) => (
-                <p className="text-base md:text-lg tracking-[0.35em] uppercase">
+                <p className="text-sm md:text-base tracking-[0.2em] uppercase font-light text-[#6b6b6b]">
                   {children}
                 </p>
               ),
             }}
           />
         ) : (
-          <p className="font-mono text-base md:text-lg tracking-[0.35em] uppercase">
+          <p className="text-sm md:text-base tracking-[0.2em] uppercase font-light text-[#6b6b6b]">
             HOSTING ORGANISATIONS
           </p>
         )}

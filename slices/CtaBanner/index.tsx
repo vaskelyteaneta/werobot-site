@@ -66,16 +66,14 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         <a
           href={pdfUrl}
           download="WeRobot26-Berlin.pdf"
-          className="transition-shadow duration-300 hover:shadow-[12px_12px_0px_#000000] inline-block px-6 py-4 md:px-20 md:py-5 text-base md:text-xl"
+          className="transition-all duration-300 hover:bg-[#1a1a1a] hover:text-[#fafafa] inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
           style={{
-            backgroundColor: "#F5FF6B",
-            color: "#000000",
-            borderRadius: "2rem",
-            fontFamily: "monospace",
-            letterSpacing: "0.15em",
+            backgroundColor: "transparent",
+            color: "#1a1a1a",
+            border: "1px solid #1a1a1a",
+            letterSpacing: "0.2em",
             textTransform: "uppercase",
             textDecoration: "none",
-            border: "2px dashed rgba(0, 0, 0, 0.4)",
             cursor: "pointer",
           }}
         >
@@ -83,17 +81,15 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         </a>
       ) : link ? (
         <PrismicLink
-          className="transition-shadow duration-300 hover:shadow-[12px_12px_0px_#000000] inline-block px-6 py-4 md:px-20 md:py-5 text-base md:text-xl"
+          className="transition-all duration-300 hover:bg-[#1a1a1a] hover:text-[#fafafa] inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
           field={link}
           style={{
-            backgroundColor: "#F5FF6B",
-            color: "#000000",
-            borderRadius: "2rem",
-            fontFamily: "monospace",
-            letterSpacing: "0.15em",
+            backgroundColor: "transparent",
+            color: "#1a1a1a",
+            border: "1px solid #1a1a1a",
+            letterSpacing: "0.2em",
             textTransform: "uppercase",
             textDecoration: "none",
-            border: "2px dashed rgba(0, 0, 0, 0.4)",
           }}
         >
           {label}
@@ -101,15 +97,15 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
       ) : (
         <button
           disabled
-          className="px-6 py-4 md:px-20 md:py-5 text-base md:text-xl"
+          className="px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
           style={{
-            backgroundColor: "#888888",
-            color: "#000000",
-            borderRadius: "2rem",
-            fontFamily: "monospace",
-            letterSpacing: "0.15em",
+            backgroundColor: "transparent",
+            color: "#6b6b6b",
+            border: "1px solid #e5e5e5",
+            letterSpacing: "0.2em",
             textTransform: "uppercase",
-            opacity: 0.6,
+            opacity: 0.5,
+            cursor: "not-allowed",
           }}
         >
           {label}

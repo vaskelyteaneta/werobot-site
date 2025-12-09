@@ -19,18 +19,6 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
   const layout = (slice.primary as any).layout || "wrap";
   const isColumnLayout = layout === "columns";
 
-  // Define the 5 colors - blue-toned to complement the purple/orange background
-  // Arranged so similar colors are spaced apart
-  const hoverColors = [
-    "#3B82F6", // Bright blue
-    "#06B6D4", // Cyan blue
-    "#8B5CF6", // Blue-purple (matches background)
-    "#14B8A6", // Teal blue
-    "#6366F1", // Indigo blue (tech feel)
-  ];
-
-  // Get hover color for a specific index
-  const getHoverColor = (index: number) => hoverColors[index % hoverColors.length];
 
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -70,7 +58,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
       className="w-full flex flex-col items-center gap-8 py-12 px-4"
     >
       {hasTitle && (
-            <p className="text-base tracking-[0.35em] uppercase text-left">
+            <p className="text-sm md:text-base tracking-[0.2em] uppercase text-left font-light text-[#6b6b6b]">
           {slice.primary.section_title}
         </p>
       )}
@@ -86,8 +74,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const hoverColor = getHoverColor(index);
-              const basePillClass = "inline-flex items-center justify-center rounded-[32px] px-8 py-3 shadow-[10px_10px_0_0_rgba(0,0,0,0)] hover:shadow-[10px_10px_0_#000000] transition-all duration-300";
+              const basePillClass = "inline-flex items-center justify-center border border-[#e5e5e5] px-6 py-2 transition-all duration-300 hover:border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] font-light";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -97,14 +84,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   field={item.link}
                   className={basePillClass}
                   style={{
-                    backgroundColor: "#FACC15", // yellow-400
-                    border: "2px dashed rgba(0, 0, 0, 0.3)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = hoverColor;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#FACC15";
+                    backgroundColor: "transparent",
+                    color: "#1a1a1a",
                   }}
                 >
                   {content}
@@ -114,13 +95,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   key={`${item.text || index}-static`}
                   className={basePillClass}
                   style={{
-                    backgroundColor: "#FACC15", // yellow-400
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = hoverColor;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#FACC15";
+                    backgroundColor: "transparent",
+                    color: "#1a1a1a",
                   }}
                 >
                   {content}
@@ -144,8 +120,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const hoverColor = getHoverColor(index);
-              const basePillClass = "inline-flex items-center justify-center rounded-[32px] px-8 py-3 shadow-[10px_10px_0_0_rgba(0,0,0,0)] hover:shadow-[10px_10px_0_#000000] transition-all duration-300";
+              const basePillClass = "inline-flex items-center justify-center border border-[#e5e5e5] px-6 py-2 transition-all duration-300 hover:border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] font-light";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -156,13 +131,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   className={basePillClass}
                   style={{ 
                     minWidth: "180px",
-                    backgroundColor: "#FFFFFF",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = hoverColor;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#FFFFFF";
+                    backgroundColor: "transparent",
+                    color: "#1a1a1a",
                   }}
                 >
                   {content}
@@ -173,13 +143,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   className={basePillClass}
                   style={{ 
                     minWidth: "180px",
-                    backgroundColor: "#FFFFFF",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = hoverColor;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#FFFFFF";
+                    backgroundColor: "transparent",
+                    color: "#1a1a1a",
                   }}
                 >
                   {content}

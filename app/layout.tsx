@@ -23,15 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ backgroundColor: "#2563eb" }}>
+    <html lang="en" style={{ backgroundColor: "#fafafa" }}>
       <head>
         <style dangerouslySetInnerHTML={{
-          __html: `html,body{background-color:#2563eb!important}`
+          __html: `html,body{background-color:#fafafa!important}`
         }} />
       </head>
       <body
         className={`${inter.variable} antialiased`}
-        style={{ backgroundColor: "#2563eb", fontFamily: "var(--font-inter)" }}
+        style={{ backgroundColor: "#fafafa", fontFamily: "var(--font-inter)" }}
       >
         <IntroScreen />
         <UnicornBackground />

@@ -27,7 +27,7 @@ export default function UnicornBackground() {
 
   return (
     <>
-      {/* Blue background base */}
+      {/* Clean background base */}
       <div 
         style={{
           position: "fixed",
@@ -35,12 +35,12 @@ export default function UnicornBackground() {
           left: 0,
           width: "100vw",
           height: "100vh",
-          backgroundColor: "#2563eb",
+          backgroundColor: "#fafafa",
           zIndex: -1,
           pointerEvents: "none"
         }}
       />
-      {/* Unicorn Studio Background */}
+      {/* Unicorn Studio Background - subtle and refined */}
       <div 
         data-us-project="XqSpkUNuFa3STasqny3T" 
         style={{
@@ -52,10 +52,11 @@ export default function UnicornBackground() {
           zIndex: 0,
           pointerEvents: "none",
           transform: "scale(1.2)",
-          transformOrigin: "center center"
+          transformOrigin: "center center",
+          opacity: 0.15,
         }}
       />
-      {/* Blue filter overlay */}
+      {/* Subtle filter overlay for refined look */}
       <div 
         style={{
           position: "fixed",
@@ -63,8 +64,8 @@ export default function UnicornBackground() {
           left: 0,
           width: "100vw",
           height: "100vh",
-          backgroundColor: "rgba(37, 99, 235, 0.4)",
-          mixBlendMode: "multiply",
+          backgroundColor: "rgba(250, 250, 250, 0.6)",
+          mixBlendMode: "normal",
           zIndex: 0,
           pointerEvents: "none"
         }}
