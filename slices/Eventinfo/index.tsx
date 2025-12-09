@@ -140,7 +140,8 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
       ? "w-full max-w-[90vw] md:max-w-[45vw]"
       : "w-full max-w-[90vw] md:max-w-[700px]";
 
-  // Get graphic positioning styles
+  // Get graphic positioning styles - absolute on desktop, static on mobile
+  // Graphics are positioned further away to avoid covering text
   const getGraphicStyle = (position: string | undefined) => {
     const baseStyle: React.CSSProperties = {
       position: "absolute",
@@ -151,35 +152,36 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
     // Normalize position string (trim and lowercase for comparison)
     const normalizedPosition = (position || "").trim().toLowerCase();
 
-    // Map positions to styles - ensuring correct mapping
+    // Moderate offsets to keep graphics on slice but prevent covering text
+    // Using negative values to position graphics slightly outside the box edges
     if (normalizedPosition === "absolute-top-left") {
-      return { ...baseStyle, top: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
+      return { ...baseStyle, top: "-2.5rem", left: "-2.5rem", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
     }
     if (normalizedPosition === "absolute-top-middle") {
-      return { ...baseStyle, top: "-1.5rem", left: "50%", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
+      return { ...baseStyle, top: "-2.5rem", left: "50%", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
     }
     if (normalizedPosition === "absolute-top-right") {
-      return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
+      return { ...baseStyle, top: "-2.5rem", right: "-2.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
     }
     if (normalizedPosition === "absolute-left-middle") {
-      return { ...baseStyle, top: "50%", left: "-1.5rem", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
+      return { ...baseStyle, top: "50%", left: "-2.5rem", transform: "translate(-50%, -50%)", bottom: "auto", right: "auto" };
     }
     if (normalizedPosition === "absolute-right-middle") {
-      return { ...baseStyle, top: "50%", right: "-1.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
+      return { ...baseStyle, top: "50%", right: "-2.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
     }
     if (normalizedPosition === "absolute-bottom-left") {
-      return { ...baseStyle, bottom: "-1.5rem", left: "-1.5rem", transform: "translate(-50%, 50%)", top: "auto", right: "auto" };
+      return { ...baseStyle, bottom: "-2.5rem", left: "-2.5rem", transform: "translate(-50%, 50%)", top: "auto", right: "auto" };
     }
     if (normalizedPosition === "absolute-bottom-middle") {
-      return { ...baseStyle, bottom: "-1.5rem", left: "50%", transform: "translate(-50%, 50%)", top: "auto", right: "auto" };
+      return { ...baseStyle, bottom: "-2.5rem", left: "50%", transform: "translate(-50%, 50%)", top: "auto", right: "auto" };
     }
     if (normalizedPosition === "absolute-bottom-right") {
-      return { ...baseStyle, bottom: "-1.5rem", right: "-1.5rem", transform: "translate(50%, 50%)", top: "auto", left: "auto" };
+      return { ...baseStyle, bottom: "-2.5rem", right: "-2.5rem", transform: "translate(50%, 50%)", top: "auto", left: "auto" };
     }
     
     // Fallback: log the actual value for debugging
     console.warn("Unknown graphic position:", position, "normalized:", normalizedPosition, "using default top-right");
-    return { ...baseStyle, top: "-1.5rem", right: "-1.5rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
+    return { ...baseStyle, top: "-4rem", right: "-4rem", transform: "translate(50%, -50%)", bottom: "auto", left: "auto" };
   };
 
   return (
@@ -217,40 +219,58 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
 
         {/* Render first graphic if provided */}
         {graphicImage?.url && (
-          <div 
-            ref={graphic1Ref} 
-            style={{
-              ...getGraphicStyle(graphicPosition),
-              position: "absolute",
-              zIndex: 20,
-              pointerEvents: "none",
-            }}
-          >
-            <img
-              src={graphicImage.url}
-              alt={graphicImage.alt || ""}
-              className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
-            />
-          </div>
+          <>
+            {/* Mobile: static, stacked */}
+            <div 
+              ref={graphic1Ref} 
+              className="static mt-4 flex justify-center md:hidden"
+            >
+              <img
+                src={graphicImage.url}
+                alt={graphicImage.alt || ""}
+                className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+              />
+            </div>
+            {/* Desktop: absolute positioned */}
+            <div 
+              className="hidden md:block"
+              style={getGraphicStyle(graphicPosition)}
+            >
+              <img
+                src={graphicImage.url}
+                alt={graphicImage.alt || ""}
+                className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+              />
+            </div>
+          </>
         )}
 
         {/* Render second graphic if provided */}
         {graphicImage2?.url && (
-          <div 
-            ref={graphic2Ref} 
-            style={{
-              ...getGraphicStyle(graphicPosition2),
-              position: "absolute",
-              zIndex: 20,
-              pointerEvents: "none",
-            }}
-          >
-            <img
-              src={graphicImage2.url}
-              alt={graphicImage2.alt || ""}
-              className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
-            />
-          </div>
+          <>
+            {/* Mobile: static, stacked */}
+            <div 
+              ref={graphic2Ref} 
+              className="static mt-4 flex justify-center md:hidden"
+            >
+              <img
+                src={graphicImage2.url}
+                alt={graphicImage2.alt || ""}
+                className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+              />
+            </div>
+            {/* Desktop: absolute positioned */}
+            <div 
+              className="hidden md:block"
+              style={getGraphicStyle(graphicPosition2)}
+            >
+              <img
+                src={graphicImage2.url}
+                alt={graphicImage2.alt || ""}
+                className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+              />
+            </div>
+          </>
         )}
       </div>
     </section>

@@ -46,6 +46,10 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
     };
   }, []);
 
+  // Check if this is the "GET THE PAPERS" button and use PDF link
+  const isPapersButton = label.toUpperCase().includes("PAPERS");
+  const pdfUrl = "https://ai-laws.org/wp-content/uploads/2025/08/WeRobot26-Berlin.pdf";
+
   return (
     <section
       ref={sectionRef}
@@ -58,18 +62,34 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         padding: "40px 0",
       }}
     >
-      {link ? (
-        <PrismicLink
-          field={link}
-          className="transition-shadow duration-300 hover:shadow-[12px_12px_0px_#000000]"
+      {isPapersButton ? (
+        <a
+          href={pdfUrl}
+          download="WeRobot26-Berlin.pdf"
+          className="transition-shadow duration-300 hover:shadow-[12px_12px_0px_#000000] inline-block px-6 py-4 md:px-20 md:py-5 text-base md:text-xl"
           style={{
-            display: "inline-block",
-            padding: "22px 80px",
             backgroundColor: "#F5FF6B",
             color: "#000000",
             borderRadius: "2rem",
             fontFamily: "monospace",
-            fontSize: "22px",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            border: "2px dashed rgba(0, 0, 0, 0.4)",
+            cursor: "pointer",
+          }}
+        >
+          {label}
+        </a>
+      ) : link ? (
+        <PrismicLink
+          className="transition-shadow duration-300 hover:shadow-[12px_12px_0px_#000000] inline-block px-6 py-4 md:px-20 md:py-5 text-base md:text-xl"
+          field={link}
+          style={{
+            backgroundColor: "#F5FF6B",
+            color: "#000000",
+            borderRadius: "2rem",
+            fontFamily: "monospace",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
             textDecoration: "none",
@@ -81,13 +101,12 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
       ) : (
         <button
           disabled
+          className="px-6 py-4 md:px-20 md:py-5 text-base md:text-xl"
           style={{
-            padding: "22px 80px",
             backgroundColor: "#888888",
             color: "#000000",
             borderRadius: "2rem",
             fontFamily: "monospace",
-            fontSize: "22px",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
             opacity: 0.6,
