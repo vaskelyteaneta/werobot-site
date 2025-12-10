@@ -48,6 +48,9 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
 
   // Check if this is the "GET THE PAPERS" button and use PDF link
   const isPapersButton = label.toUpperCase().includes("PAPERS");
+  // Check if this is "GET THE TICKET" or "GET THE PAPERS" - these should be black filled
+  const isTicketButton = label.toUpperCase().includes("TICKET");
+  const isActionButton = isPapersButton || isTicketButton;
   const pdfUrl = "https://ai-laws.org/wp-content/uploads/2025/08/WeRobot26-Berlin.pdf";
 
   return (
@@ -66,10 +69,10 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         <a
           href={pdfUrl}
           download="WeRobot26-Berlin.pdf"
-          className="transition-all duration-300 hover:bg-[#1a1a1a] hover:text-[#fafafa] inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
           style={{
-            backgroundColor: "transparent",
-            color: "#1a1a1a",
+            backgroundColor: "#1a1a1a",
+            color: "#fafafa",
             border: "1px solid #1a1a1a",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
@@ -81,11 +84,13 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         </a>
       ) : link ? (
         <PrismicLink
-          className="transition-all duration-300 hover:bg-[#1a1a1a] hover:text-[#fafafa] inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className={`transition-all duration-300 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light ${
+            isActionButton ? "hover:opacity-80" : "hover:bg-[#1a1a1a] hover:text-[#fafafa]"
+          }`}
           field={link}
           style={{
-            backgroundColor: "transparent",
-            color: "#1a1a1a",
+            backgroundColor: isActionButton ? "#1a1a1a" : "transparent",
+            color: isActionButton ? "#fafafa" : "#1a1a1a",
             border: "1px solid #1a1a1a",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
