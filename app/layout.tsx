@@ -4,6 +4,7 @@ import "./globals.css";
 import HideUnicornAttribution from "@/components/HideUnicornAttribution";
 import UnicornBackground from "@/components/UnicornBackground";
 import IntroScreen from "@/components/IntroScreen";
+import PlusGrid from "@/components/PlusGrid";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         <IntroScreen />
         <UnicornBackground />
+        <PlusGrid />
         <HideUnicornAttribution />
         {children}
       </body>
