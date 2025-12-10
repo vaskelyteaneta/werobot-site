@@ -58,7 +58,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
       className="w-full flex flex-col items-center gap-8 py-12 px-4"
     >
       {hasTitle && (
-            <p className="text-sm md:text-base tracking-[0.2em] uppercase text-left font-light text-[#6b6b6b]">
+            <p className="text-sm md:text-base tracking-[0.2em] uppercase text-left font-light text-white opacity-70">
           {slice.primary.section_title}
         </p>
       )}
@@ -74,7 +74,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center border border-[#e5e5e5] px-6 py-2 transition-all duration-300 hover:border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] font-light";
+              const basePillClass = "inline-flex items-center justify-center border border-black/30 bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black active:border-black font-light cursor-pointer rounded-sm";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -84,8 +84,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   field={item.link}
                   className={basePillClass}
                   style={{
-                    backgroundColor: "transparent",
-                    color: "#1a1a1a",
+                    color: "#ffffff",
+                    boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
                   }}
                 >
                   {content}
@@ -95,8 +95,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   key={`${item.text || index}-static`}
                   className={basePillClass}
                   style={{
-                    backgroundColor: "transparent",
-                    color: "#1a1a1a",
+                    color: "#ffffff",
+                    boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
                   }}
                 >
                   {content}
@@ -104,7 +104,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               );
             })
           ) : (
-                <p className="text-sm text-gray-500 uppercase tracking-[0.2em] col-span-3 text-left">
+                <p className="text-sm text-white opacity-70 uppercase tracking-[0.2em] col-span-3 text-left">
               Add names to the NamePills slice in Prismic.
             </p>
           )}
@@ -120,7 +120,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center border border-[#e5e5e5] px-6 py-2 transition-all duration-300 hover:border-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#fafafa] font-light";
+              const basePillClass = "inline-flex items-center justify-center border border-black/30 bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black active:border-black font-light cursor-pointer rounded-sm";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -152,7 +152,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               );
             })
           ) : (
-                <p className="text-sm text-gray-500 uppercase tracking-[0.2em]">
+                <p className="text-sm text-white opacity-70 uppercase tracking-[0.2em]">
               Add names to the NamePills slice in Prismic.
             </p>
           )}
