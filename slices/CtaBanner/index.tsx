@@ -85,7 +85,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
       ) : link ? (
         <PrismicLink
           className={`transition-all duration-300 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light ${
-            isActionButton ? "hover:opacity-80" : "hover:bg-[#1a1a1a] hover:text-[#fafafa]"
+            isActionButton ? "hover:opacity-80" : ""
           }`}
           field={link}
           style={{
