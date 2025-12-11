@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function IntroScreen() {
   const [isVisible, setIsVisible] = useState(true);
@@ -58,17 +59,16 @@ export default function IntroScreen() {
         setTimeout(() => setIsVisible(false), 700);
       }}
     >
-      <img
+      <Image
         src="/logo.png"
         alt="WeRobot Logo"
+        width={500}
+        height={200}
         className="max-w-[300px] md:max-w-[500px] h-auto"
         style={{
           objectFit: "contain",
         }}
-        onError={(e) => {
-          // Hide logo if file doesn't exist
-          (e.target as HTMLImageElement).style.display = "none";
-        }}
+        priority
       />
     </div>
   );
