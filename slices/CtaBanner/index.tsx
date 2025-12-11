@@ -48,7 +48,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
 
   // Check if this is the "GET THE PAPERS" button and use PDF link
   const isPapersButton = label.toUpperCase().includes("PAPERS");
-  // Check if this is "GET THE TICKET" or "GET THE PAPERS" - these should be black filled
+  // Check if this is "GET THE TICKET" - use Pretix link
   const isTicketButton = label.toUpperCase().includes("TICKET");
   // Check if this is "PARTNER WITH WEROBOT" - use mailto link (priority check)
   // Trim and normalize the label for better detection
@@ -57,6 +57,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
   const isActionButton = isPapersButton || isTicketButton;
   const pdfUrl = "https://ai-laws.org/wp-content/uploads/2025/08/WeRobot26-Berlin.pdf";
   const partnerEmail = "orga@werobot2026.eu";
+  const ticketUrl = "https://pretix.eu/werobot26/tickets/";
   
   // Force mailto for partner button even if link exists - this takes priority
   const shouldUseMailto = isPartnerButton;
@@ -80,6 +81,24 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             e.preventDefault();
             window.location.href = `mailto:${partnerEmail}?subject=Partner%20with%20WeRobot%202026`;
           }}
+          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          style={{
+            backgroundColor: "#000000",
+            color: "#ffffff",
+            border: "1px solid #000000",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            cursor: "default",
+          }}
+        >
+          {label}
+        </a>
+      ) : isTicketButton ? (
+        <a
+          href={ticketUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
           style={{
             backgroundColor: "#000000",

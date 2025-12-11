@@ -78,7 +78,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
       const animate = () => {
         animationRef.current = gsap.to(content, {
           x: -singleSetWidth,
-          duration: 20,
+          duration: 40,
           ease: "none",
           onComplete: () => {
             // Instantly jump back by one set width (invisible due to duplicates)
