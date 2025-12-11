@@ -16,6 +16,11 @@ export type BannerProps = SliceComponentProps<Content.BannerSlice>;
 const Banner: FC<BannerProps> = ({ slice }) => {
   const label = slice.primary.button_text || "WHAT WEROBOT OFFERS";
   const sectionRef = useRef<HTMLElement>(null);
+  
+  // Check if this is "PARTNER WITH WEROBOT" - use mailto link
+  const normalizedLabel = (label || "").trim().toUpperCase();
+  const isPartnerButton = normalizedLabel.includes("PARTNER");
+  const partnerEmail = "orga@werobot2026.eu";
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -52,15 +57,34 @@ const Banner: FC<BannerProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-16 px-4"
     >
-      <div
-        className="inline-flex border border-[#1a1a1a] bg-transparent uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
-        style={{
-          letterSpacing: "0.2em",
-          color: "#1a1a1a",
-        }}
-      >
-        {label}
-      </div>
+      {isPartnerButton ? (
+        <a
+          href={`mailto:${partnerEmail}?subject=Partner%20with%20WeRobot%202026`}
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `mailto:${partnerEmail}?subject=Partner%20with%20WeRobot%202026`;
+          }}
+          className="inline-flex border border-black bg-black uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light transition-all duration-300 hover:opacity-80"
+          style={{
+            letterSpacing: "0.2em",
+            color: "#ffffff",
+            textDecoration: "none",
+            cursor: "default",
+          }}
+        >
+          {label}
+        </a>
+      ) : (
+        <div
+          className="inline-flex border border-[#1a1a1a] bg-transparent uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          style={{
+            letterSpacing: "0.2em",
+            color: "#1a1a1a",
+          }}
+        >
+          {label}
+        </div>
+      )}
     </section>
   );
 };

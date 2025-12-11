@@ -54,20 +54,60 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
     const content = container.querySelector(".logo-content") as HTMLElement;
     if (!content) return;
 
-    // Get the width of the content
-    const contentWidth = content.scrollWidth;
-    const containerWidth = container.offsetWidth;
+    // Wait for images to load to get accurate width
+    const images = content.querySelectorAll("img");
+    let loadedImages = 0;
+    const totalImages = images.length;
 
-    // Reset position
-    gsap.set(content, { x: 0 });
+    const checkAndAnimate = () => {
+      if (loadedImages < totalImages) return;
 
-    // Create infinite scroll animation
-    animationRef.current = gsap.to(content, {
-      x: -contentWidth / 2, // Move by half the content width (since we duplicate it)
-      duration: 30, // Adjust speed here (higher = slower)
-      ease: "none",
-      repeat: -1, // Infinite repeat
-    });
+      // Calculate the width of one complete set of logos
+      const singleSetWidth = Array.from(content.children)
+        .slice(0, logos.length)
+        .reduce((sum, child) => {
+          const rect = child.getBoundingClientRect();
+          return sum + rect.width + 48; // 48px for gap-12
+        }, 0);
+
+      // Set initial position
+      gsap.set(content, { x: 0 });
+
+      // Create truly continuous infinite scroll that never stops
+      // With 4 sets of logos, moving by one set width creates seamless loop
+      const animate = () => {
+        animationRef.current = gsap.to(content, {
+          x: -singleSetWidth,
+          duration: 20,
+          ease: "none",
+          onComplete: () => {
+            // Instantly jump back by one set width (invisible due to duplicates)
+            const currentX = gsap.getProperty(content, "x") as number;
+            gsap.set(content, { x: currentX + singleSetWidth });
+            // Immediately start next cycle
+            animate();
+          }
+        });
+      };
+      
+      animate();
+    };
+
+    if (totalImages === 0) {
+      checkAndAnimate();
+    } else {
+      images.forEach((img) => {
+        if (img.complete) {
+          loadedImages++;
+          if (loadedImages === totalImages) checkAndAnimate();
+        } else {
+          img.onload = () => {
+            loadedImages++;
+            if (loadedImages === totalImages) checkAndAnimate();
+          };
+        }
+      });
+    }
 
     return () => {
       if (animationRef.current) {
@@ -76,8 +116,8 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
     };
   }, [logos]);
 
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...logos, ...logos];
+  // Duplicate logos multiple times for seamless infinite scroll
+  const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
 
   return (
     <section
@@ -87,7 +127,10 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
       className="w-full flex justify-center py-12 px-4"
     >
       <div
-        className="w-full max-w-5xl border border-[#e5e5e5] bg-transparent py-6 overflow-hidden transition-all duration-300 hover:border-[#1a1a1a]"
+        className="w-full max-w-5xl border border-black/30 bg-transparent py-6 overflow-hidden transition-all duration-300 hover:border-black"
+        style={{
+          boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
+        }}
       >
         {logos.length > 0 ? (
           <div
@@ -110,7 +153,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
             </div>
           </div>
         ) : (
-              <p className="text-xs uppercase tracking-[0.25em] text-left text-gray-500">
+              <p className="text-xs uppercase tracking-[0.25em] text-left text-white opacity-70">
             Add sponsor logos in Prismic
           </p>
         )}
