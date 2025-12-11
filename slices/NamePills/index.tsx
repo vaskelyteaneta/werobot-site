@@ -74,7 +74,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center border border-black/30 bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black active:border-black font-light cursor-pointer rounded-sm";
+              const basePillClass = "inline-flex items-center justify-center bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] font-light cursor-pointer rounded-sm border-0 outline-none";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -86,6 +86,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   style={{
                     color: "#ffffff",
                     boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
+                    border: "0",
+                    borderWidth: "0",
+                    outline: "none",
                   }}
                 >
                   {content}
@@ -97,6 +100,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   style={{
                     color: "#ffffff",
                     boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
+                    border: "0",
+                    borderWidth: "0",
+                    outline: "none",
                   }}
                 >
                   {content}
@@ -120,7 +126,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center border border-black/30 bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black active:border-black font-light cursor-pointer rounded-sm";
+              const basePillClass = "inline-flex items-center justify-center bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] font-light cursor-pointer rounded-sm border-0 outline-none";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -132,7 +138,10 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   style={{ 
                     minWidth: "180px",
                     backgroundColor: "transparent",
-                    color: "#1a1a1a",
+                    color: "#ffffff",
+                    border: "0",
+                    borderWidth: "0",
+                    outline: "none",
                   }}
                 >
                   {content}
@@ -144,7 +153,10 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   style={{ 
                     minWidth: "180px",
                     backgroundColor: "transparent",
-                    color: "#1a1a1a",
+                    color: "#ffffff",
+                    border: "0",
+                    borderWidth: "0",
+                    outline: "none",
                   }}
                 >
                   {content}
