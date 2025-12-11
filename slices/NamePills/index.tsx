@@ -74,7 +74,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] font-light cursor-pointer rounded-sm border-0 outline-none";
+              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-sm outline-none";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -84,11 +84,10 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   field={item.link}
                   className={basePillClass}
                   style={{
-                    color: "#ffffff",
+                    color: "#000000 !important",
                     boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
-                    border: "0",
-                    borderWidth: "0",
                     outline: "none",
+                    borderColor: "rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   {content}
@@ -98,11 +97,10 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   key={`${item.text || index}-static`}
                   className={basePillClass}
                   style={{
-                    color: "#ffffff",
+                    color: "#000000 !important",
                     boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
-                    border: "0",
-                    borderWidth: "0",
                     outline: "none",
+                    borderColor: "rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   {content}
@@ -126,7 +124,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center bg-white/5 backdrop-blur-md px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] font-light cursor-pointer rounded-sm border-0 outline-none";
+              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-sm outline-none";
 
               const hasLink = item.link && isFilled.link(item.link);
 
@@ -137,11 +135,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   className={basePillClass}
                   style={{ 
                     minWidth: "180px",
-                    backgroundColor: "transparent",
-                    color: "#ffffff",
-                    border: "0",
-                    borderWidth: "0",
+                    color: "#000000 !important",
                     outline: "none",
+                    borderColor: "rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   {content}
@@ -152,11 +148,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   className={basePillClass}
                   style={{ 
                     minWidth: "180px",
-                    backgroundColor: "transparent",
-                    color: "#ffffff",
-                    border: "0",
-                    borderWidth: "0",
+                    color: "#000000 !important",
                     outline: "none",
+                    borderColor: "rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   {content}

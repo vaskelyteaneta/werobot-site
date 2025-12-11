@@ -72,12 +72,17 @@ a:hover {
   color: var(--background);
 }
 
-/* Remove borders from name pills */
+/* Name pills styling - ensure black text and border */
 [data-slice-type="name_pills"] a,
-[data-slice-type="name_pills"] div {
-  border: 0 !important;
-  border-width: 0 !important;
+[data-slice-type="name_pills"] div[class*="inline-flex"] {
+  color: #000000 !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
   outline: none !important;
+}
+
+[data-slice-type="name_pills"] a:hover,
+[data-slice-type="name_pills"] div[class*="inline-flex"]:hover {
+  border-color: #000000 !important;
 }
 
 
