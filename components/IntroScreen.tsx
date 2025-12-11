@@ -58,16 +58,18 @@ export default function IntroScreen() {
         setTimeout(() => setIsVisible(false), 700);
       }}
     >
-      <h1
-        className="text-5xl md:text-7xl font-light uppercase tracking-[0.15em]"
+      <img
+        src="/logo.png"
+        alt="WeRobot Logo"
+        className="max-w-[300px] md:max-w-[500px] h-auto"
         style={{
-          color: "#1a1a1a",
-          fontFamily: "var(--font-inter)",
-          letterSpacing: "0.2em",
+          objectFit: "contain",
         }}
-      >
-        WEROBOT
-      </h1>
+        onError={(e) => {
+          // Hide logo if file doesn't exist
+          (e.target as HTMLImageElement).style.display = "none";
+        }}
+      />
     </div>
   );
 }
