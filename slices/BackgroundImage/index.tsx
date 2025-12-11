@@ -11,7 +11,56 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
   const position = primary?.position || "center";
   const opacity = primary?.opacity || "30";
   const size = primary?.size || "medium";
+  const items = (slice as any).items || [];
+  const displayMode = primary?.display_mode || "single";
 
+  // Check if we have a gallery (multiple images in items)
+  const hasGallery = items && items.length > 0 && items.some((item: any) => item.image?.url);
+  const galleryImages = hasGallery ? items.filter((item: any) => item.image?.url).map((item: any) => item.image) : [];
+
+  // Gallery mode: display multiple images in a row
+  if (hasGallery && galleryImages.length > 0) {
+    return (
+      <section
+        data-slice-type={(slice as any).slice_type}
+        data-slice-variation={(slice as any).variation}
+        className="w-full flex justify-center py-8 px-4"
+      >
+        <div className="w-full max-w-7xl flex flex-row gap-4 md:gap-6">
+          {galleryImages.map((img: any, index: number) => (
+            <div
+              key={index}
+              className="gallery-image-wrapper flex-1 relative overflow-hidden"
+              style={{
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              }}
+            >
+              <img
+                src={img.url}
+                alt={img.alt || `Gallery image ${index + 1}`}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          ))}
+        </div>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            .gallery-image-wrapper {
+              transform: scale(1);
+              box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            .gallery-image-wrapper:hover {
+              transform: scale(1.05);
+              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+              z-index: 10;
+            }
+          `
+        }} />
+      </section>
+    );
+  }
+
+  // Single image mode (original behavior)
   if (!image?.url) return null;
 
   const sizeClasses = {

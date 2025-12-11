@@ -67,9 +67,30 @@
             ],
             "default_value": "medium"
           }
+        },
+        "display_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Display Mode",
+            "placeholder": "",
+            "options": [
+              "single",
+              "gallery"
+            ],
+            "default_value": "single"
+          }
         }
       },
-      "items": {}
+      "items": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      }
     }
   ]
 }
