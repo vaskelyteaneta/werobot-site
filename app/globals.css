@@ -110,3 +110,15 @@ div[style*="unicorn"] {
   visibility: hidden !important;
   opacity: 0 !important;
 }
+
+/* Image Gallery - ensure horizontal layout */
+section[class*="gallery"] > div,
+.gallery-image-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.gallery-image-wrapper {
+  flex: 1 1 0% !important;
+  width: auto !important;
+}

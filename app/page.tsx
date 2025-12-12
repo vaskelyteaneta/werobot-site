@@ -3,6 +3,7 @@ import { createClient } from "@/prismicio";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import { SliceLike } from "@prismicio/react";
+import ImageGallery from "@/components/ImageGallery";
 
 export default async function Page() {
   const client = createClient();
@@ -27,18 +28,40 @@ export default async function Page() {
       nextPosition &&
       (nextPosition.startsWith("absolute") || nextPosition.includes("absolute"));
     
-    // Group consecutive BackgroundImage slices for horizontal gallery
-    if (currentSlice.slice_type === "background_image") {
-      const backgroundImageGroup: SliceLike[] = [currentSlice];
-      let j = i + 1;
-      while (j < page.data.slices.length && page.data.slices[j].slice_type === "background_image") {
-        backgroundImageGroup.push(page.data.slices[j]);
-        j++;
+    // Group consecutive Graphic slices for horizontal gallery
+    // Only group Graphics that are NOT using absolute positioning (those overlay other content)
+    if (currentSlice.slice_type === "graphic") {
+      const currentPosition = (currentSlice.primary as any)?.position;
+      // Skip absolute positioned graphics (they overlay other content)
+      if (currentPosition && currentPosition.startsWith("absolute")) {
+        processedSlices.push(currentSlice);
+        i += 1;
+        continue;
       }
-      if (backgroundImageGroup.length > 1) {
+      
+      // Group consecutive non-absolute Graphic slices
+      const graphicGroup: SliceLike[] = [currentSlice];
+      let j = i + 1;
+      while (j < page.data.slices.length) {
+        const nextSlice = page.data.slices[j];
+        if (nextSlice.slice_type === "graphic") {
+          const nextPosition = (nextSlice.primary as any)?.position;
+          // Only add if it's not absolute positioned
+          if (!nextPosition || !nextPosition.startsWith("absolute")) {
+            graphicGroup.push(nextSlice);
+            j++;
+          } else {
+            break;
+          }
+        } else {
+          break;
+        }
+      }
+      // Group if we have 2 or more images
+      if (graphicGroup.length >= 2) {
         processedSlices.push({
-          type: "background_image_gallery",
-          slices: backgroundImageGroup,
+          type: "graphic_gallery",
+          slices: graphicGroup,
         });
         i = j;
         continue;
@@ -68,49 +91,11 @@ export default async function Page() {
             </div>
           );
         }
-        if ((sliceOrGroup as any).type === "background_image_gallery") {
+        if ((sliceOrGroup as any).type === "background_image_gallery" || (sliceOrGroup as any).type === "graphic_gallery") {
           const gallery = sliceOrGroup as { type: string; slices: SliceLike[] };
-          const images = gallery.slices.map((slice: any) => slice.primary?.image).filter(Boolean);
-          
-          if (images.length > 0) {
-            return (
-              <section
-                key={`gallery-${index}`}
-                className="w-full flex justify-center py-8 px-4"
-              >
-                <div className="w-full max-w-7xl flex flex-row gap-4 md:gap-6">
-                  {images.map((img: any, imgIndex: number) => (
-                    <div
-                      key={imgIndex}
-                      className="gallery-image-wrapper flex-1 relative overflow-hidden"
-                      style={{
-                        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                      }}
-                    >
-                      <img
-                        src={img.url}
-                        alt={img.alt || `Gallery image ${imgIndex + 1}`}
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <style dangerouslySetInnerHTML={{
-                  __html: `
-                    .gallery-image-wrapper {
-                      transform: scale(1);
-                      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-                    }
-                    .gallery-image-wrapper:hover {
-                      transform: scale(1.05);
-                      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-                      z-index: 10;
-                    }
-                  `
-                }} />
-              </section>
-            );
-          }
+          return (
+            <ImageGallery key={`gallery-${index}`} slices={gallery.slices} />
+          );
         }
         return (
           <SliceZone
