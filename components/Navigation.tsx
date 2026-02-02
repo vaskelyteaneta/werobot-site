@@ -24,6 +24,13 @@ export default function Navigation() {
         if (response.ok) {
           const data = await response.json();
           console.log("✅ Navigation data received:", data);
+          console.log("📋 Header nav items:", data.header_navigation);
+          console.log("📋 Footer nav items:", data.footer_navigation);
+          if (data.header_navigation && data.header_navigation.length > 0) {
+            console.log("🔍 First header item:", data.header_navigation[0]);
+            console.log("🔍 First header item label:", data.header_navigation[0].label);
+            console.log("🔍 First header item link:", data.header_navigation[0].link);
+          }
           setHeaderNav(data.header_navigation || []);
           setFooterNav(data.footer_navigation || []);
           if (data.error) {
@@ -75,8 +82,8 @@ export default function Navigation() {
     <>
       {/* Header Navigation */}
       {headerNav.length > 0 && (
-        <nav className="w-full bg-transparent py-6 border-b border-black/10">
-          <div className="max-w-7xl mx-auto px-4 py-4">
+        <nav className="w-full bg-white/95 backdrop-blur-sm py-6 border-b border-black/20">
+          <div className="max-w-7xl mx-auto px-4">
             <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
               {headerNav.map((item, index) => {
                 // Extract label - KeyTextField might need .value or might be direct
@@ -136,8 +143,12 @@ export default function Navigation() {
                   <li key={index}>
                     <a
                       href={linkUrl}
-                      className="text-sm md:text-base font-light tracking-[0.1em] uppercase text-[#1a1a1a] hover:text-[#000000] transition-colors duration-200"
-                      style={{ textDecoration: "none" }}
+                      className="text-sm md:text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
+                      style={{ 
+                        textDecoration: "none",
+                        color: "#000000",
+                        fontWeight: 400,
+                      }}
                       onClick={(e) => {
                         if (isAnchorLink) {
                           e.preventDefault();
@@ -148,9 +159,9 @@ export default function Navigation() {
                           }
                         }
                       }}
-                      >
-                        {label}
-                      </a>
+                    >
+                      {label}
+                    </a>
                   </li>
                 );
               })}
