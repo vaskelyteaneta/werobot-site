@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+// Navigation component for header and footer navigation
+
 interface NavItem {
   label: string;
   link: any;
