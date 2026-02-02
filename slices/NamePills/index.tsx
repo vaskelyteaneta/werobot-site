@@ -48,7 +48,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, [pills]);
 
   return (
     <section
@@ -76,20 +76,32 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
 
               const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-none outline-none";
 
-              const hasLink = item.link && isFilled.link(item.link);
-              // Extract URL from Prismic link field
+              // Extract URL from Prismic link field - handle all possible structures
+              // Don't rely on isFilled.link() as it may return false even when link exists
               let linkUrl: string | null = null;
-              if (hasLink && item.link) {
+              if (item.link) {
                 const link = item.link as any;
-                if (link.link_type === "Web" && link.url) {
+                
+                // Try all possible ways to extract URL
+                // Prismic can store URLs in different places depending on link type
+                if (link.url) {
                   linkUrl = link.url;
-                } else if (link.url) {
+                } else if (link.text && (link.text.startsWith("http://") || link.text.startsWith("https://") || link.text.startsWith("mailto:"))) {
+                  // For 'Any' link_type, the URL is often in the 'text' property
+                  linkUrl = link.text;
+                } else if (link.value?.url) {
+                  linkUrl = link.value.url;
+                } else if (link.value?.text && (link.value.text.startsWith("http://") || link.value.text.startsWith("https://") || link.value.text.startsWith("mailto:"))) {
+                  linkUrl = link.value.text;
+                } else if (link.link_type === "Web" && link.url) {
                   linkUrl = link.url;
                 }
               }
+              
               const isExternalLink = linkUrl && typeof linkUrl === "string" && (linkUrl.startsWith("http://") || linkUrl.startsWith("https://") || linkUrl.startsWith("mailto:"));
 
-              if (hasLink && linkUrl) {
+              // Render as link if we found a URL, regardless of isFilled.link() result
+              if (linkUrl) {
                 return (
                   <a
                     key={`${item.text}-${index}`}
@@ -103,6 +115,11 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                       outline: "none",
                       borderColor: "rgba(0, 0, 0, 0.3)",
                       textDecoration: "none",
+                      pointerEvents: "auto",
+                      cursor: "pointer",
+                      position: "relative",
+                      zIndex: 10,
+                      display: "inline-flex",
                     }}
                   >
                     {content}
@@ -144,20 +161,32 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
 
               const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-none outline-none";
 
-              const hasLink = item.link && isFilled.link(item.link);
-              // Extract URL from Prismic link field
+              // Extract URL from Prismic link field - handle all possible structures
+              // Don't rely on isFilled.link() as it may return false even when link exists
               let linkUrl: string | null = null;
-              if (hasLink && item.link) {
+              if (item.link) {
                 const link = item.link as any;
-                if (link.link_type === "Web" && link.url) {
+                
+                // Try all possible ways to extract URL
+                // Prismic can store URLs in different places depending on link type
+                if (link.url) {
                   linkUrl = link.url;
-                } else if (link.url) {
+                } else if (link.text && (link.text.startsWith("http://") || link.text.startsWith("https://") || link.text.startsWith("mailto:"))) {
+                  // For 'Any' link_type, the URL is often in the 'text' property
+                  linkUrl = link.text;
+                } else if (link.value?.url) {
+                  linkUrl = link.value.url;
+                } else if (link.value?.text && (link.value.text.startsWith("http://") || link.value.text.startsWith("https://") || link.value.text.startsWith("mailto:"))) {
+                  linkUrl = link.value.text;
+                } else if (link.link_type === "Web" && link.url) {
                   linkUrl = link.url;
                 }
               }
+              
               const isExternalLink = linkUrl && typeof linkUrl === "string" && (linkUrl.startsWith("http://") || linkUrl.startsWith("https://") || linkUrl.startsWith("mailto:"));
 
-              if (hasLink && linkUrl) {
+              // Render as link if we found a URL, regardless of isFilled.link() result
+              if (linkUrl) {
                 return (
                   <a
                     key={`${item.text}-${index}`}
@@ -171,6 +200,19 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                       outline: "none",
                       borderColor: "rgba(0, 0, 0, 0.3)",
                       textDecoration: "none",
+                      pointerEvents: "auto",
+                      cursor: "pointer",
+                      position: "relative",
+                      zIndex: 10,
+                      display: "inline-flex",
+                    }}
+                    onClick={(e) => {
+                      // Ensure the link works
+                      if (linkUrl) {
+                        // Allow default behavior
+                        return;
+                      }
+                      e.preventDefault();
                     }}
                   >
                     {content}
