@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useRef } from "react";
 import { Content, isFilled } from "@prismicio/client";
-import { PrismicLink, SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps } from "@prismicio/react";
 import { gsap } from "gsap";
 
 /**
@@ -77,35 +77,53 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-none outline-none";
 
               const hasLink = item.link && isFilled.link(item.link);
+              // Extract URL from Prismic link field
+              let linkUrl: string | null = null;
+              if (hasLink && item.link) {
+                const link = item.link as any;
+                if (link.link_type === "Web" && link.url) {
+                  linkUrl = link.url;
+                } else if (link.url) {
+                  linkUrl = link.url;
+                }
+              }
+              const isExternalLink = linkUrl && typeof linkUrl === "string" && (linkUrl.startsWith("http://") || linkUrl.startsWith("https://") || linkUrl.startsWith("mailto:"));
 
-              return hasLink ? (
-                <PrismicLink
-                  key={`${item.text}-${index}`}
-                  field={item.link}
-                  className={basePillClass}
-                  style={{
-                    color: "#000000 !important",
-                    boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
-                    outline: "none",
-                    borderColor: "rgba(0, 0, 0, 0.3)",
-                  }}
-                >
-                  {content}
-                </PrismicLink>
-              ) : (
-                <div
-                  key={`${item.text || index}-static`}
-                  className={basePillClass}
-                  style={{
-                    color: "#000000 !important",
-                    boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
-                    outline: "none",
-                    borderColor: "rgba(0, 0, 0, 0.3)",
-                  }}
-                >
-                  {content}
-                </div>
-              );
+              if (hasLink && linkUrl) {
+                return (
+                  <a
+                    key={`${item.text}-${index}`}
+                    href={linkUrl}
+                    target={isExternalLink ? "_blank" : undefined}
+                    rel={isExternalLink ? "noopener noreferrer" : undefined}
+                    className={basePillClass}
+                    style={{
+                      color: "#000000 !important",
+                      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
+                      outline: "none",
+                      borderColor: "rgba(0, 0, 0, 0.3)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {content}
+                  </a>
+                );
+              } else {
+                return (
+                  <div
+                    key={`${item.text || index}-static`}
+                    className={basePillClass}
+                    style={{
+                      color: "#000000 !important",
+                      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
+                      outline: "none",
+                      borderColor: "rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    {content}
+                  </div>
+                );
+              }
             })
           ) : (
                 <p className="text-sm text-white opacity-70 uppercase tracking-[0.2em] col-span-3 text-left">
@@ -127,35 +145,53 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-none outline-none";
 
               const hasLink = item.link && isFilled.link(item.link);
+              // Extract URL from Prismic link field
+              let linkUrl: string | null = null;
+              if (hasLink && item.link) {
+                const link = item.link as any;
+                if (link.link_type === "Web" && link.url) {
+                  linkUrl = link.url;
+                } else if (link.url) {
+                  linkUrl = link.url;
+                }
+              }
+              const isExternalLink = linkUrl && typeof linkUrl === "string" && (linkUrl.startsWith("http://") || linkUrl.startsWith("https://") || linkUrl.startsWith("mailto:"));
 
-              return hasLink ? (
-                <PrismicLink
-                  key={`${item.text}-${index}`}
-                  field={item.link}
-                  className={basePillClass}
-                  style={{ 
-                    minWidth: "180px",
-                    color: "#000000 !important",
-                    outline: "none",
-                    borderColor: "rgba(0, 0, 0, 0.3)",
-                  }}
-                >
-                  {content}
-                </PrismicLink>
-              ) : (
-                <div
-                  key={`${item.text || index}-static`}
-                  className={basePillClass}
-                  style={{ 
-                    minWidth: "180px",
-                    color: "#000000 !important",
-                    outline: "none",
-                    borderColor: "rgba(0, 0, 0, 0.3)",
-                  }}
-                >
-                  {content}
-                </div>
-              );
+              if (hasLink && linkUrl) {
+                return (
+                  <a
+                    key={`${item.text}-${index}`}
+                    href={linkUrl}
+                    target={isExternalLink ? "_blank" : undefined}
+                    rel={isExternalLink ? "noopener noreferrer" : undefined}
+                    className={basePillClass}
+                    style={{ 
+                      minWidth: "180px",
+                      color: "#000000 !important",
+                      outline: "none",
+                      borderColor: "rgba(0, 0, 0, 0.3)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {content}
+                  </a>
+                );
+              } else {
+                return (
+                  <div
+                    key={`${item.text || index}-static`}
+                    className={basePillClass}
+                    style={{ 
+                      minWidth: "180px",
+                      color: "#000000 !important",
+                      outline: "none",
+                      borderColor: "rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    {content}
+                  </div>
+                );
+              }
             })
           ) : (
                 <p className="text-sm text-white opacity-70 uppercase tracking-[0.2em]">
