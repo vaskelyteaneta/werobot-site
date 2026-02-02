@@ -14,34 +14,21 @@ export default function Navigation() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("🔵 Navigation component mounted, fetching data...");
     async function fetchNavigation() {
       try {
-        console.log("📡 Fetching from /api/navigation...");
         const response = await fetch("/api/navigation");
-        console.log("📥 Response status:", response.status);
         
         if (response.ok) {
           const data = await response.json();
-          console.log("✅ Navigation data received:", data);
-          console.log("📋 Header nav items:", data.header_navigation);
-          console.log("📋 Footer nav items:", data.footer_navigation);
-          if (data.header_navigation && data.header_navigation.length > 0) {
-            console.log("🔍 First header item:", data.header_navigation[0]);
-            console.log("🔍 First header item label:", data.header_navigation[0].label);
-            console.log("🔍 First header item link:", data.header_navigation[0].link);
-          }
           setHeaderNav(data.header_navigation || []);
           setFooterNav(data.footer_navigation || []);
           if (data.error) {
             setError(data.error);
           }
         } else {
-          console.error("❌ API error:", response.status, response.statusText);
           setError(`API error: ${response.status}`);
         }
       } catch (error) {
-        console.error("❌ Error fetching navigation:", error);
         setError(error instanceof Error ? error.message : "Unknown error");
       } finally {
         setLoading(false);
@@ -50,32 +37,9 @@ export default function Navigation() {
     fetchNavigation();
   }, []);
 
-  // Always show something so we know the component is rendering
-  if (loading) {
-    return (
-      <div className="w-full py-6 border-b border-black/10 text-center bg-yellow-50">
-        <p className="text-sm text-gray-600">⏳ Loading navigation...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="w-full py-6 border-b border-red-200 bg-red-50 text-center">
-        <p className="text-sm text-red-600">❌ Navigation Error: {error}</p>
-        <p className="text-xs text-red-500 mt-1">Check console for details</p>
-      </div>
-    );
-  }
-
-  // Debug: show if no navigation items
-  if (headerNav.length === 0 && footerNav.length === 0) {
-    return (
-      <div className="w-full py-6 border-b border-yellow-200 bg-yellow-50 text-center">
-        <p className="text-sm text-yellow-700">⚠️ No navigation items found.</p>
-        <p className="text-xs text-yellow-600 mt-1">Add navigation items in Prismic Settings document.</p>
-      </div>
-    );
+  // Show nothing while loading or if there's an error (fail silently)
+  if (loading || error || (headerNav.length === 0 && footerNav.length === 0)) {
+    return null;
   }
 
   return (
@@ -86,7 +50,7 @@ export default function Navigation() {
           <div className="max-w-7xl mx-auto px-4" style={{ border: "none" }}>
             <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
               {headerNav.map((item, index) => {
-                // Extract label - KeyTextField might need .value or might be direct
+                // Extract label
                 const label = (item.label as any)?.value || item.label || (item as any).label_text || (item as any).name || `Link ${index + 1}`;
                 
                 // Extract URL from link field (similar to NamePills)
