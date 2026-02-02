@@ -1,36 +1,30 @@
 import { createClient } from "@/prismicio";
 import { NextResponse } from "next/server";
+import type { SettingsWerobotDocument } from "@/prismicio-types";
 
 export async function GET() {
   try {
     const client = createClient();
     
     // Try to fetch the settings document
-    let settings;
+    let settings: SettingsWerobotDocument | null = null;
     try {
-      settings = await client.getSingle("settings_werobot");
-      console.log("✅ Found settings_werobot document");
+      settings = await client.getSingle("settings_werobot") as SettingsWerobotDocument;
     } catch (e) {
-      try {
-        settings = await client.getSingle("settings");
-        console.log("✅ Found settings document");
-      } catch (e2) {
-        console.error("❌ Settings document not found. Tried: settings_werobot and settings");
-        return NextResponse.json(
-          { 
-            header_navigation: [], 
-            footer_navigation: [],
-            error: "Settings document not found. Make sure it exists and is published."
-          },
-          { status: 200 }
-        );
-      }
+      // If settings_werobot doesn't exist, return empty navigation
+      return NextResponse.json(
+        { 
+          header_navigation: [], 
+          footer_navigation: [],
+          error: "Settings document not found. Make sure settings_werobot exists and is published."
+        },
+        { status: 200 }
+      );
     }
     
+    // TypeScript now knows settings is SettingsWerobotDocument, so these fields exist
     const headerNav = settings.data.header_navigation || [];
     const footerNav = settings.data.footer_navigation || [];
-    
-    console.log(`📊 Navigation data: ${headerNav.length} header items, ${footerNav.length} footer items`);
     
     return NextResponse.json({
       header_navigation: headerNav,
