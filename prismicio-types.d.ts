@@ -143,7 +143,291 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HomepageDocument;
+type SettingsDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Page documents
+ */
+interface SettingsDocumentData {
+  /**
+   * Slice Zone field in *Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice> /**
+   * Meta Title field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: settings.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: settings.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Page document from Prismic
+ *
+ * - **API ID**: `settings`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SettingsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<SettingsDocumentData>,
+    "settings",
+    Lang
+  >;
+
+/**
+ * Item in *Settings werobot → Header navigation*
+ */
+export interface SettingsWerobotDocumentDataHeaderNavigationItem {
+  /**
+   * Label field in *Settings werobot → Header navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.header_navigation[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *Settings werobot → Header navigation*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.header_navigation[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * Item in *Settings werobot → Footer navigation*
+ */
+export interface SettingsWerobotDocumentDataFooterNavigationItem {
+  /**
+   * Label field in *Settings werobot → Footer navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.footer_navigation[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *Settings werobot → Footer navigation*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.footer_navigation[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * Content for Settings werobot documents
+ */
+interface SettingsWerobotDocumentData {
+  /**
+   * Header navigation field in *Settings werobot*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.header_navigation[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  header_navigation: prismic.GroupField<
+    Simplify<SettingsWerobotDocumentDataHeaderNavigationItem>
+  >;
+
+  /**
+   * Footer navigation field in *Settings werobot*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.footer_navigation[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  footer_navigation: prismic.GroupField<
+    Simplify<SettingsWerobotDocumentDataFooterNavigationItem>
+  >;
+}
+
+/**
+ * Settings werobot document from Prismic
+ *
+ * - **API ID**: `settings_werobot`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SettingsWerobotDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<SettingsWerobotDocumentData>,
+    "settings_werobot",
+    Lang
+  >;
+
+export type AllDocumentTypes =
+  | HomepageDocument
+  | SettingsDocument
+  | SettingsWerobotDocument;
+
+/**
+ * Primary content in *BackgroundImage → Default → Primary*
+ */
+export interface BackgroundImageSliceDefaultPrimary {
+  /**
+   * Image field in *BackgroundImage → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: background_image.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Position field in *BackgroundImage → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: center
+   * - **API ID Path**: background_image.default.primary.position
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  position: prismic.SelectField<
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "center-left"
+    | "center"
+    | "center-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right",
+    "filled"
+  >;
+
+  /**
+   * Opacity field in *BackgroundImage → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: 30
+   * - **API ID Path**: background_image.default.primary.opacity
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  opacity: prismic.SelectField<"10" | "20" | "30" | "40" | "50", "filled">;
+
+  /**
+   * Size field in *BackgroundImage → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: medium
+   * - **API ID Path**: background_image.default.primary.size
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  size: prismic.SelectField<"small" | "medium" | "large" | "full", "filled">;
+
+  /**
+   * Display Mode field in *BackgroundImage → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: single
+   * - **API ID Path**: background_image.default.primary.display_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  display_mode: prismic.SelectField<"single" | "gallery", "filled">;
+}
+
+/**
+ * Primary content in *BackgroundImage → Items*
+ */
+export interface BackgroundImageSliceDefaultItem {
+  /**
+   * Image field in *BackgroundImage → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: background_image.items[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for BackgroundImage Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BackgroundImageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<BackgroundImageSliceDefaultPrimary>,
+  Simplify<BackgroundImageSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *BackgroundImage*
+ */
+type BackgroundImageSliceVariation = BackgroundImageSliceDefault;
+
+/**
+ * BackgroundImage Shared Slice
+ *
+ * - **API ID**: `background_image`
+ * - **Description**: Background overlay image with reduced brightness
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BackgroundImageSlice = prismic.SharedSlice<
+  "background_image",
+  BackgroundImageSliceVariation
+>;
 
 /**
  * Primary content in *Banner → Default → Primary*
@@ -283,6 +567,90 @@ export interface EventinfoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/boolean
    */
   show_shadow: prismic.BooleanField;
+
+  /**
+   * Graphic image field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: eventinfo.default.primary.graphic_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  graphic_image: prismic.ImageField<never>;
+
+  /**
+   * Graphic position field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: absolute-top-right
+   * - **API ID Path**: eventinfo.default.primary.graphic_position
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  graphic_position: prismic.SelectField<
+    | "absolute-top-left"
+    | "absolute-top-middle"
+    | "absolute-top-right"
+    | "absolute-left-middle"
+    | "absolute-right-middle"
+    | "absolute-bottom-left"
+    | "absolute-bottom-middle"
+    | "absolute-bottom-right",
+    "filled"
+  >;
+
+  /**
+   * Graphic size field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: small
+   * - **API ID Path**: eventinfo.default.primary.graphic_size
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  graphic_size: prismic.SelectField<"small" | "medium" | "large", "filled">;
+
+  /**
+   * Graphic image 2 field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: eventinfo.default.primary.graphic_image_2
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  graphic_image_2: prismic.ImageField<never>;
+
+  /**
+   * Graphic position 2 field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: absolute-bottom-left
+   * - **API ID Path**: eventinfo.default.primary.graphic_position_2
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  graphic_position_2: prismic.SelectField<
+    | "absolute-top-left"
+    | "absolute-top-middle"
+    | "absolute-top-right"
+    | "absolute-left-middle"
+    | "absolute-right-middle"
+    | "absolute-bottom-left"
+    | "absolute-bottom-middle"
+    | "absolute-bottom-right",
+    "filled"
+  >;
+
+  /**
+   * Graphic size 2 field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: small
+   * - **API ID Path**: eventinfo.default.primary.graphic_size_2
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  graphic_size_2: prismic.SelectField<"small" | "medium" | "large", "filled">;
 }
 
 /**
@@ -328,6 +696,32 @@ export interface GraphicSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   graphic_image: prismic.ImageField<never>;
+
+  /**
+   * Position field in *Graphic → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: center
+   * - **API ID Path**: graphic.default.primary.position
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  position: prismic.SelectField<
+    | "center"
+    | "absolute-left"
+    | "absolute-right"
+    | "absolute-top-left"
+    | "absolute-top-middle"
+    | "absolute-top-right"
+    | "absolute-left-middle"
+    | "absolute-right-middle"
+    | "absolute-bottom-left"
+    | "absolute-bottom-middle"
+    | "absolute-bottom-right"
+    | "float-left"
+    | "float-right",
+    "filled"
+  >;
 
   /**
    * Alignment field in *Graphic → Default → Primary*
@@ -629,6 +1023,17 @@ export interface NamePillsSliceDefaultPrimary {
   section_title: prismic.KeyTextField;
 
   /**
+   * Layout field in *NamePills → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: wrap
+   * - **API ID Path**: name_pills.default.primary.layout
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  layout: prismic.SelectField<"wrap" | "columns", "filled">;
+
+  /**
    * pills field in *NamePills → Default → Primary*
    *
    * - **Field Type**: Group
@@ -738,7 +1143,19 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      SettingsDocument,
+      SettingsDocumentData,
+      SettingsDocumentDataSlicesSlice,
+      SettingsWerobotDocument,
+      SettingsWerobotDocumentData,
+      SettingsWerobotDocumentDataHeaderNavigationItem,
+      SettingsWerobotDocumentDataFooterNavigationItem,
       AllDocumentTypes,
+      BackgroundImageSlice,
+      BackgroundImageSliceDefaultPrimary,
+      BackgroundImageSliceDefaultItem,
+      BackgroundImageSliceVariation,
+      BackgroundImageSliceDefault,
       BannerSlice,
       BannerSliceDefaultPrimary,
       BannerSliceVariation,

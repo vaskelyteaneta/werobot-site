@@ -65,6 +65,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
   return (
     <section
       ref={sectionRef}
+      id="registration"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       style={{

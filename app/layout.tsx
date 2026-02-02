@@ -5,6 +5,7 @@ import HideUnicornAttribution from "@/components/HideUnicornAttribution";
 import UnicornBackground from "@/components/UnicornBackground";
 import IntroScreen from "@/components/IntroScreen";
 import PlusGrid from "@/components/PlusGrid";
+import Navigation from "@/components/Navigation";
 
 const inter = Inter({
   subsets: ["latin"],

@@ -48,6 +48,7 @@ const SectionTitle: FC<SectionTitleProps> = ({ slice }) => {
   return (
     <section
       ref={sectionRef}
+      id="section-title"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-10 px-4"

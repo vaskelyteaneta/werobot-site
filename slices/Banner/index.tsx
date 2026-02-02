@@ -21,6 +21,14 @@ const Banner: FC<BannerProps> = ({ slice }) => {
   const normalizedLabel = (label || "").trim().toUpperCase();
   const isPartnerButton = normalizedLabel.includes("PARTNER");
   const partnerEmail = "orga@werobot2026.eu";
+  
+  // Determine section ID based on button text
+  let sectionId = "what-we-offer"; // default
+  if (normalizedLabel.includes("CALL FOR PAPERS") || normalizedLabel.includes("CALL FOR PAPER")) {
+    sectionId = "call-for-papers";
+  } else if (normalizedLabel.includes("PAPERS")) {
+    sectionId = "call-for-papers";
+  }
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -53,6 +61,7 @@ const Banner: FC<BannerProps> = ({ slice }) => {
   return (
     <section
       ref={sectionRef}
+      id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-16 px-4"

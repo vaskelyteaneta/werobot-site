@@ -122,6 +122,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
   return (
     <section
       ref={sectionRef}
+      id="sponsors"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-12 px-4"
