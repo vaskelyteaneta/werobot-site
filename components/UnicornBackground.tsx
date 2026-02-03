@@ -2,6 +2,26 @@
 
 import { useEffect, useState } from "react";
 
+// Add global styles for slow animation
+if (typeof document !== 'undefined') {
+  const styleId = 'unicorn-background-animation';
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = `
+      @keyframes slowFloat {
+        0%, 100% {
+          transform: scale(1.5) translate(0, 0);
+        }
+        50% {
+          transform: scale(1.5) translate(2%, 2%);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
 export default function UnicornBackground() {
   const [mounted, setMounted] = useState(false);
 
@@ -40,7 +60,7 @@ export default function UnicornBackground() {
           pointerEvents: "none"
         }}
       />
-      {/* Unicorn Studio Background - white floating cloud */}
+      {/* Unicorn Studio Background - soft subtle cloud */}
       <div 
         data-us-project="XqSpkUNuFa3STasqny3T" 
         style={{
@@ -51,10 +71,11 @@ export default function UnicornBackground() {
           height: "100vh",
           zIndex: 0,
           pointerEvents: "none",
-          transform: "scale(1.2)",
+          transform: "scale(1.5)",
           transformOrigin: "center center",
-          filter: "grayscale(100%) brightness(2) contrast(0.8)",
-          opacity: 0.4,
+          filter: "grayscale(100%) brightness(1.5) contrast(0.5) blur(20px)",
+          opacity: 0.08,
+          animation: "slowFloat 60s ease-in-out infinite",
         }}
       />
     </>
