@@ -40,7 +40,7 @@ export default function UnicornBackground() {
           pointerEvents: "none"
         }}
       />
-      {/* Unicorn Studio Background - floating cloud (no color tint) */}
+      {/* Unicorn Studio Background - white floating cloud */}
       <div 
         data-us-project="XqSpkUNuFa3STasqny3T" 
         style={{
@@ -53,7 +53,8 @@ export default function UnicornBackground() {
           pointerEvents: "none",
           transform: "scale(1.2)",
           transformOrigin: "center center",
-          opacity: 0.15,
+          filter: "grayscale(100%) brightness(2) contrast(0.8)",
+          opacity: 0.4,
         }}
       />
     </>
