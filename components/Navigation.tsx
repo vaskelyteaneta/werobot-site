@@ -39,8 +39,13 @@ export default function Navigation() {
     fetchNavigation();
   }, []);
 
-  // Show nothing while loading or if there's an error (fail silently)
-  if (loading || error || (headerNav.length === 0 && footerNav.length === 0)) {
+  // Show nothing while loading
+  if (loading) {
+    return null;
+  }
+
+  // If there's an error or no navigation items, return null (fail silently)
+  if (error || (headerNav.length === 0 && footerNav.length === 0)) {
     return null;
   }
 
@@ -48,8 +53,20 @@ export default function Navigation() {
     <>
       {/* Header Navigation */}
       {headerNav.length > 0 && (
-        <nav className="w-full bg-transparent py-6" style={{ border: "none !important", borderBottom: "none !important", borderTop: "none !important", outline: "none" }}>
-          <div className="max-w-7xl mx-auto px-4" style={{ border: "none" }}>
+        <nav className="w-full py-6" style={{ 
+          backgroundColor: "transparent", 
+          border: "none", 
+          borderBottom: "none", 
+          borderTop: "none", 
+          outline: "none",
+          boxShadow: "none",
+          background: "transparent"
+        }}>
+          <div className="max-w-7xl mx-auto px-4" style={{ 
+            border: "none",
+            backgroundColor: "transparent",
+            boxShadow: "none"
+          }}>
             <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
               {headerNav.map((item, index) => {
                 // Extract label

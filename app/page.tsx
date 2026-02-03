@@ -85,7 +85,7 @@ export default async function Page() {
         <main>
           {processedSlices.map((sliceOrGroup, index) => {
             return (
-              <div key={`slice-wrapper-${index}`}>
+              <div key={`slice-wrapper-${index}`} style={{ backgroundColor: "transparent" }}>
                 {(() => {
                   if ((sliceOrGroup as any).type === "grouped") {
                     const group = sliceOrGroup as { type: string; slices: SliceLike[] };
