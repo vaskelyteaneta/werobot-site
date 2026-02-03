@@ -80,7 +80,7 @@ export default function UnicornBackground() {
           pointerEvents: "none"
         }}
       />
-      {/* Unicorn Studio Background - soft subtle cloud */}
+      {/* Unicorn Studio Background - soft yellow cloud */}
       <div 
         data-us-project="XqSpkUNuFa3STasqny3T" 
         style={{
@@ -93,8 +93,8 @@ export default function UnicornBackground() {
           pointerEvents: "none",
           transform: "scale(1.5)",
           transformOrigin: "center center",
-          filter: "grayscale(100%) brightness(1.8) contrast(0.6) blur(15px)",
-          opacity: 0.2,
+          filter: "brightness(1.2) contrast(0.7) blur(18px) saturate(1.1)",
+          opacity: 0.35,
           animation: "slowFloat 60s ease-in-out infinite",
         }}
       />
