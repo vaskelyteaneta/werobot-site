@@ -99,15 +99,14 @@ export default async function Page() {
           );
         }
         return (
-          <>
+          <div key={`slice-wrapper-${index}`}>
             <SliceZone
-              key={`slice-${index}`}
               slices={[sliceOrGroup as SliceLike]}
               components={components}
             />
             {/* Add navigation after the first slice (hero/logo) */}
             {index === 0 && <Navigation />}
-          </>
+          </div>
         );
       })}
     </main>

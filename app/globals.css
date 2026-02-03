@@ -2,12 +2,12 @@
 
 /* Prevent flash of unstyled content - set background immediately */
 html {
-  background-color: #b3d9ff;
+  background-color: #D1E4F6;
 }
 
 :root {
   /* Refined color palette - clean and minimal */
-  --background: #b3d9ff; /* pastel blue */
+  --background: #D1E4F6; /* light blue */
   --foreground: #1a1a1a; /* deep charcoal */
   --accent: #2d2d2d; /* subtle dark accent */
   --muted: #6b6b6b; /* muted text */
