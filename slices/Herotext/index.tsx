@@ -49,7 +49,6 @@ const Herotext = ({ slice }: HerotextProps) => {
   return (
     <section
       ref={sectionRef}
-      id="hero"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="flex justify-center pt-32 pb-16"

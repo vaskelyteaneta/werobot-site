@@ -81,41 +81,35 @@ export default async function Page() {
     }
   }
   
-      return (
-        <main>
-          {processedSlices.map((sliceOrGroup, index) => {
-            return (
-              <div key={`slice-wrapper-${index}`} style={{ backgroundColor: "transparent" }}>
-                {(() => {
-                  if ((sliceOrGroup as any).type === "grouped") {
-                    const group = sliceOrGroup as { type: string; slices: SliceLike[] };
-                    return (
-                      <div key={`group-${index}`} className="relative w-full overflow-visible">
-                        <SliceZone slices={group.slices} components={components} />
-                      </div>
-                    );
-                  }
-                  if ((sliceOrGroup as any).type === "background_image_gallery" || (sliceOrGroup as any).type === "graphic_gallery") {
-                    const gallery = sliceOrGroup as { type: string; slices: SliceLike[] };
-                    return (
-                      <ImageGallery key={`gallery-${index}`} slices={gallery.slices} />
-                    );
-                  }
-                  return (
-                    <SliceZone
-                      key={`slice-${index}`}
-                      slices={[sliceOrGroup as SliceLike]}
-                      components={components}
-                    />
-                  );
-                })()}
-                {/* Add navigation after the first slice (hero/logo) */}
-                {index === 0 && (
-                  <Navigation />
-                )}
-              </div>
-            );
-          })}
+  return (
+    <main>
+      {processedSlices.map((sliceOrGroup, index) => {
+        if ((sliceOrGroup as any).type === "grouped") {
+          const group = sliceOrGroup as { type: string; slices: SliceLike[] };
+          return (
+            <div key={`group-${index}`} className="relative w-full overflow-visible">
+              <SliceZone slices={group.slices} components={components} />
+            </div>
+          );
+        }
+        if ((sliceOrGroup as any).type === "background_image_gallery" || (sliceOrGroup as any).type === "graphic_gallery") {
+          const gallery = sliceOrGroup as { type: string; slices: SliceLike[] };
+          return (
+            <ImageGallery key={`gallery-${index}`} slices={gallery.slices} />
+          );
+        }
+        return (
+          <>
+            <SliceZone
+              key={`slice-${index}`}
+              slices={[sliceOrGroup as SliceLike]}
+              components={components}
+            />
+            {/* Add navigation after the first slice (hero/logo) */}
+            {index === 0 && <Navigation />}
+          </>
+        );
+      })}
     </main>
   );
 }

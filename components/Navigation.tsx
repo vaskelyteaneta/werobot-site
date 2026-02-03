@@ -53,20 +53,26 @@ export default function Navigation() {
     <>
       {/* Header Navigation */}
       {headerNav.length > 0 && (
-        <nav className="w-full py-6" style={{ 
-          backgroundColor: "transparent", 
-          border: "none", 
-          borderBottom: "none", 
-          borderTop: "none", 
-          outline: "none",
-          boxShadow: "none",
-          background: "transparent"
-        }}>
-          <div className="max-w-7xl mx-auto px-4" style={{ 
-            border: "none",
+        <nav 
+          className="w-full py-6" 
+          style={{ 
             backgroundColor: "transparent",
-            boxShadow: "none"
-          }}>
+            border: "none",
+            borderBottom: "none",
+            borderTop: "none",
+            outline: "none",
+            boxShadow: "none",
+            background: "transparent"
+          }}
+        >
+          <div 
+            className="max-w-7xl mx-auto px-4" 
+            style={{ 
+              border: "none",
+              backgroundColor: "transparent",
+              boxShadow: "none"
+            }}
+          >
             <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
               {headerNav.map((item, index) => {
                 // Extract label
