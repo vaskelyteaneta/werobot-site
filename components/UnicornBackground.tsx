@@ -75,7 +75,7 @@ export default function UnicornBackground() {
           left: 0,
           width: "100vw",
           height: "100vh",
-          backgroundColor: "#e6f2ff",
+          backgroundColor: "#e3f2fd",
           zIndex: -1,
           pointerEvents: "none"
         }}
