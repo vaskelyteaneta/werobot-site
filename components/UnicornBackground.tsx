@@ -40,7 +40,7 @@ export default function UnicornBackground() {
           pointerEvents: "none"
         }}
       />
-      {/* Unicorn Studio Background - subtle and refined */}
+      {/* Unicorn Studio Background - blue floating cloud */}
       <div 
         data-us-project="XqSpkUNuFa3STasqny3T" 
         style={{
@@ -53,10 +53,11 @@ export default function UnicornBackground() {
           pointerEvents: "none",
           transform: "scale(1.2)",
           transformOrigin: "center center",
-          opacity: 0.15,
+          filter: "hue-rotate(200deg) saturate(1.3) brightness(0.8)",
+          opacity: 0.3,
         }}
       />
-      {/* Subtle filter overlay for refined look */}
+      {/* Blue overlay for the cloud */}
       <div 
         style={{
           position: "fixed",
@@ -64,8 +65,8 @@ export default function UnicornBackground() {
           left: 0,
           width: "100vw",
           height: "100vh",
-          backgroundColor: "rgba(250, 250, 250, 0.6)",
-          mixBlendMode: "normal",
+          backgroundColor: "rgba(94, 128, 199, 0.3)",
+          mixBlendMode: "color",
           zIndex: 0,
           pointerEvents: "none"
         }}
