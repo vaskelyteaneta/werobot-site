@@ -28,6 +28,26 @@ export default function UnicornBackground() {
   useEffect(() => {
     setMounted(true);
 
+    // Add CSS animation for slow movement
+    if (typeof document !== 'undefined') {
+      const styleId = 'unicorn-background-animation';
+      if (!document.getElementById(styleId)) {
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+          @keyframes slowFloat {
+            0%, 100% {
+              transform: scale(1.5) translate(0, 0);
+            }
+            50% {
+              transform: scale(1.5) translate(2%, 2%);
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+
     // Load Unicorn Studio script
     if (typeof window !== 'undefined' && !(window as any).UnicornStudio) {
       (window as any).UnicornStudio = { isInitialized: false };
