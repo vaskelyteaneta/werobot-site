@@ -14,6 +14,8 @@ html {
   --border: #e5e5e5; /* subtle borders */
 }
 
+/* Tailwind CSS v4 theme configuration */
+/* stylelint-disable-next-line */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -53,6 +55,19 @@ main {
   position: relative;
   z-index: 10;
   min-height: 100vh;
+  background-color: transparent;
+}
+
+/* Remove any borders or lines from sections and navigation */
+section,
+nav,
+nav > div {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
 }
 
 /* Refined link styles */

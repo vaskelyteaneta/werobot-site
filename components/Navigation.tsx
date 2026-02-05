@@ -57,17 +57,18 @@ export default function Navigation() {
           className="w-full py-6" 
           style={{ 
             backgroundColor: "transparent",
-            border: "none !important",
-            borderBottom: "none !important",
-            borderTop: "none !important",
-            borderLeft: "none !important",
-            borderRight: "none !important",
+            border: "none",
+            borderBottom: "none",
+            borderTop: "none",
+            borderLeft: "none",
+            borderRight: "none",
             outline: "none",
             boxShadow: "none",
             background: "transparent",
             margin: 0,
             paddingTop: "1.5rem",
-            paddingBottom: "1.5rem"
+            paddingBottom: "1.5rem",
+            borderWidth: 0
           }}
         >
           <div 
