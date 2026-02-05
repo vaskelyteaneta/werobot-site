@@ -15,7 +15,7 @@ html {
 }
 
 /* Tailwind CSS v4 theme configuration */
-/* stylelint-disable-next-line */
+/* @suppress css(unknownAtRules) */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
