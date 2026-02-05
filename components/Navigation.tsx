@@ -57,20 +57,28 @@ export default function Navigation() {
           className="w-full py-6" 
           style={{ 
             backgroundColor: "transparent",
-            border: "none",
-            borderBottom: "none",
-            borderTop: "none",
+            border: "none !important",
+            borderBottom: "none !important",
+            borderTop: "none !important",
+            borderLeft: "none !important",
+            borderRight: "none !important",
             outline: "none",
             boxShadow: "none",
-            background: "transparent"
+            background: "transparent",
+            margin: 0,
+            paddingTop: "1.5rem",
+            paddingBottom: "1.5rem"
           }}
         >
           <div 
             className="max-w-7xl mx-auto px-4" 
             style={{ 
-              border: "none",
+              border: "none !important",
+              borderBottom: "none !important",
+              borderTop: "none !important",
               backgroundColor: "transparent",
-              boxShadow: "none"
+              boxShadow: "none",
+              margin: 0
             }}
           >
             <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">

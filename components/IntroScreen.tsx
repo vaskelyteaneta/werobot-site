@@ -52,7 +52,7 @@ export default function IntroScreen() {
         isAnimating ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       style={{
-        backgroundColor: "#fafafa",
+        backgroundColor: "#D1E4F6",
       }}
       onClick={() => {
         setIsAnimating(true);
