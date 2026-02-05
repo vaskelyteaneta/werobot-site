@@ -18,6 +18,12 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
   const hasTitle = Boolean(slice.primary.section_title);
   const layout = (slice.primary as any).layout || "wrap";
   const isColumnLayout = layout === "columns";
+  
+  // Generate section ID from title (e.g., "ORGANIZING COMMITTEE" -> "organizing-committee")
+  const sectionTitle = slice.primary.section_title || "";
+  const sectionId = sectionTitle
+    ? sectionTitle.toLowerCase().replace(/\s+/g, "-")
+    : "organizing-committee"; // fallback default
 
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -53,7 +59,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
   return (
     <section
       ref={sectionRef}
-      id="organizing-committee"  // Add your section ID here
+      id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="w-full flex flex-col items-center gap-8 py-12 px-4"
