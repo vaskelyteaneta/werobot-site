@@ -153,7 +153,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
           style={{
             backgroundColor: "transparent",
             color: "#6b6b6b",
-            border: "1px solid #e5e5e5",
+            border: "1px solid white",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             opacity: 0.5,

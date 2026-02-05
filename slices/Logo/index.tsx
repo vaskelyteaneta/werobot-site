@@ -47,7 +47,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
       }
     >
       <div
-        className="border border-[#e5e5e5] bg-transparent px-10 py-6 flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#1a1a1a]"
+        className="border border-white bg-transparent px-10 py-6 flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#1a1a1a]"
         style={{
           width: useAbsolute ? "100%" : "auto",
           maxWidth: useAbsolute ? "100%" : `${width}px`,
