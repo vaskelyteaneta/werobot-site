@@ -153,7 +153,15 @@ export default function Navigation() {
                           const targetId = linkUrl.substring(1); // Remove the #
                           const element = document.getElementById(targetId);
                           if (element) {
-                            element.scrollIntoView({ behavior: "smooth", block: "start" });
+                            // Calculate offset to show section title
+                            const offset = 100; // Offset in pixels
+                            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - offset;
+                            
+                            window.scrollTo({
+                              top: offsetPosition,
+                              behavior: "smooth"
+                            });
                           }
                         }
                       }}
