@@ -186,9 +186,11 @@ export async function generateStaticParams() {
   for (const type of pageTypes) {
     try {
       const pages = await client.getAllByType(type as any);
-      allPages.push(...pages.map((page) => ({
-        uid: page.uid,
-      })));
+      allPages.push(...pages
+        .filter((page) => page.uid !== null && page.uid !== undefined)
+        .map((page) => ({
+          uid: page.uid as string,
+        })));
     } catch (error) {
       // Type doesn't exist, skip it
       continue;
