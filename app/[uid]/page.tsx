@@ -17,11 +17,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const client = createClient();
 
   // Try multiple custom types: program, about, settings
-  const pageTypes = ["program", "about", "settings"];
+  const pageTypes: ("program" | "about" | "settings")[] = ["program", "about", "settings"];
   
   for (const type of pageTypes) {
     try {
-      const page = await client.getByUID(type, uid);
+      const page = await client.getByUID(type as any, uid);
       
       return {
         title: (page.data.meta_title as string) || "Werobot",
@@ -49,13 +49,13 @@ export default async function Page({ params }: PageProps) {
   const client = createClient();
 
   // Try multiple custom types: program, about, settings
-  const pageTypes = ["program", "about", "settings"];
+  const pageTypes: ("program" | "about" | "settings")[] = ["program", "about", "settings"];
   let page = null;
   let pageType = null;
 
   for (const type of pageTypes) {
     try {
-      page = await client.getByUID(type, uid);
+      page = await client.getByUID(type as any, uid);
       pageType = type;
       break; // Found it, exit loop
     } catch (error) {
@@ -177,12 +177,12 @@ export default async function Page({ params }: PageProps) {
 export async function generateStaticParams() {
   const client = createClient();
   
-  const pageTypes = ["program", "about", "settings"];
+  const pageTypes: ("program" | "about" | "settings")[] = ["program", "about", "settings"];
   const allPages: { uid: string }[] = [];
   
   for (const type of pageTypes) {
     try {
-      const pages = await client.getAllByType(type);
+      const pages = await client.getAllByType(type as any);
       allPages.push(...pages.map((page) => ({
         uid: page.uid,
       })));
