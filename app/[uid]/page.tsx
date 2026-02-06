@@ -22,14 +22,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   for (const type of pageTypes) {
     try {
       const page = await client.getByUID(type as any, uid);
+      const pageData = page.data as any;
       
       return {
-        title: (page.data.meta_title as string) || "Werobot",
-        description: (page.data.meta_description as string) || "Werobot 2026",
+        title: (pageData.meta_title as string) || "Werobot",
+        description: (pageData.meta_description as string) || "Werobot 2026",
         openGraph: {
-          title: (page.data.meta_title as string) || "Werobot",
-          description: (page.data.meta_description as string) || "Werobot 2026",
-          images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+          title: (pageData.meta_title as string) || "Werobot",
+          description: (pageData.meta_description as string) || "Werobot 2026",
+          images: pageData.meta_image?.url ? [{ url: pageData.meta_image.url }] : [],
         },
       };
     } catch (error) {
