@@ -6,6 +6,7 @@ import UnicornBackground from "@/components/UnicornBackground";
 import IntroScreen from "@/components/IntroScreen";
 import PlusGrid from "@/components/PlusGrid";
 import Footer from "@/components/Footer";
+import PageNavigation from "@/components/PageNavigation";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
         <UnicornBackground />
         <PlusGrid />
         <HideUnicornAttribution />
+        <PageNavigation />
         <div style={{ flex: 1 }}>
           {children}
         </div>

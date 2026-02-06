@@ -5,7 +5,6 @@ import { components } from "@/slices";
 import { SliceLike } from "@prismicio/react";
 import ImageGallery from "@/components/ImageGallery";
 import Header from "@/components/Header";
-import PageNavigation from "@/components/PageNavigation";
 
 export default async function Page() {
   const client = createClient();
@@ -105,13 +104,8 @@ export default async function Page() {
               slices={[sliceOrGroup as SliceLike]}
               components={components}
             />
-            {/* Add navigations after the first slice (hero/logo) */}
-            {index === 0 && (
-              <>
-                <PageNavigation />
-                <Header />
-              </>
-            )}
+            {/* Add anchor navigation after the first slice (hero/logo) - only on homepage */}
+            {index === 0 && <Header />}
           </div>
         );
       })}
