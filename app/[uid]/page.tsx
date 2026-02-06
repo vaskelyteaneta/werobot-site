@@ -18,34 +18,59 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { uid } = await params;
   const client = createClient();
 
-  try {
-    // Fetch page by UID - using "settings" custom type (API ID)
-    const page = await client.getByUID("settings", uid);
-    
-    return {
-      title: (page.data.meta_title as string) || "Werobot",
-      description: (page.data.meta_description as string) || "Werobot 2026",
-      openGraph: {
+  // Try multiple custom types: program, about, settings
+  const pageTypes = ["program", "about", "settings"];
+  
+  for (const type of pageTypes) {
+    try {
+      const page = await client.getByUID(type, uid);
+      
+      return {
         title: (page.data.meta_title as string) || "Werobot",
         description: (page.data.meta_description as string) || "Werobot 2026",
-        images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
-      },
-    };
-  } catch (error) {
-    return {
-      title: "Werobot",
-      description: "Werobot 2026",
-    };
+        openGraph: {
+          title: (page.data.meta_title as string) || "Werobot",
+          description: (page.data.meta_description as string) || "Werobot 2026",
+          images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : [],
+        },
+      };
+    } catch (error) {
+      // Try next type
+      continue;
+    }
   }
+  
+  return {
+    title: "Werobot",
+    description: "Werobot 2026",
+  };
 }
 
 export default async function Page({ params }: PageProps) {
   const { uid } = await params;
   const client = createClient();
 
+  // Try multiple custom types: program, about, settings
+  const pageTypes = ["program", "about", "settings"];
+  let page = null;
+  let pageType = null;
+
+  for (const type of pageTypes) {
+    try {
+      page = await client.getByUID(type, uid);
+      pageType = type;
+      break; // Found it, exit loop
+    } catch (error) {
+      // Try next type
+      continue;
+    }
+  }
+
+  if (!page) {
+    notFound();
+  }
+
   try {
-    // Fetch page by UID - using "settings" custom type (API ID)
-    const page = await client.getByUID("settings", uid);
     
     // Group slices to allow graphics to overlay eventinfo boxes
     // Also group consecutive BackgroundImage slices for horizontal gallery
@@ -152,7 +177,7 @@ export default async function Page({ params }: PageProps) {
       </main>
     );
   } catch (error) {
-    // If page not found, return 404
+    // If there's an error rendering, return 404
     notFound();
   }
 }
@@ -161,15 +186,20 @@ export default async function Page({ params }: PageProps) {
 export async function generateStaticParams() {
   const client = createClient();
   
-  try {
-    // Fetch all pages of type "settings" (the repeatable Page custom type)
-    const pages = await client.getAllByType("settings");
-    
-    return pages.map((page) => ({
-      uid: page.uid,
-    }));
-  } catch (error) {
-    // If the type doesn't exist yet, return empty array
-    return [];
+  const pageTypes = ["program", "about", "settings"];
+  const allPages: { uid: string }[] = [];
+  
+  for (const type of pageTypes) {
+    try {
+      const pages = await client.getAllByType(type);
+      allPages.push(...pages.map((page) => ({
+        uid: page.uid,
+      })));
+    } catch (error) {
+      // Type doesn't exist, skip it
+      continue;
+    }
   }
+  
+  return allPages;
 }
