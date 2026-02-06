@@ -51,12 +51,12 @@ export default async function Page({ params }: PageProps) {
 
   // Try multiple custom types: program, about, settings
   const pageTypes: ("program" | "about" | "settings")[] = ["program", "about", "settings"];
-  let page = null;
+  let page: any = null;
   let pageType = null;
 
   for (const type of pageTypes) {
     try {
-      page = await client.getByUID(type as any, uid);
+      page = await client.getByUID(type as any, uid) as any;
       pageType = type;
       break; // Found it, exit loop
     } catch (error) {
@@ -71,7 +71,7 @@ export default async function Page({ params }: PageProps) {
 
   try {
     // Cast page.data to any to access slices safely
-    const pageData = page.data as any;
+    const pageData = (page as any).data as any;
     
     // Group slices to allow graphics to overlay eventinfo boxes
     // Also group consecutive BackgroundImage slices for horizontal gallery
