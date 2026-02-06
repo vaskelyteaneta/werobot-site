@@ -1,7 +1,7 @@
 {
   "format": "page",
-  "id": "program",
-  "label": "Program",
+  "id": "about",
+  "label": "About",
   "repeatable": true,
   "status": true,
   "json": {
@@ -17,28 +17,28 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "logo_row": {
-              "type": "SharedSlice"
-            },
             "section_title": {
               "type": "SharedSlice"
             },
             "name_pills": {
               "type": "SharedSlice"
             },
-            "logo": {
+            "cta_banner": {
               "type": "SharedSlice"
             },
-            "eventinfo": {
+            "logo_row": {
+              "type": "SharedSlice"
+            },
+            "graphic": {
               "type": "SharedSlice"
             },
             "hero_banner": {
               "type": "SharedSlice"
             },
-            "cta_banner": {
+            "logo": {
               "type": "SharedSlice"
             },
-            "graphic": {
+            "eventinfo": {
               "type": "SharedSlice"
             },
             "background_image": {

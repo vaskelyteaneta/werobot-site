@@ -69,6 +69,77 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type AboutDocumentDataSlicesSlice =
+  | SectionTitleSlice
+  | NamePillsSlice
+  | CtaBannerSlice
+  | LogoRowSlice
+  | GraphicSlice
+  | HeroBannerSlice
+  | LogoSlice
+  | EventinfoSlice
+  | BackgroundImageSlice
+  | BannerSlice;
+
+/**
+ * Content for About documents
+ */
+interface AboutDocumentData {
+  /**
+   * Slice Zone field in *About*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<AboutDocumentDataSlicesSlice> /**
+   * Meta Title field in *About*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: about.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *About*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: about.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *About*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * About document from Prismic
+ *
+ * - **API ID**: `about`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AboutDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<AboutDocumentData>, "about", Lang>;
+
 type HomepageDocumentDataSlicesSlice =
   | NamePillsSlice
   | LogoRowSlice
@@ -144,6 +215,13 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type ProgramDocumentDataSlicesSlice =
+  | LogoRowSlice
+  | SectionTitleSlice
+  | NamePillsSlice
+  | LogoSlice
+  | EventinfoSlice
+  | HeroBannerSlice
+  | CtaBannerSlice
   | GraphicSlice
   | BackgroundImageSlice
   | BannerSlice;
@@ -334,6 +412,33 @@ export interface SettingsWerobotDocumentDataFooterNavigationItem {
 }
 
 /**
+ * Item in *Settings werobot → Page navigation*
+ */
+export interface SettingsWerobotDocumentDataPageNavigationItem {
+  /**
+   * Label field in *Settings werobot → Page navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.page_navigation[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *Settings werobot → Page navigation*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.page_navigation[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
  * Content for Settings werobot documents
  */
 interface SettingsWerobotDocumentData {
@@ -362,6 +467,19 @@ interface SettingsWerobotDocumentData {
   footer_navigation: prismic.GroupField<
     Simplify<SettingsWerobotDocumentDataFooterNavigationItem>
   >;
+
+  /**
+   * Page navigation field in *Settings werobot*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings_werobot.page_navigation[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  page_navigation: prismic.GroupField<
+    Simplify<SettingsWerobotDocumentDataPageNavigationItem>
+  >;
 }
 
 /**
@@ -381,6 +499,7 @@ export type SettingsWerobotDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | AboutDocument
   | HomepageDocument
   | ProgramDocument
   | SettingsDocument
@@ -1212,6 +1331,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AboutDocument,
+      AboutDocumentData,
+      AboutDocumentDataSlicesSlice,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
@@ -1225,6 +1347,7 @@ declare module "@prismicio/client" {
       SettingsWerobotDocumentData,
       SettingsWerobotDocumentDataHeaderNavigationItem,
       SettingsWerobotDocumentDataFooterNavigationItem,
+      SettingsWerobotDocumentDataPageNavigationItem,
       AllDocumentTypes,
       BackgroundImageSlice,
       BackgroundImageSliceDefaultPrimary,
