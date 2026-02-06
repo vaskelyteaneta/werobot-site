@@ -4,7 +4,7 @@ import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import { SliceLike } from "@prismicio/react";
 import ImageGallery from "@/components/ImageGallery";
-import Navigation from "@/components/Navigation";
+import Header from "@/components/Header";
 
 export default async function Page() {
   const client = createClient();
@@ -104,8 +104,8 @@ export default async function Page() {
               slices={[sliceOrGroup as SliceLike]}
               components={components}
             />
-            {/* Add navigation after the first slice (hero/logo) */}
-            {index === 0 && <Navigation />}
+            {/* Add header navigation after the first slice (hero/logo) */}
+            {index === 0 && <Header />}
           </div>
         );
       })}

@@ -143,7 +143,78 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type SettingsDocumentDataSlicesSlice = never;
+type ProgramDocumentDataSlicesSlice =
+  | GraphicSlice
+  | BackgroundImageSlice
+  | BannerSlice;
+
+/**
+ * Content for Program documents
+ */
+interface ProgramDocumentData {
+  /**
+   * Slice Zone field in *Program*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<ProgramDocumentDataSlicesSlice> /**
+   * Meta Title field in *Program*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: program.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Program*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: program.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Program*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: program.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Program document from Prismic
+ *
+ * - **API ID**: `program`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProgramDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ProgramDocumentData>,
+    "program",
+    Lang
+  >;
+
+type SettingsDocumentDataSlicesSlice =
+  | GraphicSlice
+  | EventinfoSlice
+  | BannerSlice;
 
 /**
  * Content for Page documents
@@ -311,6 +382,7 @@ export type SettingsWerobotDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | HomepageDocument
+  | ProgramDocument
   | SettingsDocument
   | SettingsWerobotDocument;
 
@@ -1143,6 +1215,9 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      ProgramDocument,
+      ProgramDocumentData,
+      ProgramDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataSlicesSlice,
