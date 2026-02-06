@@ -25,10 +25,13 @@ export async function GET() {
     const settingsWerobot = settings as SettingsWerobotDocument;
     const headerNav = settingsWerobot.data.header_navigation || [];
     const footerNav = settingsWerobot.data.footer_navigation || [];
+    // Page navigation - if it exists, use it; otherwise filter page links from header_navigation
+    const pageNav = (settingsWerobot.data as any).page_navigation || [];
     
     return NextResponse.json({
       header_navigation: headerNav,
       footer_navigation: footerNav,
+      page_navigation: pageNav,
     });
   } catch (error) {
     // If settings_werobot doesn't exist, return empty navigation

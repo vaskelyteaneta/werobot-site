@@ -122,7 +122,13 @@ export default function Header() {
               }
 
               // Check if it's an anchor link (starts with #)
+              // Header only shows anchor links, not page links
               const isAnchorLink = linkUrl.startsWith("#");
+              
+              // Skip page links (they go to PageNavigation component)
+              if (!isAnchorLink) {
+                return null;
+              }
 
               return (
                 <li key={index}>

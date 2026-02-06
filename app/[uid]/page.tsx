@@ -7,6 +7,7 @@ import ImageGallery from "@/components/ImageGallery";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import PageNavigation from "@/components/PageNavigation";
 
 interface PageProps {
   params: Promise<{ uid: string }>;
@@ -138,8 +139,13 @@ export default async function Page({ params }: PageProps) {
                 slices={[sliceOrGroup as SliceLike]}
                 components={components}
               />
-              {/* Add header navigation after the first slice (hero/logo) */}
-              {index === 0 && <Header />}
+              {/* Add navigations after the first slice (hero/logo) */}
+              {index === 0 && (
+                <>
+                  <PageNavigation />
+                  <Header />
+                </>
+              )}
             </div>
           );
         })}
