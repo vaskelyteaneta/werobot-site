@@ -70,15 +70,17 @@ export default async function Page({ params }: PageProps) {
   }
 
   try {
+    // Cast page.data to any to access slices safely
+    const pageData = page.data as any;
     
     // Group slices to allow graphics to overlay eventinfo boxes
     // Also group consecutive BackgroundImage slices for horizontal gallery
     const processedSlices: (SliceLike | { type: string; slices: SliceLike[] })[] = [];
     let i = 0;
     
-    while (i < page.data.slices.length) {
-      const currentSlice = page.data.slices[i];
-      const nextSlice = page.data.slices[i + 1];
+    while (i < pageData.slices.length) {
+      const currentSlice = pageData.slices[i];
+      const nextSlice = pageData.slices[i + 1];
       
       // If current is Eventinfo and next is Graphic with absolute positioning
       const nextPosition = (nextSlice?.primary as any)?.position;
@@ -102,8 +104,8 @@ export default async function Page({ params }: PageProps) {
         // Group consecutive non-absolute Graphic slices
         const graphicGroup: SliceLike[] = [currentSlice];
         let j = i + 1;
-        while (j < page.data.slices.length) {
-          const nextSlice = page.data.slices[j];
+        while (j < pageData.slices.length) {
+          const nextSlice = pageData.slices[j];
           if (nextSlice.slice_type === "graphic") {
             const nextPosition = (nextSlice.primary as any)?.position;
             // Only add if it's not absolute positioned
