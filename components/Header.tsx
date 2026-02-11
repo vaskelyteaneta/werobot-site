@@ -150,13 +150,6 @@ export default function Header({ anchorNavigation }: HeaderProps) {
                 linkUrl = `#${normalized}`;
               }
 
-              // Normalize anchor links: convert to lowercase and replace spaces with hyphens
-              if (linkUrl.startsWith("#")) {
-                const anchorPart = linkUrl.substring(1);
-                const normalized = anchorPart.toLowerCase().replace(/\s+/g, "-");
-                linkUrl = `#${normalized}`;
-              }
-
               // Check if it's an anchor link (starts with #)
               // Header only shows anchor links, not page links
               const isAnchorLink = linkUrl.startsWith("#");
@@ -180,10 +173,33 @@ export default function Header({ anchorNavigation }: HeaderProps) {
                       if (isAnchorLink) {
                         e.preventDefault();
                         const targetId = linkUrl.substring(1);
-                        const element = document.getElementById(targetId);
+                        
+                        // Try to find the element by ID - try multiple variations
+                        let element = document.getElementById(targetId);
+                        
+                        // If not found, try common variations
+                        if (!element) {
+                          // Try with "call-for-" prefix (for papers section)
+                          if (targetId === "papers") {
+                            element = document.getElementById("call-for-papers");
+                          }
+                          // Try with dashes instead of spaces
+                          const dashedId = targetId.replace(/\s+/g, "-");
+                          if (!element && dashedId !== targetId) {
+                            element = document.getElementById(dashedId);
+                          }
+                          // Try finding by data attribute or section
+                          if (!element) {
+                            const sections = document.querySelectorAll(`section[id*="${targetId}"], div[id*="${targetId}"]`);
+                            if (sections.length > 0) {
+                              element = sections[0] as HTMLElement;
+                            }
+                          }
+                        }
+                        
                         if (element) {
                           // Find the section title within the section if it exists
-                          const titleElement = element.querySelector('p.text-sm, p.text-base');
+                          const titleElement = element.querySelector('p.text-sm, p.text-base, h1, h2, h3');
                           const targetElement = titleElement || element;
                           
                           // Calculate actual header height dynamically
@@ -202,6 +218,9 @@ export default function Header({ anchorNavigation }: HeaderProps) {
                             top: Math.max(0, offsetPosition), // Ensure we don't scroll to negative position
                             behavior: "smooth"
                           });
+                        } else {
+                          // Debug: log if element not found
+                          console.warn(`Anchor element not found for ID: ${targetId}`);
                         }
                       }
                     }}
