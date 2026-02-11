@@ -1,39 +1,44 @@
 import { FC } from "react";
-import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
 /**
  * Props for `Anchor`.
+ * Note: AnchorSlice type will be available after regenerating Prismic types from Slice Machine
  */
-export type AnchorProps = SliceComponentProps<Content.AnchorSlice>;
+export type AnchorProps = SliceComponentProps<any>;
 
 /**
  * Component for "Anchor" Slices.
  * Renders an invisible anchor point that anchor navigation links can scroll to.
  */
 const Anchor: FC<AnchorProps> = ({ slice }) => {
-  const anchorLink = (slice.primary as any).anchor_link as string | null;
+  const anchorLink = (slice.primary as any)?.anchor_link as string | null | undefined;
 
-  if (!anchorLink) {
+  if (!anchorLink || typeof anchorLink !== 'string' || anchorLink.trim() === '') {
     return null;
   }
 
-  // Normalize: lowercase, replace spaces with hyphens
-  const anchorId = anchorLink.toLowerCase().replace(/\s+/g, "-");
+  // Normalize: lowercase, replace spaces with hyphens, trim
+  const anchorId = anchorLink.trim().toLowerCase().replace(/\s+/g, "-");
+
+  if (!anchorId) {
+    return null;
+  }
 
   return (
-    <div
+    <section
       id={anchorId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       aria-hidden="true"
       style={{
         // Invisible but present in DOM for scroll targeting
-        // Negative margin pulls the scroll target up so the content below is visible
         height: 0,
         overflow: "hidden",
-        marginTop: "-1px",
-        paddingTop: "1px",
+        margin: 0,
+        padding: 0,
+        border: "none",
+        position: "relative",
       }}
     />
   );

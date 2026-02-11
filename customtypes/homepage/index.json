@@ -11,6 +11,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "background_image": {
+              "type": "SharedSlice"
+            },
+            "anchor": {
+              "type": "SharedSlice"
+            },
             "name_pills": {
               "type": "SharedSlice"
             },

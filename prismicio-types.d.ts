@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type AboutDocumentDataSlicesSlice =
+  | AnchorSlice
   | SectionTitleSlice
   | NamePillsSlice
   | CtaBannerSlice
@@ -141,6 +142,8 @@ export type AboutDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<AboutDocumentData>, "about", Lang>;
 
 type HomepageDocumentDataSlicesSlice =
+  | BackgroundImageSlice
+  | AnchorSlice
   | NamePillsSlice
   | LogoRowSlice
   | LogoSlice
@@ -215,6 +218,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type ProgramDocumentDataSlicesSlice =
+  | AnchorSlice
   | LogoRowSlice
   | SectionTitleSlice
   | NamePillsSlice
@@ -286,74 +290,6 @@ export type ProgramDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<ProgramDocumentData>,
     "program",
-    Lang
-  >;
-
-type SettingsDocumentDataSlicesSlice =
-  | GraphicSlice
-  | EventinfoSlice
-  | BannerSlice;
-
-/**
- * Content for Page documents
- */
-interface SettingsDocumentData {
-  /**
-   * Slice Zone field in *Page*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/slices
-   */
-  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice> /**
-   * Meta Title field in *Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: settings.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */;
-  meta_title: prismic.KeyTextField;
-
-  /**
-   * Meta Description field in *Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: settings.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  meta_description: prismic.KeyTextField;
-
-  /**
-   * Meta Image field in *Page*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.meta_image
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  meta_image: prismic.ImageField<never>;
-}
-
-/**
- * Page document from Prismic
- *
- * - **API ID**: `settings`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/content-modeling
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type SettingsDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<SettingsDocumentData>,
-    "settings",
     Lang
   >;
 
@@ -498,12 +434,164 @@ export type SettingsWerobotDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *Site → Anchor navigation*
+ */
+export interface SiteDocumentDataAnchorNavigationItem {
+  /**
+   * Name field in *Site → Anchor navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: site.anchor_navigation[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * anchor link field in *Site → Anchor navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: site.anchor_navigation[].anchor_link
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  anchor_link: prismic.KeyTextField;
+}
+
+type SiteDocumentDataSlicesSlice =
+  | AnchorSlice
+  | SectionTitleSlice
+  | BackgroundImageSlice
+  | NamePillsSlice
+  | LogoSlice
+  | EventinfoSlice
+  | LogoRowSlice
+  | GraphicSlice
+  | HeroBannerSlice
+  | CtaBannerSlice
+  | BannerSlice;
+
+/**
+ * Content for Site documents
+ */
+interface SiteDocumentData {
+  /**
+   * Anchor navigation field in *Site*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: site.anchor_navigation[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  anchor_navigation: prismic.GroupField<
+    Simplify<SiteDocumentDataAnchorNavigationItem>
+  >;
+
+  /**
+   * Slice Zone field in *Site*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: site.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<SiteDocumentDataSlicesSlice> /**
+   * Meta Title field in *Site*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: site.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Site*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: site.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Site*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: site.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Site document from Prismic
+ *
+ * - **API ID**: `site`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SiteDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<SiteDocumentData>, "site", Lang>;
+
 export type AllDocumentTypes =
   | AboutDocument
   | HomepageDocument
   | ProgramDocument
-  | SettingsDocument
-  | SettingsWerobotDocument;
+  | SettingsWerobotDocument
+  | SiteDocument;
+
+/**
+ * Primary content in *Anchor → Default → Primary*
+ */
+export interface AnchorSliceDefaultPrimary {
+  /**
+   * anchor link field in *Anchor → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: anchor.default.primary.anchor_link
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  anchor_link: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Anchor Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AnchorSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AnchorSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Anchor*
+ */
+type AnchorSliceVariation = AnchorSliceDefault;
+
+/**
+ * Anchor Shared Slice
+ *
+ * - **API ID**: `anchor`
+ * - **Description**: Anchor
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AnchorSlice = prismic.SharedSlice<"anchor", AnchorSliceVariation>;
 
 /**
  * Primary content in *BackgroundImage → Default → Primary*
@@ -1340,15 +1428,20 @@ declare module "@prismicio/client" {
       ProgramDocument,
       ProgramDocumentData,
       ProgramDocumentDataSlicesSlice,
-      SettingsDocument,
-      SettingsDocumentData,
-      SettingsDocumentDataSlicesSlice,
       SettingsWerobotDocument,
       SettingsWerobotDocumentData,
       SettingsWerobotDocumentDataHeaderNavigationItem,
       SettingsWerobotDocumentDataFooterNavigationItem,
       SettingsWerobotDocumentDataPageNavigationItem,
+      SiteDocument,
+      SiteDocumentData,
+      SiteDocumentDataAnchorNavigationItem,
+      SiteDocumentDataSlicesSlice,
       AllDocumentTypes,
+      AnchorSlice,
+      AnchorSliceDefaultPrimary,
+      AnchorSliceVariation,
+      AnchorSliceDefault,
       BackgroundImageSlice,
       BackgroundImageSliceDefaultPrimary,
       BackgroundImageSliceDefaultItem,
