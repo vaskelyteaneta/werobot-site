@@ -77,20 +77,34 @@ export default function Footer() {
               
               // Handle repeatable link field - it's an array
               if (Array.isArray(link) && link.length > 0) {
-                // Find the Web link (link_type: 'Web') which has the actual URL
-                let selectedLink = link.find((l: any) => l.link_type === 'Web' && l.url) || link[0];
+                // Find the Web link first, or use the first link
+                const selectedLink = link.find((l: any) => l.link_type === 'Web' && l.url) || 
+                                    link.find((l: any) => l.link_type === 'Document' && l.uid) ||
+                                    link[0];
                 
-                if (selectedLink?.url) {
-                  linkUrl = selectedLink.url;
-                } else if (selectedLink?.text) {
-                  linkUrl = selectedLink.text;
-                } else if (selectedLink?.value?.url) {
-                  linkUrl = selectedLink.value.url;
-                } else if (selectedLink?.value?.text) {
-                  linkUrl = selectedLink.value.text;
+                if (selectedLink) {
+                  // Handle Document links (internal pages)
+                  if (selectedLink.link_type === 'Document' && selectedLink.uid) {
+                    linkUrl = `/${selectedLink.uid}`;
+                  }
+                  // Handle Web links
+                  else if (selectedLink?.url) {
+                    linkUrl = selectedLink.url;
+                  } else if (selectedLink?.text) {
+                    linkUrl = selectedLink.text;
+                  } else if (selectedLink?.value?.url) {
+                    linkUrl = selectedLink.value.url;
+                  } else if (selectedLink?.value?.text) {
+                    linkUrl = selectedLink.value.text;
+                  }
                 }
               } else if (link && typeof link === 'object' && !Array.isArray(link)) {
-                if (link.url) {
+                // Handle Document links (internal pages)
+                if (link.link_type === 'Document' && link.uid) {
+                  linkUrl = `/${link.uid}`;
+                }
+                // Handle Web links
+                else if (link.url) {
                   linkUrl = link.url;
                 } else if (link.text) {
                   linkUrl = link.text;
@@ -117,8 +131,11 @@ export default function Footer() {
               <li key={index}>
                 <a
                   href={linkUrl}
-                  className="text-sm md:text-base font-light tracking-[0.1em] uppercase text-[#1a1a1a] hover:text-[#000000] transition-colors duration-200"
-                  style={{ textDecoration: "none" }}
+                  className="text-sm md:text-base font-light tracking-[0.1em] uppercase hover:text-[#333333] transition-colors duration-200"
+                  style={{ 
+                    textDecoration: "none",
+                    color: "#000000",
+                  }}
                   onClick={(e) => {
                     if (isAnchorLink) {
                       e.preventDefault();
