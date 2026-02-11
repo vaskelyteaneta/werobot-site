@@ -56,6 +56,27 @@ main {
   z-index: 10;
   min-height: 100vh;
   background-color: transparent;
+  color: #000000;
+}
+
+/* Ensure all text in main is black by default */
+main * {
+  color: inherit;
+}
+
+/* Override any white text to black */
+main p,
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main span,
+main div,
+main li,
+main a:not([class*="text-"]) {
+  color: #000000 !important;
 }
 
 /* Remove any borders or lines from sections and navigation */

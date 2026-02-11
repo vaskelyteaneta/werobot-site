@@ -11,6 +11,10 @@ export default async function Page() {
 
   // "homepage" = the API ID of your Page type in Prismic
   const page = await client.getSingle("homepage");
+  const pageData = page.data as any;
+  
+  // Extract anchor navigation from homepage
+  const anchorNavigation = pageData.anchor_navigation || [];
   
   // Group slices to allow graphics to overlay eventinfo boxes
   // Also group consecutive BackgroundImage slices for horizontal gallery
@@ -105,7 +109,7 @@ export default async function Page() {
               components={components}
             />
             {/* Add anchor navigation after the first slice (hero/logo) - only on homepage */}
-            {index === 0 && <Header />}
+            {index === 0 && anchorNavigation.length > 0 && <Header anchorNavigation={anchorNavigation} />}
           </div>
         );
       })}

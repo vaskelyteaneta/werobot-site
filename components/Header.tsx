@@ -3,15 +3,29 @@
 import { useEffect, useState } from "react";
 
 interface NavItem {
-  label: string;
-  link: any;
+  name?: string;
+  anchor_link?: string;
+  label?: string;
+  link?: any;
 }
 
-export default function Header() {
+interface HeaderProps {
+  anchorNavigation?: NavItem[];
+}
+
+export default function Header({ anchorNavigation }: HeaderProps) {
   const [headerNav, setHeaderNav] = useState<NavItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // If anchorNavigation is passed as prop, use it directly
+    if (anchorNavigation && anchorNavigation.length > 0) {
+      setHeaderNav(anchorNavigation);
+      setLoading(false);
+      return;
+    }
+
+    // Otherwise, fetch from API (fallback for backwards compatibility)
     async function fetchNavigation() {
       try {
         const response = await fetch("/api/navigation");
@@ -27,7 +41,7 @@ export default function Header() {
       }
     }
     fetchNavigation();
-  }, []);
+  }, [anchorNavigation]);
 
   // Show nothing while loading
   if (loading) {
@@ -72,12 +86,22 @@ export default function Header() {
         >
           <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
             {headerNav.map((item, index) => {
-              // Extract label
-              const label = (item.label as any)?.value || item.label || (item as any).label_text || (item as any).name || `Link ${index + 1}`;
+              // Extract label - support both new structure (name) and old structure (label)
+              const nameValue = typeof item.name === 'string' ? item.name : (item.name as any)?.value;
+              const labelValue = typeof item.label === 'string' ? item.label : (item.label as any)?.value;
+              const label = nameValue || labelValue || (item as any).label_text || `Link ${index + 1}`;
               
-              // Extract URL from link field
+              // Extract URL - support both new structure (anchor_link) and old structure (link)
               let linkUrl: string | null = null;
-              if (item.link) {
+              
+              // New structure: anchor_link field (KeyTextField is usually a string)
+              if (item.anchor_link) {
+                const anchorLink = item.anchor_link as any;
+                linkUrl = typeof anchorLink === 'string' ? anchorLink : (anchorLink?.value || anchorLink || null);
+              }
+              
+              // Old structure: link field (fallback)
+              if (!linkUrl && item.link) {
                 const link = item.link as any;
                 
                 // Handle repeatable link field - it's an array
@@ -112,6 +136,18 @@ export default function Header() {
               // If no URL found, skip this item
               if (!linkUrl) {
                 return null;
+              }
+              
+              // Ensure anchor links start with #
+              if (!linkUrl.startsWith("#") && !linkUrl.startsWith("http")) {
+                linkUrl = `#${linkUrl}`;
+              }
+
+              // Normalize anchor links: convert to lowercase and replace spaces with hyphens
+              if (linkUrl.startsWith("#")) {
+                const anchorPart = linkUrl.substring(1);
+                const normalized = anchorPart.toLowerCase().replace(/\s+/g, "-");
+                linkUrl = `#${normalized}`;
               }
 
               // Normalize anchor links: convert to lowercase and replace spaces with hyphens

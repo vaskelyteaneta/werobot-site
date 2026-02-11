@@ -6,6 +6,7 @@ import { SliceLike } from "@prismicio/react";
 import ImageGallery from "@/components/ImageGallery";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Header from "@/components/Header";
 
 interface PageProps {
   params: Promise<{ uid: string }>;
@@ -16,12 +17,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { uid } = await params;
   const client = createClient();
 
-  // Try multiple custom types: program, about, settings
-  const pageTypes: ("program" | "about" | "settings")[] = ["program", "about", "settings"];
+  // Try multiple custom types: site (for About, Legal, etc.), homepage
+  const pageTypes: ("site" | "homepage")[] = ["site", "homepage"];
   
   for (const type of pageTypes) {
     try {
-      const page = await client.getByUID(type as any, uid);
+      const page = await client.getByUID(type as any, uid) as any;
       const pageData = page.data as any;
       
       return {
@@ -49,8 +50,8 @@ export default async function Page({ params }: PageProps) {
   const { uid } = await params;
   const client = createClient();
 
-  // Try multiple custom types: program, about, settings
-  const pageTypes: ("program" | "about" | "settings")[] = ["program", "about", "settings"];
+  // Try multiple custom types: site (for About, Legal, etc.), homepage
+  const pageTypes: ("site" | "homepage")[] = ["site", "homepage"];
   let page: any = null;
   let pageType = null;
 
@@ -72,6 +73,9 @@ export default async function Page({ params }: PageProps) {
   try {
     // Cast page.data to any to access slices safely
     const pageData = (page as any).data as any;
+    
+    // Extract anchor navigation from page (if it exists)
+    const anchorNavigation = pageData.anchor_navigation || [];
     
     // Group slices to allow graphics to overlay eventinfo boxes
     // Also group consecutive BackgroundImage slices for horizontal gallery
@@ -143,7 +147,7 @@ export default async function Page({ params }: PageProps) {
     }
     
     return (
-      <main>
+      <main style={{ color: "#000000" }}>
         {processedSlices.map((sliceOrGroup, index) => {
           if ((sliceOrGroup as any).type === "grouped") {
             const group = sliceOrGroup as { type: string; slices: SliceLike[] };
@@ -165,6 +169,8 @@ export default async function Page({ params }: PageProps) {
                 slices={[sliceOrGroup as SliceLike]}
                 components={components}
               />
+              {/* Add anchor navigation after the first slice (hero/logo) if it exists */}
+              {index === 0 && anchorNavigation.length > 0 && <Header anchorNavigation={anchorNavigation} />}
             </div>
           );
         })}
@@ -180,7 +186,7 @@ export default async function Page({ params }: PageProps) {
 export async function generateStaticParams() {
   const client = createClient();
   
-  const pageTypes: ("program" | "about" | "settings")[] = ["program", "about", "settings"];
+  const pageTypes: ("site" | "homepage")[] = ["site", "homepage"];
   const allPages: { uid: string }[] = [];
   
   for (const type of pageTypes) {

@@ -136,7 +136,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
           <div
             ref={containerRef}
             className="relative w-full overflow-hidden"
-            style={{ height: "80px" }}
+            style={{ height: "140px" }}
           >
             <div className="logo-content flex items-center gap-12 h-full" style={{ width: "fit-content", paddingLeft: "0", paddingRight: "0" }}>
               {duplicatedLogos.map((item, index) =>
@@ -145,8 +145,18 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
                     key={`${item.logo.url}-${index}`}
                     src={item.logo.url}
                     alt={item.logo.alt || "Partner logo"}
-                    className="max-h-16 object-contain flex-shrink-0"
-                    style={{ maxWidth: "180px", width: "auto" }}
+                    className="h-28 object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
+                    style={{ 
+                      width: "auto",
+                      height: "112px",
+                      filter: "grayscale(100%)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.filter = "grayscale(0%)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.filter = "grayscale(100%)";
+                    }}
                   />
                 ) : null
               )}
