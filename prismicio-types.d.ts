@@ -69,6 +69,31 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+/**
+ * Item in *Homepage → Anchor navigation*
+ */
+export interface HomepageDocumentDataAnchorNavigationItem {
+  /**
+   * Name field in *Homepage → Anchor navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.anchor_navigation[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * anchor link field in *Homepage → Anchor navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.anchor_navigation[].anchor_link
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  anchor_link: prismic.KeyTextField;
+}
+
 type HomepageDocumentDataSlicesSlice =
   | BackgroundImageSlice
   | AnchorSlice
@@ -86,6 +111,19 @@ type HomepageDocumentDataSlicesSlice =
  * Content for Homepage documents
  */
 interface HomepageDocumentData {
+  /**
+   * Anchor navigation field in *Homepage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.anchor_navigation[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  anchor_navigation: prismic.GroupField<
+    Simplify<HomepageDocumentDataAnchorNavigationItem>
+  >;
+
   /**
    * Slice Zone field in *Homepage*
    *
@@ -146,33 +184,6 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *Settings werobot → Header navigation*
- */
-export interface SettingsWerobotDocumentDataHeaderNavigationItem {
-  /**
-   * Label field in *Settings werobot → Header navigation*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings_werobot.header_navigation[].label
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  label: prismic.KeyTextField;
-
-  /**
-   * Link field in *Settings werobot → Header navigation*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings_werobot.header_navigation[].link
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >;
-}
-
-/**
  * Item in *Settings werobot → Footer navigation*
  */
 export interface SettingsWerobotDocumentDataFooterNavigationItem {
@@ -230,19 +241,6 @@ export interface SettingsWerobotDocumentDataPageNavigationItem {
  * Content for Settings werobot documents
  */
 interface SettingsWerobotDocumentData {
-  /**
-   * Header navigation field in *Settings werobot*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings_werobot.header_navigation[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  header_navigation: prismic.GroupField<
-    Simplify<SettingsWerobotDocumentDataHeaderNavigationItem>
-  >;
-
   /**
    * Footer navigation field in *Settings werobot*
    *
@@ -1271,10 +1269,10 @@ declare module "@prismicio/client" {
     export type {
       HomepageDocument,
       HomepageDocumentData,
+      HomepageDocumentDataAnchorNavigationItem,
       HomepageDocumentDataSlicesSlice,
       SettingsWerobotDocument,
       SettingsWerobotDocumentData,
-      SettingsWerobotDocumentDataHeaderNavigationItem,
       SettingsWerobotDocumentDataFooterNavigationItem,
       SettingsWerobotDocumentDataPageNavigationItem,
       SiteDocument,

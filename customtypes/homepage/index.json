@@ -6,6 +6,29 @@
   "status": true,
   "json": {
     "Main": {
+      "anchor_navigation": {
+        "type": "Group",
+        "config": {
+          "label": "Anchor navigation",
+          "repeat": true,
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Name",
+                "placeholder": ""
+              }
+            },
+            "anchor_link": {
+              "type": "Text",
+              "config": {
+                "label": "anchor link",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
