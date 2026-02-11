@@ -73,29 +73,38 @@ export default function PageNavigation() {
               
               // Handle repeatable link field - it's an array
               if (Array.isArray(link) && link.length > 0) {
-                // Find the Web link (link_type: 'Web') which has the actual URL
-                let selectedLink = link.find((l: any) => l.link_type === 'Web' && l.url) || link[0];
+                // Find the Web link first, or use the first link
+                const selectedLink = link.find((l: any) => l.link_type === 'Web' && l.url) || link[0];
                 
-                // Extract URL from the selected link
-                if (selectedLink?.url) {
-                  linkUrl = selectedLink.url;
-                } else if (selectedLink?.text) {
-                  linkUrl = selectedLink.text;
-                } else if (selectedLink?.value?.url) {
-                  linkUrl = selectedLink.value.url;
-                } else if (selectedLink?.value?.text) {
-                  linkUrl = selectedLink.value.text;
+                if (selectedLink) {
+                  // Handle Document links - construct URL from UID
+                  if (selectedLink.link_type === 'Document' && selectedLink.uid) {
+                    linkUrl = `/${selectedLink.uid}`;
+                  }
+                  // Handle Web links
+                  else if (selectedLink.link_type === 'Web' && selectedLink.url && typeof selectedLink.url === 'string' && selectedLink.url.trim() !== '') {
+                    linkUrl = selectedLink.url.trim();
+                  }
+                  // Fallback: check url property
+                  else if (selectedLink.url && typeof selectedLink.url === 'string' && selectedLink.url.trim() !== '' && selectedLink.url !== 'null') {
+                    linkUrl = selectedLink.url.trim();
+                  }
+                  // Fallback: check text property
+                  else if (selectedLink.text && typeof selectedLink.text === 'string' && selectedLink.text.trim() !== '' && selectedLink.text !== 'null') {
+                    linkUrl = selectedLink.text.trim();
+                  }
                 }
               } else if (link && typeof link === 'object' && !Array.isArray(link)) {
                 // Single link object (not array)
-                if (link.url) {
-                  linkUrl = link.url;
-                } else if (link.text) {
-                  linkUrl = link.text;
-                } else if (link.value?.url) {
-                  linkUrl = link.value.url;
-                } else if (link.value?.text) {
-                  linkUrl = link.value.text;
+                // Handle Document links
+                if (link.link_type === 'Document' && link.uid) {
+                  linkUrl = `/${link.uid}`;
+                }
+                // Handle Web links
+                else if (link.url && typeof link.url === 'string' && link.url.trim() !== '' && link.url !== 'null') {
+                  linkUrl = link.url.trim();
+                } else if (link.text && typeof link.text === 'string' && link.text.trim() !== '' && link.text !== 'null') {
+                  linkUrl = link.text.trim();
                 }
               }
             }

@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  anchor: dynamic(() => import("./Anchor")),
   background_image: dynamic(() => import("./BackgroundImage")),
   banner: dynamic(() => import("./Banner")),
   cta_banner: dynamic(() => import("./CtaBanner")),
