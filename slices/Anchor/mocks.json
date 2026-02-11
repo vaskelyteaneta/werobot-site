@@ -1,0 +1,14 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"anchor_link": {
+				"__TYPE__": "FieldContent",
+				"value": "accurate",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

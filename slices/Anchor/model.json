@@ -1,0 +1,26 @@
+{
+  "id": "anchor",
+  "type": "SharedSlice",
+  "name": "Anchor",
+  "description": "Anchor",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "anchor_link": {
+          "type": "Text",
+          "config": {
+            "label": "anchor link",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

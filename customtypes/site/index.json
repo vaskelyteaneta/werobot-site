@@ -1,0 +1,108 @@
+{
+  "format": "page",
+  "id": "site",
+  "label": "Site",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "anchor_navigation": {
+        "type": "Group",
+        "config": {
+          "label": "Anchor navigation",
+          "repeat": true,
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Name",
+                "placeholder": ""
+              }
+            },
+            "anchor_link": {
+              "type": "Text",
+              "config": {
+                "label": "anchor link",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "anchor": {
+              "type": "SharedSlice"
+            },
+            "section_title": {
+              "type": "SharedSlice"
+            },
+            "background_image": {
+              "type": "SharedSlice"
+            },
+            "name_pills": {
+              "type": "SharedSlice"
+            },
+            "logo": {
+              "type": "SharedSlice"
+            },
+            "eventinfo": {
+              "type": "SharedSlice"
+            },
+            "logo_row": {
+              "type": "SharedSlice"
+            },
+            "graphic": {
+              "type": "SharedSlice"
+            },
+            "hero_banner": {
+              "type": "SharedSlice"
+            },
+            "cta_banner": {
+              "type": "SharedSlice"
+            },
+            "banner": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}
