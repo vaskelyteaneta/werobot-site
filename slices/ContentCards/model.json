@@ -33,6 +33,20 @@
                   "placeholder": ""
                 }
               },
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              },
+              "date": {
+                "type": "Date",
+                "config": {
+                  "label": "Date",
+                  "placeholder": ""
+                }
+              },
               "description": {
                 "type": "StructuredText",
                 "config": {

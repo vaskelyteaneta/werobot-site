@@ -81,10 +81,11 @@ const Banner: FC<BannerProps> = ({ slice }) => {
         </a>
       ) : (
         <div
-          className="inline-flex border border-[#1a1a1a] bg-transparent uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className="inline-flex border border-black bg-transparent uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
           style={{
             letterSpacing: "0.2em",
-            color: "#1a1a1a",
+            color: "#000000",
+            borderColor: "#000000",
           }}
         >
           {label}
