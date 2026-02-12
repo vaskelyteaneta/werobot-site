@@ -3,7 +3,7 @@
 // slices/Eventinfo/index.tsx
 import { useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps, PrismicLink, LinkField } from "@prismicio/react";
 import { gsap } from "gsap";
 
 /**
@@ -209,7 +209,29 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
       >
         {slice.primary.text ? (
               <div className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-left text-[#1a1a1a] font-light">
-            <PrismicRichText field={slice.primary.text} />
+            <PrismicRichText 
+              field={slice.primary.text}
+              components={{
+                hyperlink: ({ node, children }) => {
+                  const linkField = node.data as LinkField;
+                  return (
+                    <PrismicLink
+                      field={linkField}
+                      className="underline hover:text-[#000000] transition-colors duration-200"
+                      style={{ 
+                        textDecoration: "underline", 
+                        color: "#1a1a1a",
+                        cursor: "pointer"
+                      }}
+                      target={linkField.target || undefined}
+                      rel={linkField.target === '_blank' ? 'noopener noreferrer' : undefined}
+                    >
+                      {children}
+                    </PrismicLink>
+                  );
+                },
+              }}
+            />
           </div>
         ) : (
               <p className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-left text-[#1a1a1a] font-light">
