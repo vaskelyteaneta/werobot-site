@@ -95,6 +95,7 @@ export interface HomepageDocumentDataAnchorNavigationItem {
 }
 
 type HomepageDocumentDataSlicesSlice =
+  | ContentCardsSlice
   | BackgroundImageSlice
   | AnchorSlice
   | NamePillsSlice
@@ -310,6 +311,7 @@ export interface SiteDocumentDataAnchorNavigationItem {
 }
 
 type SiteDocumentDataSlicesSlice =
+  | ContentCardsSlice
   | AnchorSlice
   | SectionTitleSlice
   | BackgroundImageSlice
@@ -597,6 +599,98 @@ type BannerSliceVariation = BannerSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type BannerSlice = prismic.SharedSlice<"banner", BannerSliceVariation>;
+
+/**
+ * Item in *ContentCards → Default → Primary → Content*
+ */
+export interface ContentCardsSliceDefaultPrimaryContentItem {
+  /**
+   * Image field in *ContentCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_cards.default.primary.content[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *ContentCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_cards.default.primary.content[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *ContentCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_cards.default.primary.content[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *ContentCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_cards.default.primary.content[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *ContentCards → Default → Primary*
+ */
+export interface ContentCardsSliceDefaultPrimary {
+  /**
+   * Content field in *ContentCards → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_cards.default.primary.content[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  content: prismic.GroupField<
+    Simplify<ContentCardsSliceDefaultPrimaryContentItem>
+  >;
+}
+
+/**
+ * Default variation for ContentCards Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ContentCardsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContentCardsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContentCards*
+ */
+type ContentCardsSliceVariation = ContentCardsSliceDefault;
+
+/**
+ * ContentCards Shared Slice
+ *
+ * - **API ID**: `content_cards`
+ * - **Description**: ContentCards
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ContentCardsSlice = prismic.SharedSlice<
+  "content_cards",
+  ContentCardsSliceVariation
+>;
 
 /**
  * Primary content in *CtaBanner → Default → Primary*
@@ -1293,6 +1387,11 @@ declare module "@prismicio/client" {
       BannerSliceDefaultPrimary,
       BannerSliceVariation,
       BannerSliceDefault,
+      ContentCardsSlice,
+      ContentCardsSliceDefaultPrimaryContentItem,
+      ContentCardsSliceDefaultPrimary,
+      ContentCardsSliceVariation,
+      ContentCardsSliceDefault,
       CtaBannerSlice,
       CtaBannerSliceDefaultPrimary,
       CtaBannerSliceVariation,

@@ -34,6 +34,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "content_cards": {
+              "type": "SharedSlice"
+            },
             "background_image": {
               "type": "SharedSlice"
             },

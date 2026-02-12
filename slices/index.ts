@@ -6,6 +6,7 @@ export const components = {
   anchor: dynamic(() => import("./Anchor")),
   background_image: dynamic(() => import("./BackgroundImage")),
   banner: dynamic(() => import("./Banner")),
+  content_cards: dynamic(() => import("./ContentCards")),
   cta_banner: dynamic(() => import("./CtaBanner")),
   eventinfo: dynamic(() => import("./Eventinfo")),
   graphic: dynamic(() => import("./Graphic")),
