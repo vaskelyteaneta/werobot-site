@@ -158,3 +158,31 @@ section[class*="gallery"] > div,
   flex: 1 1 0% !important;
   width: auto !important;
 }
+
+/* Splide carousel styling - match design */
+.splide__arrow {
+  background: transparent !important;
+  border: 1px solid #000000 !important;
+  color: #000000 !important;
+  opacity: 1 !important;
+  width: 40px !important;
+  height: 40px !important;
+  transition: all 0.3s ease !important;
+}
+
+.splide__arrow:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.splide__arrow:disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.splide__arrow svg {
+  fill: currentColor !important;
+  width: 16px !important;
+  height: 16px !important;
+}

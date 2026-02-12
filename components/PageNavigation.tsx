@@ -11,6 +11,8 @@ interface NavItem {
 export default function PageNavigation() {
   const [pageNav, setPageNav] = useState<NavItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     async function fetchNavigation() {
@@ -30,6 +32,31 @@ export default function PageNavigation() {
     fetchNavigation();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show at the very top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show navigation
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px - hide navigation
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   // Show nothing while loading
   if (loading) {
     return null;
@@ -42,21 +69,21 @@ export default function PageNavigation() {
 
   return (
     <nav 
-      className="w-full py-4" 
+      className="w-full py-4 fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out" 
       style={{ 
-        backgroundColor: "transparent",
+        backgroundColor: "rgb(209, 228, 246)", // Matches page background
         border: "none",
         outline: "none",
         boxShadow: "none",
-        background: "transparent",
         margin: 0,
+        transform: isVisible ? "translateY(0)" : "translateY(-100%)",
       }}
     >
       <div 
         className="max-w-7xl mx-auto px-4" 
         style={{ 
           border: "none !important",
-          backgroundColor: "transparent",
+          backgroundColor: "rgb(209, 228, 246)", // Matches page background
           boxShadow: "none",
           margin: 0
         }}

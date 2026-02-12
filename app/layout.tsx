@@ -47,7 +47,7 @@ export default function RootLayout({
         <PlusGrid />
         <HideUnicornAttribution />
         <PageNavigation />
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, paddingTop: "80px" }}>
           {children}
         </div>
         <Footer />

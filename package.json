@@ -13,6 +13,8 @@
     "@prismicio/client": "^7.21.0",
     "@prismicio/next": "^2.0.2",
     "@prismicio/react": "^3.2.2",
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
     "gsap": "^3.13.0",
     "next": "^16.0.8",
     "react": "^19.2.1",
