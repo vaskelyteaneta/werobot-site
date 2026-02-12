@@ -23,10 +23,11 @@ export async function GET() {
     
     // TypeScript now knows this is SettingsWerobotDocument
     const settingsWerobot = settings as SettingsWerobotDocument;
-    const headerNav = settingsWerobot.data.header_navigation || [];
-    const footerNav = settingsWerobot.data.footer_navigation || [];
+    const settingsData = settingsWerobot.data as any;
+    const headerNav = settingsData.header_navigation || [];
+    const footerNav = settingsData.footer_navigation || [];
     // Page navigation - if it exists, use it; otherwise filter page links from header_navigation
-    const pageNav = (settingsWerobot.data as any).page_navigation || [];
+    const pageNav = settingsData.page_navigation || [];
     
     return NextResponse.json({
       header_navigation: headerNav,
