@@ -22,6 +22,21 @@
 			"show_shadow": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"link": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"__TYPE__": "LinkContent",
+						"key": "57f53769-4d50-43a3-9ede-5e9e2cf28796",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "https://slicemachine.dev",
+							"text": "interior"
+						}
+					}
+				]
 			}
 		},
 		"items": []

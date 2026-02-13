@@ -120,6 +120,17 @@
             ],
             "default_value": "small"
           }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true
+          }
         }
       },
       "items": {}

@@ -22,14 +22,14 @@ html {
   --font-inter: var(--font-inter);
 }
 
-/* Refined dark mode */
+/* Force light mode - disable dark mode to keep consistent light blue background */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #f5f5f5;
-    --accent: #e5e5e5;
-    --muted: #a0a0a0;
-    --border: #2a2a2a;
+    --background: #D1E4F6;
+    --foreground: #1a1a1a;
+    --accent: #2d2d2d;
+    --muted: #6b6b6b;
+    --border: #e5e5e5;
   }
 }
 

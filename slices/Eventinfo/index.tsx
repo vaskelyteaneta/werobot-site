@@ -214,20 +214,34 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               components={{
                 hyperlink: ({ node, children }) => {
                   const linkField = node.data as LinkField;
+                  // Extract URL from linkField
+                  let href = "";
+                  if (linkField.link_type === "Web" && linkField.url) {
+                    href = linkField.url;
+                  } else if (linkField.link_type === "Document" && linkField.uid) {
+                    href = `/${linkField.uid}`;
+                  } else if (typeof linkField === "string") {
+                    href = linkField;
+                  } else if ((linkField as any).url) {
+                    href = (linkField as any).url;
+                  }
+                  
+                  const isExternal = href.startsWith("http://") || href.startsWith("https://");
+                  
                   return (
-                    <PrismicLink
-                      field={linkField}
+                    <a
+                      href={href}
+                      target={isExternal || linkField.target === '_blank' ? '_blank' : undefined}
+                      rel={isExternal || linkField.target === '_blank' ? 'noopener noreferrer' : undefined}
                       className="underline hover:text-[#000000] transition-colors duration-200"
                       style={{ 
                         textDecoration: "underline", 
                         color: "#1a1a1a",
                         cursor: "pointer"
                       }}
-                      target={linkField.target || undefined}
-                      rel={linkField.target === '_blank' ? 'noopener noreferrer' : undefined}
                     >
                       {children}
-                    </PrismicLink>
+                    </a>
                   );
                 },
               }}

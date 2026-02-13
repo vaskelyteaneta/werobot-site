@@ -625,6 +625,26 @@ export interface ContentCardsSliceDefaultPrimaryContentItem {
   title: prismic.KeyTextField;
 
   /**
+   * Name field in *ContentCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_cards.default.primary.content[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Date field in *ContentCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: content_cards.default.primary.content[].date
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
    * Description field in *ContentCards → Default → Primary → Content*
    *
    * - **Field Type**: Rich Text
@@ -872,6 +892,18 @@ export interface EventinfoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   graphic_size_2: prismic.SelectField<"small" | "medium" | "large", "filled">;
+
+  /**
+   * link field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: eventinfo.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
 }
 
 /**
