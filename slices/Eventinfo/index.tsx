@@ -3,7 +3,7 @@
 // slices/Eventinfo/index.tsx
 import { useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps, PrismicLink, LinkField } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps, PrismicLink } from "@prismicio/react";
 import { gsap } from "gsap";
 
 /**
@@ -213,7 +213,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               field={slice.primary.text}
               components={{
                 hyperlink: ({ node, children }) => {
-                  const linkField = node.data as LinkField;
+                  const linkField = node.data as any;
                   // Extract URL from linkField
                   let href = "";
                   if (linkField.link_type === "Web" && linkField.url) {
