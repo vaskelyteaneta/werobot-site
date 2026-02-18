@@ -40,6 +40,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "paper_cards": {
+              "type": "SharedSlice"
+            },
             "content_cards": {
               "type": "SharedSlice"
             },

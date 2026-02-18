@@ -3,17 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"text": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Do est est nisi velit incididunt. Adipisicing reprehenderit labore laborum amet dolore enim adipisicing amet fugiat consectetur."
-						}
-					}
-				]
-			},
 			"alignment": {
 				"__TYPE__": "FieldContent",
 				"value": "center",
@@ -28,12 +17,23 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "57f53769-4d50-43a3-9ede-5e9e2cf28796",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://slicemachine.dev",
 							"text": "interior"
+						}
+					}
+				]
+			},
+			"text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Aute cillum irure ut ex nisi adipisicing nulla. Dolor aute eiusmod nisi irure tempor ad non tempor."
 						}
 					}
 				]

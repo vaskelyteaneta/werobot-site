@@ -71,7 +71,9 @@ export default function PageNavigation() {
     <nav 
       className="w-full py-4 fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out" 
       style={{ 
-        backgroundColor: "rgb(209, 228, 246)", // Matches page background
+        background: "linear-gradient(to bottom, rgba(209, 228, 246, 0.6) 0%, rgba(209, 228, 246, 0) 100%)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
         border: "none",
         outline: "none",
         boxShadow: "none",
@@ -80,10 +82,10 @@ export default function PageNavigation() {
       }}
     >
       <div 
-        className="max-w-7xl mx-auto px-4" 
+        className="w-full flex justify-center px-4" 
         style={{ 
           border: "none !important",
-          backgroundColor: "rgb(209, 228, 246)", // Matches page background
+          backgroundColor: "transparent", // Transparent since parent has blur
           boxShadow: "none",
           margin: 0
         }}

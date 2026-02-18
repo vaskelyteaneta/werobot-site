@@ -52,7 +52,7 @@ export default function IntroScreen() {
         isAnimating ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       style={{
-        backgroundColor: "#D1E4F6",
+        backgroundColor: "#E6F2FF",
       }}
       onClick={() => {
         setIsAnimating(true);
@@ -60,11 +60,11 @@ export default function IntroScreen() {
       }}
     >
       <Image
-        src="/logo.png"
+        src="/metalic-logo.png"
         alt="WeRobot Logo"
-        width={500}
-        height={200}
-        className="max-w-[300px] md:max-w-[500px] h-auto"
+        width={600}
+        height={250}
+        className="max-w-[350px] md:max-w-[600px] h-auto"
         style={{
           objectFit: "contain",
         }}

@@ -95,6 +95,7 @@ export interface HomepageDocumentDataAnchorNavigationItem {
 }
 
 type HomepageDocumentDataSlicesSlice =
+  | PaperCardsSlice
   | ContentCardsSlice
   | BackgroundImageSlice
   | AnchorSlice
@@ -311,6 +312,7 @@ export interface SiteDocumentDataAnchorNavigationItem {
 }
 
 type SiteDocumentDataSlicesSlice =
+  | PaperCardsSlice
   | ContentCardsSlice
   | AnchorSlice
   | SectionTitleSlice
@@ -778,16 +780,6 @@ export type CtaBannerSlice = prismic.SharedSlice<
  */
 export interface EventinfoSliceDefaultPrimary {
   /**
-   * Text field in *Eventinfo → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: eventinfo.default.primary.text
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  text: prismic.RichTextField;
-
-  /**
    * Alignment field in *Eventinfo → Default → Primary*
    *
    * - **Field Type**: Select
@@ -904,6 +896,16 @@ export interface EventinfoSliceDefaultPrimary {
   link: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
+
+  /**
+   * text field in *Eventinfo → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: eventinfo.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
 }
 
 /**
@@ -1328,6 +1330,98 @@ export type NamePillsSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *PaperCards → Default → Primary → Content*
+ */
+export interface PaperCardsSliceDefaultPrimaryContentItem {
+  /**
+   * Title field in *PaperCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: paper_cards.default.primary.content[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Name field in *PaperCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: paper_cards.default.primary.content[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Description field in *PaperCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: paper_cards.default.primary.content[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *PaperCards → Default → Primary → Content*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: paper_cards.default.primary.content[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *PaperCards → Default → Primary*
+ */
+export interface PaperCardsSliceDefaultPrimary {
+  /**
+   * Content field in *PaperCards → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: paper_cards.default.primary.content[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  content: prismic.GroupField<
+    Simplify<PaperCardsSliceDefaultPrimaryContentItem>
+  >;
+}
+
+/**
+ * Default variation for PaperCards Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PaperCardsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<PaperCardsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *PaperCards*
+ */
+type PaperCardsSliceVariation = PaperCardsSliceDefault;
+
+/**
+ * PaperCards Shared Slice
+ *
+ * - **API ID**: `paper_cards`
+ * - **Description**: PaperCards
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PaperCardsSlice = prismic.SharedSlice<
+  "paper_cards",
+  PaperCardsSliceVariation
+>;
+
+/**
  * Primary content in *SectionTitle → Default → Primary*
  */
 export interface SectionTitleSliceDefaultPrimary {
@@ -1454,6 +1548,11 @@ declare module "@prismicio/client" {
       NamePillsSliceDefaultPrimary,
       NamePillsSliceVariation,
       NamePillsSliceDefault,
+      PaperCardsSlice,
+      PaperCardsSliceDefaultPrimaryContentItem,
+      PaperCardsSliceDefaultPrimary,
+      PaperCardsSliceVariation,
+      PaperCardsSliceDefault,
       SectionTitleSlice,
       SectionTitleSliceDefaultPrimary,
       SectionTitleSliceVariation,

@@ -14,5 +14,6 @@ export const components = {
   logo: dynamic(() => import("./Logo")),
   logo_row: dynamic(() => import("./LogoRow")),
   name_pills: dynamic(() => import("./NamePills")),
+  paper_cards: dynamic(() => import("./PaperCards")),
   section_title: dynamic(() => import("./SectionTitle")),
 };

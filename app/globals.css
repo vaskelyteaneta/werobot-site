@@ -186,3 +186,9 @@ section[class*="gallery"] > div,
   width: 16px !important;
   height: 16px !important;
 }
+
+/* Footer navigation - ensure black text */
+footer a,
+footer li a {
+  color: #000000 !important;
+}

@@ -135,6 +135,7 @@ export default function Footer() {
                   style={{ 
                     textDecoration: "none",
                     color: "#000000",
+                    fontWeight: 400,
                   }}
                   onClick={(e) => {
                     if (isAnchorLink) {

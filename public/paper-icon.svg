@@ -1,0 +1,40 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="1024" height="1024" fill="#FFFFFF"/>
+  
+  <!-- Document shadow -->
+  <path d="M290 180 L290 870 L760 870 L760 310 L630 180 Z" fill="#333333" transform="translate(8, 8)"/>
+  
+  <!-- Document outer border -->
+  <path d="M280 170 L280 860 L750 860 L750 300 L620 170 Z" fill="#444444" stroke="#555555" stroke-width="4"/>
+  
+  <!-- Document body (white) -->
+  <path d="M290 180 L290 850 L740 850 L740 310 L610 180 Z" fill="#FFFFFF" stroke="#333333" stroke-width="3"/>
+  
+  <!-- Folded corner -->
+  <path d="M610 180 L610 310 L740 310 Z" fill="#D0D0D0" stroke="#333333" stroke-width="3"/>
+  
+  <!-- Title bar -->
+  <rect x="340" y="260" width="220" height="28" rx="2" fill="#222222"/>
+  
+  <!-- List item 1 -->
+  <rect x="340" y="340" width="18" height="18" fill="#222222"/>
+  <rect x="375" y="343" width="300" height="14" rx="2" fill="#333333"/>
+  
+  <!-- List item 2 -->
+  <rect x="340" y="390" width="18" height="18" fill="#222222"/>
+  <rect x="375" y="393" width="300" height="14" rx="2" fill="#333333"/>
+  
+  <!-- List item 3 -->
+  <rect x="340" y="440" width="18" height="18" fill="#222222"/>
+  <rect x="375" y="443" width="300" height="14" rx="2" fill="#333333"/>
+  
+  <!-- List item 4 -->
+  <rect x="340" y="490" width="18" height="18" fill="#222222"/>
+  <rect x="375" y="493" width="300" height="14" rx="2" fill="#333333"/>
+  
+  <!-- List item 5 -->
+  <rect x="340" y="540" width="18" height="18" fill="#222222"/>
+  <rect x="375" y="543" width="300" height="14" rx="2" fill="#333333"/>
+  
+</svg>
