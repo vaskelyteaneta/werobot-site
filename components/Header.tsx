@@ -74,7 +74,7 @@ export default function Header({ anchorNavigation }: HeaderProps) {
         }}
       >
         <div 
-          className="max-w-7xl mx-auto px-4" 
+          className="w-full flex justify-center px-4" 
           style={{ 
             border: "none !important",
             borderBottom: "none !important",

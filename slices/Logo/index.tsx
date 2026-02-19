@@ -40,17 +40,14 @@ const Logo: FC<LogoProps> = ({ slice }) => {
           ? {
               top: offsetY,
               left: offsetX,
-              width: `${width}px`,
               zIndex,
             }
           : undefined
       }
     >
       <div
-        className="border border-black bg-transparent px-10 py-6 flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#1a1a1a]"
+        className="border border-black bg-transparent px-10 py-6 flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#1a1a1a] w-full max-w-[90vw] md:max-w-[700px]"
         style={{
-          width: useAbsolute ? "100%" : "auto",
-          maxWidth: useAbsolute ? "100%" : `${width}px`,
           transform: rotation ? `rotate(${rotation}deg)` : undefined,
           transformOrigin: "center",
         }}
@@ -59,7 +56,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
           <img
             src={slice.primary.logo.url}
             alt={slice.primary.logo.alt || slice.primary.text || "Logo"}
-            className="max-h-24 object-contain"
+            className="object-contain"
             style={{
               width: "100%",
               height: "auto",
