@@ -196,7 +196,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
         className={[
           containerClasses,
           "px-8 py-8 md:px-12 md:py-10",
-          "border border-white",
+          "border border-black",
           "bg-transparent",
           "relative",
           "z-0",

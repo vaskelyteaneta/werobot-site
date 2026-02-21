@@ -81,7 +81,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black font-light cursor-pointer rounded-none outline-none";
 
               // Extract URL from Prismic link field - handle all possible structures
               // Don't rely on isFilled.link() as it may return false even when link exists
@@ -166,7 +166,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black/30 font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black font-light cursor-pointer rounded-none outline-none";
 
               // Extract URL from Prismic link field - handle all possible structures
               // Don't rely on isFilled.link() as it may return false even when link exists
