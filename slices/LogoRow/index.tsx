@@ -128,9 +128,6 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
     >
       <div
         className="w-full max-w-5xl border border-black bg-transparent py-6 overflow-hidden transition-all duration-300 hover:border-black"
-        style={{
-          boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
-        }}
       >
         {logos.length > 0 ? (
           <div
