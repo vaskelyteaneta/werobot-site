@@ -56,7 +56,7 @@ export default function Header({ anchorNavigation }: HeaderProps) {
   return (
     <header>
       <nav 
-        className="w-full py-6" 
+        className="w-full py-8 md:py-12" 
         style={{ 
           backgroundColor: "transparent",
           border: "none",
@@ -68,13 +68,11 @@ export default function Header({ anchorNavigation }: HeaderProps) {
           boxShadow: "none",
           background: "transparent",
           margin: 0,
-          paddingTop: "1.5rem",
-          paddingBottom: "1.5rem",
           borderWidth: 0
         }}
       >
         <div 
-          className="w-full flex justify-center px-4" 
+          className="w-full flex justify-center px-6 md:px-8" 
           style={{ 
             border: "none !important",
             borderBottom: "none !important",
@@ -84,7 +82,7 @@ export default function Header({ anchorNavigation }: HeaderProps) {
             margin: 0
           }}
         >
-          <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+          <ul className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {headerNav.map((item, index) => {
               // Extract label - support both new structure (name) and old structure (label)
               const nameValue = typeof item.name === 'string' ? item.name : (item.name as any)?.value;
