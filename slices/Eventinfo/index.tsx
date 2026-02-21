@@ -261,22 +261,26 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               ref={graphic1Ref} 
               className="static mt-4 flex justify-center md:hidden"
             >
-              <img
-                src={graphicImage.url}
-                alt={graphicImage.alt || ""}
-                className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
-              />
+              <div className="rotate-slow">
+                <img
+                  src={graphicImage.url}
+                  alt={graphicImage.alt || ""}
+                  className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+                />
+              </div>
             </div>
             {/* Desktop: absolute positioned */}
             <div 
               className="hidden md:block"
               style={getGraphicStyle(graphicPosition)}
             >
-              <img
-                src={graphicImage.url}
-                alt={graphicImage.alt || ""}
-                className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
-              />
+              <div className="rotate-slow">
+                <img
+                  src={graphicImage.url}
+                  alt={graphicImage.alt || ""}
+                  className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+                />
+              </div>
             </div>
           </>
         )}
@@ -289,22 +293,26 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               ref={graphic2Ref} 
               className="static mt-4 flex justify-center md:hidden"
             >
-              <img
-                src={graphicImage2.url}
-                alt={graphicImage2.alt || ""}
-                className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
-              />
+              <div className="rotate-slow">
+                <img
+                  src={graphicImage2.url}
+                  alt={graphicImage2.alt || ""}
+                  className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+                />
+              </div>
             </div>
             {/* Desktop: absolute positioned */}
             <div 
               className="hidden md:block"
               style={getGraphicStyle(graphicPosition2)}
             >
-              <img
-                src={graphicImage2.url}
-                alt={graphicImage2.alt || ""}
-                className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
-              />
+              <div className="rotate-slow">
+                <img
+                  src={graphicImage2.url}
+                  alt={graphicImage2.alt || ""}
+                  className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+                />
+              </div>
             </div>
           </>
         )}

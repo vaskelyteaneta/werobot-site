@@ -192,3 +192,19 @@ footer a,
 footer li a {
   color: #000000 !important;
 }
+
+/* Slow rotation animation for graphic elements */
+@keyframes slowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-slow {
+  animation: slowRotate 20s linear infinite;
+  transform-origin: center center;
+  display: inline-block;
+}

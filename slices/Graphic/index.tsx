@@ -20,12 +20,26 @@ const Graphic = ({ slice }: GraphicProps) => {
     large: "max-w-[500px] md:max-w-[600px]",
   };
 
+  // Only apply rotation to absolute positioned graphics (decorative overlays)
+  // Gallery graphics (star row) and non-absolute graphics should not rotate
+  const shouldRotate = position && (position.startsWith("absolute") || position.includes("absolute"));
+  
   const imageContent = slice.primary.graphic_image?.url ? (
-    <img
-      src={slice.primary.graphic_image.url}
-      alt={slice.primary.graphic_image.alt || ""}
-      className={`w-full h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
-    />
+    shouldRotate ? (
+      <div className="rotate-slow">
+        <img
+          src={slice.primary.graphic_image.url}
+          alt={slice.primary.graphic_image.alt || ""}
+          className={`w-full h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+        />
+      </div>
+    ) : (
+      <img
+        src={slice.primary.graphic_image.url}
+        alt={slice.primary.graphic_image.alt || ""}
+        className={`w-full h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+      />
+    )
   ) : (
     <p style={{ color: "white" }}>No image selected.</p>
   );
