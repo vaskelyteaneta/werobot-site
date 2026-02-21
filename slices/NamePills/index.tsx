@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useCallback } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { gsap } from "gsap";
@@ -25,6 +25,29 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
     ? sectionTitle.toLowerCase().replace(/\s+/g, "-")
     : "organizing-committee"; // fallback default
 
+  // Direct hover handlers to guarantee pure black (#000000) background - no CSS involved
+  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    el.style.setProperty("background-color", "#000000", "important");
+    el.style.setProperty("background", "#000000", "important");
+    el.style.setProperty("border-color", "#000000", "important");
+    el.style.setProperty("color", "#ffffff", "important");
+    // Also update all child elements
+    el.querySelectorAll("*").forEach((child) => {
+      (child as HTMLElement).style.setProperty("color", "#ffffff", "important");
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    el.style.setProperty("background-color", "transparent", "important");
+    el.style.setProperty("background", "transparent", "important");
+    el.style.setProperty("border-color", "#000000", "important");
+    el.style.setProperty("color", "#000000", "important");
+    el.querySelectorAll("*").forEach((child) => {
+      (child as HTMLElement).style.setProperty("color", "#000000", "important");
+    });
+  }, []);
 
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -81,20 +104,15 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "inline-flex items-center justify-center px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
 
               // Extract URL from Prismic link field - handle all possible structures
-              // Don't rely on isFilled.link() as it may return false even when link exists
               let linkUrl: string | null = null;
               if (item.link) {
                 const link = item.link as any;
-                
-                // Try all possible ways to extract URL
-                // Prismic can store URLs in different places depending on link type
                 if (link.url) {
                   linkUrl = link.url;
                 } else if (link.text && (link.text.startsWith("http://") || link.text.startsWith("https://") || link.text.startsWith("mailto:"))) {
-                  // For 'Any' link_type, the URL is often in the 'text' property
                   linkUrl = link.text;
                 } else if (link.value?.url) {
                   linkUrl = link.value.url;
@@ -107,7 +125,14 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               
               const isExternalLink = linkUrl && typeof linkUrl === "string" && (linkUrl.startsWith("http://") || linkUrl.startsWith("https://") || linkUrl.startsWith("mailto:"));
 
-              // Render as link if we found a URL, regardless of isFilled.link() result
+              const pillStyle: React.CSSProperties = {
+                backgroundColor: "transparent",
+                color: "#000000",
+                borderColor: "#000000",
+                outline: "none",
+                textDecoration: "none",
+              };
+
               if (linkUrl) {
                 return (
                   <a
@@ -116,18 +141,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                     target={isExternalLink ? "_blank" : undefined}
                     rel={isExternalLink ? "noopener noreferrer" : undefined}
                     className={basePillClass}
-                    style={{
-                      color: "#000000 !important",
-                      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
-                      outline: "none",
-                      borderColor: "rgba(0, 0, 0, 0.3)",
-                      textDecoration: "none",
-                      pointerEvents: "auto",
-                      cursor: "pointer",
-                      position: "relative",
-                      zIndex: 10,
-                      display: "inline-flex",
-                    }}
+                    style={pillStyle}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {content}
                   </a>
@@ -137,12 +153,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   <div
                     key={`${item.text || index}-static`}
                     className={basePillClass}
-                    style={{
-                      color: "#000000 !important",
-                      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
-                      outline: "none",
-                      borderColor: "rgba(0, 0, 0, 0.3)",
-                    }}
+                    style={pillStyle}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {content}
                   </div>
@@ -166,20 +179,15 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center bg-transparent px-6 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:border-black border border-black font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "inline-flex items-center justify-center px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
 
               // Extract URL from Prismic link field - handle all possible structures
-              // Don't rely on isFilled.link() as it may return false even when link exists
               let linkUrl: string | null = null;
               if (item.link) {
                 const link = item.link as any;
-                
-                // Try all possible ways to extract URL
-                // Prismic can store URLs in different places depending on link type
                 if (link.url) {
                   linkUrl = link.url;
                 } else if (link.text && (link.text.startsWith("http://") || link.text.startsWith("https://") || link.text.startsWith("mailto:"))) {
-                  // For 'Any' link_type, the URL is often in the 'text' property
                   linkUrl = link.text;
                 } else if (link.value?.url) {
                   linkUrl = link.value.url;
@@ -192,7 +200,15 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               
               const isExternalLink = linkUrl && typeof linkUrl === "string" && (linkUrl.startsWith("http://") || linkUrl.startsWith("https://") || linkUrl.startsWith("mailto:"));
 
-              // Render as link if we found a URL, regardless of isFilled.link() result
+              const pillStyle: React.CSSProperties = {
+                minWidth: "180px",
+                backgroundColor: "transparent",
+                color: "#000000",
+                borderColor: "#000000",
+                outline: "none",
+                textDecoration: "none",
+              };
+
               if (linkUrl) {
                 return (
                   <a
@@ -201,26 +217,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                     target={isExternalLink ? "_blank" : undefined}
                     rel={isExternalLink ? "noopener noreferrer" : undefined}
                     className={basePillClass}
-                    style={{ 
-                      minWidth: "180px",
-                      color: "#000000 !important",
-                      outline: "none",
-                      borderColor: "rgba(0, 0, 0, 0.3)",
-                      textDecoration: "none",
-                      pointerEvents: "auto",
-                      cursor: "pointer",
-                      position: "relative",
-                      zIndex: 10,
-                      display: "inline-flex",
-                    }}
-                    onClick={(e) => {
-                      // Ensure the link works
-                      if (linkUrl) {
-                        // Allow default behavior
-                        return;
-                      }
-                      e.preventDefault();
-                    }}
+                    style={pillStyle}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {content}
                   </a>
@@ -230,12 +229,9 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                   <div
                     key={`${item.text || index}-static`}
                     className={basePillClass}
-                    style={{ 
-                      minWidth: "180px",
-                      color: "#000000 !important",
-                      outline: "none",
-                      borderColor: "rgba(0, 0, 0, 0.3)",
-                    }}
+                    style={pillStyle}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {content}
                   </div>

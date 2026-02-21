@@ -108,18 +108,7 @@ a:hover {
   color: var(--background);
 }
 
-/* Name pills styling - ensure black text and border */
-[data-slice-type="name_pills"] a,
-[data-slice-type="name_pills"] div[class*="inline-flex"] {
-  color: #000000 !important;
-  border: 1px solid rgba(0, 0, 0, 0.3) !important;
-  outline: none !important;
-}
-
-[data-slice-type="name_pills"] a:hover,
-[data-slice-type="name_pills"] div[class*="inline-flex"]:hover {
-  border-color: #000000 !important;
-}
+/* Name pills - hover handled via JS, no CSS hover rules to avoid conflicts */
 
 
 /* Hide Unicorn Studio attribution - links */
