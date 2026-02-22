@@ -78,11 +78,23 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
     return (
       <div
         key={index}
-        className="border border-black bg-transparent p-6 transition-all duration-300 hover:border-[#1a1a1a]"
+        className="border border-black bg-transparent p-6 transition-all duration-300 group"
         style={{
           display: "flex",
           flexDirection: "column",
           gap: "1rem",
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget;
+          el.style.backgroundColor = "rgba(209, 228, 246, 0.4)";
+          el.style.backdropFilter = "blur(12px)";
+          el.style.WebkitBackdropFilter = "blur(12px)";
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget;
+          el.style.backgroundColor = "transparent";
+          el.style.backdropFilter = "none";
+          el.style.WebkitBackdropFilter = "none";
         }}
       >
         {image?.url && (
