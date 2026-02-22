@@ -81,7 +81,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             e.preventDefault();
             window.location.href = `mailto:${partnerEmail}?subject=Partner%20with%20WeRobot%202026`;
           }}
-          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           style={{
             backgroundColor: "#000000",
             color: "#ffffff",
@@ -90,6 +90,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             textTransform: "uppercase",
             textDecoration: "none",
             cursor: "default",
+            borderRadius: "9999px",
           }}
         >
           {label}
@@ -99,7 +100,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
           href={ticketUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           style={{
             backgroundColor: "#000000",
             color: "#ffffff",
@@ -108,6 +109,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             textTransform: "uppercase",
             textDecoration: "none",
             cursor: "default",
+            borderRadius: "9999px",
           }}
         >
           {label}
@@ -116,7 +118,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         <a
           href={pdfUrl}
           download="WeRobot26-Berlin.pdf"
-          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           style={{
             backgroundColor: "#1a1a1a",
             color: "#fafafa",
@@ -125,13 +127,14 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             textTransform: "uppercase",
             textDecoration: "none",
             cursor: "pointer",
+            borderRadius: "9999px",
           }}
         >
           {label}
         </a>
       ) : link ? (
         <PrismicLink
-          className={`transition-all duration-300 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light ${
+          className={`transition-all duration-300 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full ${
             isActionButton ? "hover:opacity-80" : ""
           }`}
           field={link}
@@ -142,6 +145,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             textDecoration: "none",
+            borderRadius: "9999px",
           }}
         >
           {label}
@@ -149,7 +153,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
       ) : (
         <button
           disabled
-          className="px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className="px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           style={{
             backgroundColor: "transparent",
             color: "#6b6b6b",
@@ -158,6 +162,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
             textTransform: "uppercase",
             opacity: 0.5,
             cursor: "not-allowed",
+            borderRadius: "9999px",
           }}
         >
           {label}
