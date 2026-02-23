@@ -30,14 +30,14 @@ const Graphic = ({ slice }: GraphicProps) => {
         <img
           src={slice.primary.graphic_image.url}
           alt={slice.primary.graphic_image.alt || ""}
-          className={`w-full h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+          className={`w-full h-auto border border-black ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
         />
       </div>
     ) : (
       <img
         src={slice.primary.graphic_image.url}
         alt={slice.primary.graphic_image.alt || ""}
-        className={`w-full h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+        className={`w-full h-auto border border-black ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
       />
     )
   ) : (
