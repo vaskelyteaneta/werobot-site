@@ -102,6 +102,11 @@ a:hover {
   opacity: 0.7;
 }
 
+/* NamePills links must stay fully opaque for black hover effect */
+[data-slice-type="name_pills"] a:hover {
+  opacity: 1 !important;
+}
+
 /* Subtle selection styles */
 ::selection {
   background-color: var(--foreground);

@@ -32,6 +32,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
     el.style.setProperty("background", "#000000", "important");
     el.style.setProperty("border-color", "#000000", "important");
     el.style.setProperty("color", "#ffffff", "important");
+    el.style.setProperty("opacity", "1", "important");
     // Also update all child elements
     el.querySelectorAll("*").forEach((child) => {
       (child as HTMLElement).style.setProperty("color", "#ffffff", "important");
