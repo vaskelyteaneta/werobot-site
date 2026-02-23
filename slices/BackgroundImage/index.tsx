@@ -24,13 +24,13 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
       <section
         data-slice-type={(slice as any).slice_type}
         data-slice-variation={(slice as any).variation}
-        className="w-full flex justify-center py-8 px-4"
+        className="w-full flex justify-center py-8 px-6"
       >
-        <div className="w-full max-w-7xl flex flex-row gap-4 md:gap-6">
+        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-4 md:gap-6">
           {galleryImages.map((img: any, index: number) => (
             <div
               key={index}
-              className="gallery-image-wrapper flex-1 relative overflow-hidden border border-black"
+              className="gallery-image-wrapper w-full md:flex-1 relative overflow-hidden border border-black"
               style={{
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
               }}
