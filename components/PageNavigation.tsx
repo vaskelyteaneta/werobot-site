@@ -38,13 +38,13 @@ export default function PageNavigation() {
       const currentScrollY = window.scrollY;
 
       // Always show at the very top
-      if (currentScrollY < 10) {
+      if (currentScrollY < 20) {
         setIsVisible(true);
       } else if (currentScrollY < lastScrollY) {
         // Scrolling up - show navigation
         setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past 100px - hide navigation
+      } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scrolling down and past 50px - hide navigation (earlier threshold for smoother fade)
         setIsVisible(false);
       }
       
@@ -163,7 +163,7 @@ export default function PageNavigation() {
 
       {/* Mobile Navigation: Logo left + Hamburger right */}
       <nav
-        className="md:hidden w-full py-3 px-4 fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out flex items-center justify-between"
+        className="md:hidden w-full py-3 px-4 fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out flex items-center justify-between"
         style={{
           background: "transparent",
           border: "none",
@@ -171,6 +171,8 @@ export default function PageNavigation() {
           boxShadow: "none",
           margin: 0,
           transform: isVisible ? "translateY(0)" : "translateY(-100%)",
+          opacity: isVisible ? 1 : 0,
+          pointerEvents: isVisible ? "auto" : "none",
         }}
       >
         {/* weROBOT logo - three times bigger than hamburger button */}
