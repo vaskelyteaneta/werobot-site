@@ -265,7 +265,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
                 <img
                   src={graphicImage.url}
                   alt={graphicImage.alt || ""}
-                  className={`w-full h-auto border border-black ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
                 />
               </div>
             </div>
@@ -278,7 +278,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
                 <img
                   src={graphicImage.url}
                   alt={graphicImage.alt || ""}
-                  className={`w-full h-auto border border-black ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
                 />
               </div>
             </div>
@@ -297,7 +297,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
                 <img
                   src={graphicImage2.url}
                   alt={graphicImage2.alt || ""}
-                  className={`w-full h-auto border border-black ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
                 />
               </div>
             </div>
@@ -310,7 +310,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
                 <img
                   src={graphicImage2.url}
                   alt={graphicImage2.alt || ""}
-                  className={`w-full h-auto border border-black ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
                 />
               </div>
             </div>
