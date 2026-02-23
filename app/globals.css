@@ -141,16 +141,25 @@ div[style*="unicorn"] {
   opacity: 0 !important;
 }
 
-/* Image Gallery - ensure horizontal layout */
-section[class*="gallery"] > div,
-.gallery-image-wrapper {
-  display: flex !important;
-  flex-direction: row !important;
+/* Image Gallery - ensure horizontal layout on desktop */
+@media (min-width: 768px) {
+  section[class*="gallery"] > div,
+  .gallery-image-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
+  .gallery-image-wrapper {
+    flex: 1 1 0% !important;
+    width: auto !important;
+  }
 }
 
-.gallery-image-wrapper {
-  flex: 1 1 0% !important;
-  width: auto !important;
+/* On mobile, hide extra graphics in a gallery (show only the first) */
+@media (max-width: 767px) {
+  .mobile-hide-graphic {
+    display: none !important;
+  }
 }
 
 /* Splide carousel styling - match design */

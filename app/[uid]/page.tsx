@@ -146,9 +146,22 @@ export default async function Page({ params }: PageProps) {
       }
     }
     
+    // Track which slices are "consecutive graphic" so we can hide extras on mobile
+    const isGraphicType = (item: any) => {
+      if (item.slice_type === "graphic") return true;
+      if (item.type === "graphic_gallery") return true;
+      return false;
+    };
+
     return (
       <main style={{ color: "#000000" }}>
         {processedSlices.map((sliceOrGroup, index) => {
+          // Check if previous item was also a graphic-type
+          const prevItem = index > 0 ? processedSlices[index - 1] : null;
+          const isPrevGraphic = prevItem && isGraphicType(prevItem);
+          const isCurrentGraphic = isGraphicType(sliceOrGroup);
+          const hideOnMobile = isPrevGraphic && isCurrentGraphic;
+
           if ((sliceOrGroup as any).type === "grouped") {
             const group = sliceOrGroup as { type: string; slices: SliceLike[] };
             return (
@@ -164,7 +177,7 @@ export default async function Page({ params }: PageProps) {
             );
           }
           return (
-            <div key={`slice-wrapper-${index}`}>
+            <div key={`slice-wrapper-${index}`} className={hideOnMobile ? "mobile-hide-graphic" : ""}>
               <SliceZone
                 slices={[sliceOrGroup as SliceLike]}
                 components={components}
