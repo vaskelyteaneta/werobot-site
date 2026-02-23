@@ -98,7 +98,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
         }}
       >
         {image?.url && (
-          <div className="w-full aspect-square overflow-hidden">
+          <div className="w-full aspect-square overflow-hidden border border-black">
             <img
               src={image.url}
               alt={image.alt || title || "Content card image"}
