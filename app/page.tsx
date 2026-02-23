@@ -129,12 +129,12 @@ export default async function Page() {
             </div>
           );
         }
-        // First slice is the Logo — hide it on mobile (replaced by small fixed logo in nav)
-        const isFirstLogo = index === 0 && (sliceOrGroup as any).slice_type === "logo";
+        // First slice is the big weROBOT logo — hide it on mobile (replaced by small fixed logo in nav)
+        const hideFirstOnMobile = index === 0;
 
         return (
           <div key={`slice-wrapper-${index}`}>
-            <div className={hideOnMobile ? "mobile-hide-graphic" : isFirstLogo ? "hidden md:block" : ""}>
+            <div className={hideOnMobile ? "mobile-hide-graphic" : hideFirstOnMobile ? "hidden md:block" : ""}>
               <SliceZone
                 slices={[sliceOrGroup as SliceLike]}
                 components={components}

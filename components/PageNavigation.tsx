@@ -180,7 +180,7 @@ export default function PageNavigation() {
             alt="weROBOT"
             className="object-contain"
             style={{
-              height: "36px",
+              height: "20px",
               width: "auto",
             }}
           />
