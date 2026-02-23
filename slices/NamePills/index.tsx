@@ -99,12 +99,12 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
           {pills.length > 0 ? (
             pills.map((item, index) => {
               const content = (
-                    <span className="text-sm tracking-[0.1em]">
+                    <span className="text-sm tracking-[0.1em] text-center">
                   {item.text || "Name"}
                 </span>
               );
 
-              const basePillClass = "w-full md:w-auto inline-flex items-center justify-center px-4 md:px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "w-full md:w-auto flex items-center justify-center px-4 md:px-6 py-2 border font-light cursor-pointer rounded-none outline-none text-center";
 
               // Extract URL from Prismic link field - handle all possible structures
               let linkUrl: string | null = null;
@@ -174,12 +174,12 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
           {pills.length > 0 ? (
             pills.map((item, index) => {
               const content = (
-                    <span className="text-sm tracking-[0.1em]">
+                    <span className="text-sm tracking-[0.1em] text-center">
                   {item.text || "Name"}
                 </span>
               );
 
-              const basePillClass = "w-full md:w-auto inline-flex items-center justify-center px-4 md:px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "w-full md:w-auto flex items-center justify-center px-4 md:px-6 py-2 border font-light cursor-pointer rounded-none outline-none text-center";
 
               // Extract URL from Prismic link field - handle all possible structures
               let linkUrl: string | null = null;
