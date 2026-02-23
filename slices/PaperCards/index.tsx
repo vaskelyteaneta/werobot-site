@@ -72,13 +72,13 @@ const PaperCards: FC<PaperCardsProps> = ({ slice }) => {
           const el = e.currentTarget;
           el.style.backgroundColor = "rgba(209, 228, 246, 0.4)";
           el.style.backdropFilter = "blur(12px)";
-          el.style.WebkitBackdropFilter = "blur(12px)";
+          el.style.setProperty("-webkit-backdrop-filter", "blur(12px)");
         }}
         onMouseLeave={(e) => {
           const el = e.currentTarget;
           el.style.backgroundColor = "transparent";
           el.style.backdropFilter = "none";
-          el.style.WebkitBackdropFilter = "none";
+          el.style.setProperty("-webkit-backdrop-filter", "none");
         }}
       >
         {/* Always use the same document icon */}
