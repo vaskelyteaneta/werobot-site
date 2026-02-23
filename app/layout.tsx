@@ -26,16 +26,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ backgroundColor: "#E6F2FF" }}>
+    <html lang="en" style={{ backgroundColor: "#D1E4F6" }}>
       <head>
         <style dangerouslySetInnerHTML={{
-          __html: `html,body{background-color:#E6F2FF!important}`
+          __html: `html,body{background-color:#D1E4F6!important}`
         }} />
       </head>
       <body
         className={`${inter.variable} antialiased`}
         style={{ 
-          backgroundColor: "#E6F2FF", 
+          backgroundColor: "#D1E4F6", 
           fontFamily: "var(--font-inter)",
           display: "flex",
           flexDirection: "column",
@@ -48,7 +48,7 @@ export default function RootLayout({
         <HideUnicornAttribution />
         <PageNavigation />
         <div style={{ flex: 1, paddingTop: "80px" }}>
-          {children}
+        {children}
         </div>
         <Footer />
       </body>
