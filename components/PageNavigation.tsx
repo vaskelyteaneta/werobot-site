@@ -173,12 +173,12 @@ export default function PageNavigation() {
           transform: isVisible ? "translateY(0)" : "translateY(-100%)",
         }}
       >
-        {/* weROBOT logo - same height as hamburger button (h-5 icon + p-2 = 36px total) */}
+        {/* weROBOT logo - three times bigger than hamburger button */}
         <Link href="/" aria-label="Home" className="flex items-center">
           <img
             src="/metalic-logo.png"
             alt="weROBOT"
-            className="h-9 w-auto object-contain"
+            className="h-[108px] w-auto object-contain"
           />
         </Link>
 
