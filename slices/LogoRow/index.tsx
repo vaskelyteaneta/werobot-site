@@ -133,7 +133,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
         }
       `}} />
       <div
-        className="w-full max-w-5xl border border-black bg-transparent py-3 md:py-6 overflow-hidden transition-all duration-300 hover:border-black"
+        className="w-full max-w-5xl bg-transparent py-3 md:py-6 overflow-hidden transition-all duration-300"
       >
         {logos.length > 0 ? (
           <div

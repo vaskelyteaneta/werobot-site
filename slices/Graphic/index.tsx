@@ -215,7 +215,7 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="w-full flex justify-start px-4 md:px-8 py-4"
       >
-        <div className="border border-black inline-block">
+        <div className="inline-block">
           {imageContent}
         </div>
       </section>
@@ -229,7 +229,7 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="w-full flex justify-end px-4 md:px-8 py-4"
       >
-        <div className="border border-black inline-block">
+        <div className="inline-block">
           {imageContent}
         </div>
       </section>
@@ -243,7 +243,7 @@ const Graphic = ({ slice }: GraphicProps) => {
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-10 px-4"
     >
-      <div className="border border-black inline-block">
+      <div className="inline-block">
         {imageContent}
       </div>
     </section>
