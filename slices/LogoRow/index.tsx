@@ -126,27 +126,30 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-12 px-4"
     >
+      <style dangerouslySetInnerHTML={{ __html: `
+        .logo-img { height: 30px !important; max-width: 120px !important; }
+        @media (min-width: 768px) {
+          .logo-img { height: 70px !important; max-width: 250px !important; }
+        }
+      `}} />
       <div
-        className="w-full max-w-5xl border border-black bg-transparent py-6 overflow-hidden transition-all duration-300 hover:border-black"
+        className="w-full max-w-5xl border border-black bg-transparent py-3 md:py-6 overflow-hidden transition-all duration-300 hover:border-black"
       >
         {logos.length > 0 ? (
           <div
             ref={containerRef}
-            className="relative w-full overflow-hidden"
-            style={{ height: "80px" }}
+            className="relative w-full overflow-hidden h-[40px] md:h-[80px]"
           >
-            <div className="logo-content flex items-center gap-8 md:gap-12 h-full" style={{ width: "fit-content", paddingLeft: "0", paddingRight: "0" }}>
+            <div className="logo-content flex items-center gap-6 md:gap-12 h-full" style={{ width: "fit-content" }}>
               {duplicatedLogos.map((item, index) =>
                 item.logo?.url ? (
                   <img
                     key={`${item.logo.url}-${index}`}
                     src={item.logo.url}
                     alt={item.logo.alt || "Partner logo"}
-                    className="h-16 md:h-20 object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
+                    className="logo-img object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
                     style={{ 
-                      maxWidth: "none",
                       width: "auto",
-                      height: "auto",
                       filter: "grayscale(100%)",
                     }}
                     onMouseEnter={(e) => {
