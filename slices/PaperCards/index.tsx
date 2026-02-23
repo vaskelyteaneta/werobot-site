@@ -84,7 +84,7 @@ const PaperCards: FC<PaperCardsProps> = ({ slice }) => {
         {/* Always use the same document icon */}
         <div className="w-full aspect-square overflow-hidden flex items-center justify-center bg-white border border-black">
           <img
-            src="/file-image.png"
+            src="/file image1.png"
             alt="Paper document"
             className="w-full h-full object-contain"
           />
