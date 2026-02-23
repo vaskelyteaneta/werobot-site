@@ -52,7 +52,7 @@ const SectionTitle: FC<SectionTitleProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-10 px-4"
     >
-      <div className="text-left">
+      <div className="text-center md:text-left">
         {hasTitle ? (
           <PrismicRichText
             field={slice.primary.title}
