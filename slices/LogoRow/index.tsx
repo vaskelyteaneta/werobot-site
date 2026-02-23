@@ -133,16 +133,16 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
           <div
             ref={containerRef}
             className="relative w-full overflow-hidden"
-            style={{ height: "60px" }}
+            style={{ height: "80px" }}
           >
-            <div className="logo-content flex items-center gap-6 md:gap-12 h-full" style={{ width: "fit-content", paddingLeft: "0", paddingRight: "0" }}>
+            <div className="logo-content flex items-center gap-8 md:gap-12 h-full" style={{ width: "fit-content", paddingLeft: "0", paddingRight: "0" }}>
               {duplicatedLogos.map((item, index) =>
                 item.logo?.url ? (
                   <img
                     key={`${item.logo.url}-${index}`}
                     src={item.logo.url}
                     alt={item.logo.alt || "Partner logo"}
-                    className="h-12 md:h-20 object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
+                    className="h-16 md:h-20 object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
                     style={{ 
                       maxWidth: "none",
                       width: "auto",
