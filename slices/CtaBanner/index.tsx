@@ -134,14 +134,12 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         </a>
       ) : link ? (
         <PrismicLink
-          className={`transition-all duration-300 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full ${
-            isActionButton ? "hover:opacity-80" : ""
-          }`}
+          className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           field={link}
           style={{
-            backgroundColor: isActionButton ? "#1a1a1a" : "transparent",
-            color: isActionButton ? "#fafafa" : "#1a1a1a",
-            border: "1px solid #1a1a1a",
+            backgroundColor: "#000000",
+            color: "#ffffff",
+            border: "1px solid #000000",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             textDecoration: "none",
