@@ -154,7 +154,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
       ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex justify-center py-12 px-4"
+      className="w-full flex justify-center py-12 px-6"
     >
       <div className="w-full max-w-7xl">
         {useCarousel ? (

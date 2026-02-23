@@ -57,9 +57,9 @@ const Herotext = ({ slice }: HerotextProps) => {
       ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="flex justify-center pt-32 pb-16"
+      className="flex justify-center pt-32 pb-16 px-4"
     >
-      <div className="px-8 py-6 border border-black bg-transparent">
+      <div className="px-4 md:px-8 py-4 md:py-6 border border-black bg-transparent max-w-[calc(100%-2rem)] md:max-w-none">
         <PrismicRichText
           field={slice.primary.title}
           components={{

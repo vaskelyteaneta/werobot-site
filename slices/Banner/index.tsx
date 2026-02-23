@@ -60,7 +60,7 @@ const Banner: FC<BannerProps> = ({ slice }) => {
       id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex justify-center py-16 px-4"
+      className="w-full flex justify-center py-16 px-6"
     >
       {isPartnerButton ? (
         <a

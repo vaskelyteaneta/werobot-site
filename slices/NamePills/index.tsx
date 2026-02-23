@@ -85,7 +85,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
       id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex flex-col items-center gap-6 md:gap-8 py-8 md:py-12 px-4"
+      className="w-full flex flex-col items-center gap-6 md:gap-8 py-8 md:py-12 px-6"
     >
       {hasTitle && (
             <p className="text-sm md:text-base tracking-[0.2em] uppercase text-left font-light text-white opacity-70">

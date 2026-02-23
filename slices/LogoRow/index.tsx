@@ -124,7 +124,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
       ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex justify-center py-12 px-4"
+      className="w-full flex justify-center py-12 px-6"
     >
       <style dangerouslySetInnerHTML={{ __html: `
         .logo-img { height: 30px !important; max-width: 120px !important; }

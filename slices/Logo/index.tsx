@@ -46,7 +46,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
       }
     >
       <div
-        className="border border-black bg-transparent px-10 py-6 flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#1a1a1a] w-full max-w-[90vw] md:max-w-[700px]"
+        className="border border-black bg-transparent px-4 md:px-10 py-4 md:py-6 flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#1a1a1a] w-full max-w-[calc(100%-2rem)] md:max-w-[700px]"
         style={{
           transform: rotation ? `rotate(${rotation}deg)` : undefined,
           transformOrigin: "center",
