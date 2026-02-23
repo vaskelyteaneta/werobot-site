@@ -145,7 +145,8 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
     );
   };
 
-  // Use Splide carousel if more than 3 cards, otherwise use grid
+  // Use Splide carousel if more than 3 cards, but only on desktop
+  // On mobile, always use grid layout
   const useCarousel = content.length > 3;
 
   return (
@@ -157,31 +158,39 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
     >
       <div className="w-full max-w-7xl">
         {useCarousel ? (
-          <Splide
-            options={{
-              type: "slide",
-              perPage: 3,
-              perMove: 1,
-              gap: "2rem",
-              pagination: false, // No paging as requested
-              arrows: true,
-              breakpoints: {
-                1024: {
-                  perPage: 2,
-                },
-                640: {
-                  perPage: 1,
-                },
-              },
-            }}
-            aria-label="Content Cards"
-          >
-            {content.map((item: any, index: number) => (
-              <SplideSlide key={index}>
-                {renderCard(item, index)}
-              </SplideSlide>
-            ))}
-          </Splide>
+          <>
+            {/* Desktop: Show carousel */}
+            <div className="hidden md:block">
+              <Splide
+                options={{
+                  type: "slide",
+                  perPage: 3,
+                  perMove: 1,
+                  gap: "2rem",
+                  pagination: false,
+                  arrows: true,
+                  breakpoints: {
+                    1024: {
+                      perPage: 2,
+                    },
+                  },
+                }}
+                aria-label="Content Cards"
+              >
+                {content.map((item: any, index: number) => (
+                  <SplideSlide key={index}>
+                    {renderCard(item, index)}
+                  </SplideSlide>
+                ))}
+              </Splide>
+            </div>
+            {/* Mobile: Show stacked grid */}
+            <div className="block md:hidden">
+              <div className="grid grid-cols-1 gap-8">
+                {content.map((item: any, index: number) => renderCard(item, index))}
+              </div>
+            </div>
+          </>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {content.map((item: any, index: number) => renderCard(item, index))}
