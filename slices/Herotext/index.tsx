@@ -58,12 +58,12 @@ const Herotext = ({ slice }: HerotextProps) => {
           field={slice.primary.title}
           components={{
             heading1: ({ children }) => (
-              <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] uppercase text-[#1a1a1a]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a]">
                 {children}
               </h1>
             ),
             paragraph: ({ children }) => (
-              <p className="text-xl md:text-2xl font-light tracking-[0.2em] uppercase text-[#1a1a1a]">
+              <p className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a]">
                 {children}
               </p>
             ),
