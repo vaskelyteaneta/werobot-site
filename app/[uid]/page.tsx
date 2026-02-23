@@ -146,21 +146,33 @@ export default async function Page({ params }: PageProps) {
       }
     }
     
-    // Track which slices are "consecutive graphic" so we can hide extras on mobile
-    const isGraphicType = (item: any) => {
-      if (item.slice_type === "graphic") return true;
+    // Pre-calculate which graphics should be hidden on mobile
+    // Only hide when two non-absolute graphics are DIRECTLY next to each other
+    // If there's other content between them, both stay visible
+    const hideOnMobileMap = new Set<number>();
+    
+    const isNonAbsoluteGraphic = (item: any) => {
       if (item.type === "graphic_gallery") return true;
+      if (item.slice_type === "graphic") {
+        const pos = item.primary?.position;
+        return !pos || !String(pos).startsWith("absolute");
+      }
       return false;
     };
+    
+    for (let idx = 1; idx < processedSlices.length; idx++) {
+      const prev = processedSlices[idx - 1] as any;
+      const curr = processedSlices[idx] as any;
+      // If two non-absolute graphics are right next to each other, hide the 2nd on mobile
+      if (isNonAbsoluteGraphic(prev) && isNonAbsoluteGraphic(curr)) {
+        hideOnMobileMap.add(idx);
+      }
+    }
 
     return (
       <main style={{ color: "#000000" }}>
         {processedSlices.map((sliceOrGroup, index) => {
-          // Check if previous item was also a graphic-type
-          const prevItem = index > 0 ? processedSlices[index - 1] : null;
-          const isPrevGraphic = prevItem && isGraphicType(prevItem);
-          const isCurrentGraphic = isGraphicType(sliceOrGroup);
-          const hideOnMobile = isPrevGraphic && isCurrentGraphic;
+          const hideOnMobile = hideOnMobileMap.has(index);
 
           if ((sliceOrGroup as any).type === "grouped") {
             const group = sliceOrGroup as { type: string; slices: SliceLike[] };
@@ -173,7 +185,9 @@ export default async function Page({ params }: PageProps) {
           if ((sliceOrGroup as any).type === "background_image_gallery" || (sliceOrGroup as any).type === "graphic_gallery") {
             const gallery = sliceOrGroup as { type: string; slices: SliceLike[] };
             return (
-              <ImageGallery key={`gallery-${index}`} slices={gallery.slices} />
+              <div key={`gallery-${index}`} className={hideOnMobile ? "mobile-hide-graphic" : ""}>
+                <ImageGallery slices={gallery.slices} />
+              </div>
             );
           }
           return (
