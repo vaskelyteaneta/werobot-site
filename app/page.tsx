@@ -129,12 +129,17 @@ export default async function Page() {
             </div>
           );
         }
+        // First slice is the Logo — hide it on mobile (replaced by small fixed logo in nav)
+        const isFirstLogo = index === 0 && (sliceOrGroup as any).slice_type === "logo";
+
         return (
-          <div key={`slice-wrapper-${index}`} className={hideOnMobile ? "mobile-hide-graphic" : ""}>
-            <SliceZone
-              slices={[sliceOrGroup as SliceLike]}
-              components={components}
-            />
+          <div key={`slice-wrapper-${index}`}>
+            <div className={hideOnMobile ? "mobile-hide-graphic" : isFirstLogo ? "hidden md:block" : ""}>
+              <SliceZone
+                slices={[sliceOrGroup as SliceLike]}
+                components={components}
+              />
+            </div>
             {/* Add anchor navigation after the first slice (hero/logo) - only on homepage */}
             {index === 0 && anchorNavigation.length > 0 && <Header anchorNavigation={anchorNavigation} />}
           </div>
