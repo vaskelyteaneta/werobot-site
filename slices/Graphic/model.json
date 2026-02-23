@@ -68,6 +68,13 @@
             ],
             "default_value": "small"
           }
+        },
+        "show_border": {
+          "type": "Boolean",
+          "config": {
+            "label": "Show border",
+            "default_value": false
+          }
         }
       },
       "items": {}

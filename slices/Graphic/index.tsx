@@ -12,6 +12,7 @@ export type GraphicProps = SliceComponentProps<Content.GraphicSlice>;
 const Graphic = ({ slice }: GraphicProps) => {
   const position = (slice.primary as any).position || "center";
   const size = slice.primary.size || "small";
+  const showBorder = (slice.primary as any).show_border || false;
   
   // Size mappings
   const sizeClasses = {
@@ -215,7 +216,7 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="w-full flex justify-start px-4 md:px-8 py-4"
       >
-        <div className="inline-block">
+        <div className={showBorder ? "border border-black inline-block" : "inline-block"}>
           {imageContent}
         </div>
       </section>
@@ -229,7 +230,7 @@ const Graphic = ({ slice }: GraphicProps) => {
         data-slice-variation={slice.variation}
         className="w-full flex justify-end px-4 md:px-8 py-4"
       >
-        <div className="inline-block">
+        <div className={showBorder ? "border border-black inline-block" : "inline-block"}>
           {imageContent}
         </div>
       </section>
@@ -243,7 +244,7 @@ const Graphic = ({ slice }: GraphicProps) => {
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-10 px-4"
     >
-      <div className="inline-block">
+      <div className={showBorder ? "border border-black inline-block" : "inline-block"}>
         {imageContent}
       </div>
     </section>
