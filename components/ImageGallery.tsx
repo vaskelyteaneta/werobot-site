@@ -23,7 +23,7 @@ export default function ImageGallery({ slices }: ImageGalleryProps) {
         {images.map((img: any, imgIndex: number) => (
           <div
             key={imgIndex}
-            className="gallery-image-wrapper flex-1 relative overflow-hidden transition-all duration-300"
+            className="gallery-image-wrapper flex-1 relative overflow-hidden transition-all duration-300 border border-black"
             style={{
               transform: "scale(1)",
               boxShadow: "0 0 0 rgba(0, 0, 0, 0)",

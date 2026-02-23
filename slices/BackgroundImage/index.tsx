@@ -30,7 +30,7 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
           {galleryImages.map((img: any, index: number) => (
             <div
               key={index}
-              className="gallery-image-wrapper flex-1 relative overflow-hidden"
+              className="gallery-image-wrapper flex-1 relative overflow-hidden border border-black"
               style={{
                 transition: "transform 0.3s ease, box-shadow 0.3s ease",
               }}
