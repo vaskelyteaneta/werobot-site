@@ -75,6 +75,13 @@
             "label": "Show border",
             "default_value": false
           }
+        },
+        "hide_on_mobile": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hide on mobile",
+            "default_value": false
+          }
         }
       },
       "items": {}

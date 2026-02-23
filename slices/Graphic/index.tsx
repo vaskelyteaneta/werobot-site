@@ -13,6 +13,29 @@ const Graphic = ({ slice }: GraphicProps) => {
   const position = (slice.primary as any).position || "center";
   const size = slice.primary.size || "small";
   const showBorder = (slice.primary as any).show_border || false;
+  const hideOnMobile = (slice.primary as any).hide_on_mobile || false;
+
+  // If hide_on_mobile is true, hide this graphic on mobile screens
+  if (hideOnMobile) {
+    return (
+      <div className="hidden md:block">
+        <GraphicContent slice={slice} position={position} size={size} showBorder={showBorder} />
+      </div>
+    );
+  }
+
+  return <GraphicContent slice={slice} position={position} size={size} showBorder={showBorder} />;
+};
+
+/**
+ * Inner component that renders the actual graphic content.
+ */
+const GraphicContent = ({ slice, position, size, showBorder }: {
+  slice: any;
+  position: string;
+  size: string;
+  showBorder: boolean;
+}) => {
   
   // Size mappings
   const sizeClasses = {
@@ -252,3 +275,4 @@ const Graphic = ({ slice }: GraphicProps) => {
 };
 
 export default Graphic;
+
