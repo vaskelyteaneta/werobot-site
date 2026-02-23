@@ -62,11 +62,11 @@ const PaperCards: FC<PaperCardsProps> = ({ slice }) => {
     return (
       <div
         key={index}
-        className="border border-black bg-transparent p-6 transition-all duration-300 group"
+        className="border border-black bg-transparent p-4 md:p-6 transition-all duration-300 group"
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: "1rem",
+          gap: "0.75rem",
         }}
         onMouseEnter={(e) => {
           const el = e.currentTarget;

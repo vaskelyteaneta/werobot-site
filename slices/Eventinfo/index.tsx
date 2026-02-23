@@ -195,7 +195,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
         ref={boxRef}
         className={[
           containerClasses,
-          "px-8 py-8 md:px-12 md:py-10",
+          "px-4 py-4 md:px-12 md:py-10",
           "border border-black",
           "bg-transparent",
           "relative",
