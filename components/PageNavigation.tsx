@@ -118,8 +118,9 @@ export default function PageNavigation() {
 
   return (
     <>
+      {/* Desktop Navigation */}
       <nav 
-        className="w-full py-4 fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out" 
+        className="w-full py-4 fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out hidden md:block" 
         style={{ 
           background: "linear-gradient(to bottom, rgba(209, 228, 246, 0.6) 0%, rgba(209, 228, 246, 0) 100%)",
           backdropFilter: "blur(12px)",
@@ -131,9 +132,8 @@ export default function PageNavigation() {
           transform: isVisible ? "translateY(0)" : "translateY(-100%)",
         }}
       >
-        {/* Desktop Navigation */}
         <div 
-          className="hidden md:flex w-full justify-center px-4" 
+          className="w-full flex justify-center px-4" 
           style={{ 
             border: "none !important",
             backgroundColor: "transparent",
@@ -159,43 +159,59 @@ export default function PageNavigation() {
             ))}
           </ul>
         </div>
+      </nav>
 
-        {/* Mobile: Hamburger Button */}
-        <div 
-          className="md:hidden flex justify-end px-4"
-          style={{ 
-            border: "none !important",
+      {/* Mobile Navigation: Logo left + Hamburger right */}
+      <nav
+        className="md:hidden w-full py-3 px-4 fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out flex items-center justify-between"
+        style={{
+          background: "transparent",
+          border: "none",
+          outline: "none",
+          boxShadow: "none",
+          margin: 0,
+          transform: isVisible ? "translateY(0)" : "translateY(-100%)",
+        }}
+      >
+        {/* weROBOT logo - same height as hamburger */}
+        <Link href="/" aria-label="Home">
+          <img
+            src="/metalic-logo.png"
+            alt="weROBOT"
+            className="object-contain"
+            style={{
+              height: "24px",
+              width: "auto",
+            }}
+          />
+        </Link>
+
+        {/* Hamburger Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2 text-black focus:outline-none"
+          aria-label="Toggle menu"
+          style={{
             backgroundColor: "transparent",
-            boxShadow: "none",
-            margin: 0
+            border: "none",
+            cursor: "pointer",
           }}
         >
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-black focus:outline-none"
-            aria-label="Toggle menu"
-            style={{
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span 
-                className={`block h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}
-                style={{ width: "100%" }}
-              />
-              <span 
-                className={`block h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}
-                style={{ width: "100%" }}
-              />
-              <span 
-                className={`block h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}
-                style={{ width: "100%" }}
-              />
-            </div>
-          </button>
-        </div>
+          <div className="w-6 h-5 flex flex-col justify-between">
+            <span 
+              className={`block h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}
+              style={{ width: "100%" }}
+            />
+            <span 
+              className={`block h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}
+              style={{ width: "100%" }}
+            />
+            <span 
+              className={`block h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}
+              style={{ width: "100%" }}
+            />
+          </div>
+        </button>
       </nav>
 
       {/* Mobile Menu Overlay */}
