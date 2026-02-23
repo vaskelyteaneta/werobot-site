@@ -108,7 +108,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
         )}
         
         {title && (
-          <h3 className="text-lg md:text-xl font-light tracking-[0.05em] text-black">
+          <h3 className="text-base font-light tracking-[0.05em] text-black">
             {title}
           </h3>
         )}
@@ -122,7 +122,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
         )}
         
         {description && (
-          <div className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-black font-light">
+          <div className="text-sm tracking-[0.05em] leading-relaxed text-black font-light">
             <PrismicRichText field={description} />
           </div>
         )}
@@ -131,7 +131,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
           <div className="mt-auto">
             <PrismicLink
               field={link}
-              className="text-sm md:text-base font-light tracking-[0.1em] uppercase text-black hover:text-[#333333] transition-colors duration-200 underline"
+              className="text-sm font-light tracking-[0.05em] text-black hover:text-[#333333] transition-colors duration-200 underline"
               style={{
                 textDecoration: "underline",
                 color: "#000000",
