@@ -173,16 +173,12 @@ export default function PageNavigation() {
           transform: isVisible ? "translateY(0)" : "translateY(-100%)",
         }}
       >
-        {/* weROBOT logo - same height as hamburger */}
-        <Link href="/" aria-label="Home">
+        {/* weROBOT logo - same height as hamburger icon (h-5) */}
+        <Link href="/" aria-label="Home" className="p-2 -ml-2">
           <img
             src="/metalic-logo.png"
             alt="weROBOT"
-            className="object-contain"
-            style={{
-              height: "20px",
-              width: "auto",
-            }}
+            className="h-5 w-auto object-contain"
           />
         </Link>
 
