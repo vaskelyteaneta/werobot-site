@@ -147,7 +147,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
                     key={`${item.logo.url}-${index}`}
                     src={item.logo.url}
                     alt={item.logo.alt || "Partner logo"}
-                    className="logo-img object-contain flex-shrink-0 transition-all duration-300 cursor-pointer border border-black"
+                    className="logo-img object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
                     style={{ 
                       width: "auto",
                       filter: "grayscale(100%)",

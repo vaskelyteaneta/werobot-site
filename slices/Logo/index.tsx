@@ -56,7 +56,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
           <img
             src={slice.primary.logo.url}
             alt={slice.primary.logo.alt || slice.primary.text || "Logo"}
-            className="object-contain border border-black"
+            className="object-contain"
             style={{
               width: "100%",
               height: "auto",
