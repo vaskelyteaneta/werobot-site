@@ -17,13 +17,19 @@ export default function ImageGallery({ slices }: ImageGalleryProps) {
 
   if (images.length === 0) return null;
 
+  // On mobile, if there are exactly 2 consecutive Graphic slices, only show the first one
+  const shouldHideSecondOnMobile = images.length === 2 && 
+    slices.every((slice: any) => slice.slice_type === "graphic");
+
   return (
     <section className="w-full py-8 px-6 md:py-12">
       <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-4 md:gap-6">
         {images.map((img: any, imgIndex: number) => (
           <div
             key={imgIndex}
-            className="gallery-image-wrapper w-full md:flex-1 relative overflow-hidden transition-all duration-300 border border-black"
+            className={`gallery-image-wrapper w-full md:flex-1 relative overflow-hidden transition-all duration-300 border border-black ${
+              shouldHideSecondOnMobile && imgIndex === 1 ? "hidden md:block" : ""
+            }`}
             style={{
               transform: "scale(1)",
               boxShadow: "0 0 0 rgba(0, 0, 0, 0)",

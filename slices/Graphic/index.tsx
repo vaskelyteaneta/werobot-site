@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
@@ -10,9 +13,40 @@ export type GraphicProps = SliceComponentProps<Content.GraphicSlice>;
  * Graphic slice.
  */
 const Graphic = ({ slice }: GraphicProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
   const position = (slice.primary as any).position || "center";
   const size = slice.primary.size || "small";
   const showBorder = (slice.primary as any).show_border || false;
+  
+  // Hide on mobile if this is the second consecutive Graphic slice
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    
+    // Skip absolute positioned graphics (they overlay other content)
+    if (position && (position.startsWith("absolute") || position.includes("absolute"))) {
+      return;
+    }
+    
+    // Find the parent wrapper and check previous sibling wrapper
+    const wrapper = sectionRef.current.closest('[class*="slice-wrapper"]');
+    if (!wrapper) return;
+    
+    const previousWrapper = wrapper.previousElementSibling;
+    if (previousWrapper) {
+      // Check if previous wrapper contains a Graphic slice
+      const prevGraphic = previousWrapper.querySelector('[data-slice-type="graphic"]');
+      if (prevGraphic) {
+        // Check if previous graphic is also non-absolute
+        const prevSection = prevGraphic.closest('section');
+        const isPrevAbsolute = prevSection?.className.includes('absolute');
+        
+        if (!isPrevAbsolute) {
+          // Hide this Graphic on mobile (second consecutive one)
+          sectionRef.current.classList.add("hidden", "md:block");
+        }
+      }
+    }
+  }, [position]);
   
   // Size mappings
   const sizeClasses = {
@@ -212,6 +246,7 @@ const Graphic = ({ slice }: GraphicProps) => {
   if (position === "float-left") {
     return (
       <section
+        ref={sectionRef}
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
         className="w-full flex justify-start px-4 md:px-8 py-4"
@@ -226,6 +261,7 @@ const Graphic = ({ slice }: GraphicProps) => {
   if (position === "float-right") {
     return (
       <section
+        ref={sectionRef}
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
         className="w-full flex justify-end px-4 md:px-8 py-4"
@@ -240,6 +276,7 @@ const Graphic = ({ slice }: GraphicProps) => {
   // Default: centered
   return (
     <section
+      ref={sectionRef}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-10 px-4"
