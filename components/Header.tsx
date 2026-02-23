@@ -17,6 +17,28 @@ export default function Header({ anchorNavigation }: HeaderProps) {
   const [headerNav, setHeaderNav] = useState<NavItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Abbreviate long labels on mobile for more compact display
+  const getMobileLabel = (label: string): string => {
+    const abbreviations: { [key: string]: string } = {
+      "ORGANIZING COMMITTEE": "COMMITTEE",
+      "ORGANIZING": "ORG",
+    };
+    
+    // Check for exact match first
+    if (abbreviations[label]) {
+      return abbreviations[label];
+    }
+    
+    // Check if label contains any abbreviation key
+    for (const [key, value] of Object.entries(abbreviations)) {
+      if (label.includes(key)) {
+        return label.replace(key, value);
+      }
+    }
+    
+    return label;
+  };
+
   useEffect(() => {
     // If anchorNavigation is passed as prop, use it directly
     if (anchorNavigation && anchorNavigation.length > 0) {
@@ -56,7 +78,7 @@ export default function Header({ anchorNavigation }: HeaderProps) {
   return (
     <header>
       <nav 
-        className="w-full py-8 md:py-12" 
+        className="w-full py-4 md:py-12" 
         style={{ 
           backgroundColor: "transparent",
           border: "none",
@@ -72,7 +94,7 @@ export default function Header({ anchorNavigation }: HeaderProps) {
         }}
       >
         <div 
-          className="w-full flex justify-center px-6 md:px-8" 
+          className="w-full flex justify-center px-4 md:px-8" 
           style={{ 
             border: "none !important",
             borderBottom: "none !important",
@@ -82,7 +104,7 @@ export default function Header({ anchorNavigation }: HeaderProps) {
             margin: 0
           }}
         >
-          <ul className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+          <ul className="flex flex-wrap items-center justify-center gap-3 md:gap-12">
             {headerNav.map((item, index) => {
               // Extract label - support both new structure (name) and old structure (label)
               const nameValue = typeof item.name === 'string' ? item.name : (item.name as any)?.value;
@@ -157,11 +179,14 @@ export default function Header({ anchorNavigation }: HeaderProps) {
                 return null;
               }
 
+              const displayLabel = label;
+              const mobileLabel = getMobileLabel(label);
+
               return (
                 <li key={index}>
                   <a
                     href={linkUrl}
-                    className="text-sm md:text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
+                    className="text-xs md:text-base font-light tracking-[0.1em] md:tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
                     style={{ 
                       textDecoration: "none",
                       color: "#000000",
@@ -223,7 +248,8 @@ export default function Header({ anchorNavigation }: HeaderProps) {
                       }
                     }}
                   >
-                    {label}
+                    <span className="md:hidden">{mobileLabel}</span>
+                    <span className="hidden md:inline">{displayLabel}</span>
                   </a>
                 </li>
               );
