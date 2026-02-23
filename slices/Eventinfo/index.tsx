@@ -205,7 +205,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
           "hover:border-[#1a1a1a]",
           "overflow-visible",
         ].join(" ")}
-        style={{ position: "relative" }}
+        style={{ position: "relative", border: "1px solid #000000" }}
       >
         {slice.primary.text ? (
               <div className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-left text-[#1a1a1a] font-light">
