@@ -93,8 +93,8 @@ export default function UnicornBackground() {
           pointerEvents: "none",
           transform: "scale(1.5)",
           transformOrigin: "center center",
-          filter: "brightness(1.3) contrast(0.9) blur(15px) saturate(1.25)",
-          opacity: 0.35,
+          filter: "brightness(1.1) contrast(0.95) blur(15px) saturate(1.1)",
+          opacity: 0.25,
           mixBlendMode: "screen",
           animation: "slowFloat 60s ease-in-out infinite",
         }}
