@@ -26,16 +26,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ backgroundColor: "#D1E4F6" }}>
+    <html lang="en" style={{ backgroundColor: "#E6F2FF" }}>
       <head>
         <style dangerouslySetInnerHTML={{
-          __html: `html,body{background-color:#D1E4F6!important}`
+          __html: `html,body{background-color:#E6F2FF!important}`
         }} />
       </head>
       <body
         className={`${inter.variable} antialiased`}
         style={{ 
-          backgroundColor: "#D1E4F6", 
+          backgroundColor: "#E6F2FF", 
           fontFamily: "var(--font-inter)",
           display: "flex",
           flexDirection: "column",

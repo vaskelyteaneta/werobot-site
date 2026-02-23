@@ -2,12 +2,12 @@
 
 /* Prevent flash of unstyled content - set background immediately */
 html {
-  background-color: #D1E4F6;
+  background-color: #E6F2FF;
 }
 
 :root {
   /* Refined color palette - clean and minimal */
-  --background: #D1E4F6; /* light blue */
+  --background: #E6F2FF; /* light periwinkle blue */
   --foreground: #1a1a1a; /* deep charcoal */
   --accent: #2d2d2d; /* subtle dark accent */
   --muted: #6b6b6b; /* muted text */
@@ -25,7 +25,7 @@ html {
 /* Force light mode - disable dark mode to keep consistent light blue background */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #D1E4F6;
+    --background: #E6F2FF;
     --foreground: #1a1a1a;
     --accent: #2d2d2d;
     --muted: #6b6b6b;
