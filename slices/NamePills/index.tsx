@@ -85,7 +85,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
       id={sectionId}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full flex flex-col items-center gap-8 py-12 px-4"
+      className="w-full flex flex-col items-center gap-6 md:gap-8 py-8 md:py-12 px-4"
     >
       {hasTitle && (
             <p className="text-sm md:text-base tracking-[0.2em] uppercase text-left font-light text-white opacity-70">
@@ -95,7 +95,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
 
       {isColumnLayout ? (
         // Three-column layout
-        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
           {pills.length > 0 ? (
             pills.map((item, index) => {
               const content = (
@@ -104,7 +104,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "w-full md:w-auto inline-flex items-center justify-center px-4 md:px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
 
               // Extract URL from Prismic link field - handle all possible structures
               let linkUrl: string | null = null;
@@ -170,7 +170,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
         </div>
       ) : (
         // Original wrap layout
-        <div className="w-full max-w-5xl flex flex-wrap justify-center gap-6">
+        <div className="w-full max-w-5xl flex flex-col md:flex-row md:flex-wrap md:justify-center gap-3 md:gap-6">
           {pills.length > 0 ? (
             pills.map((item, index) => {
               const content = (
@@ -179,7 +179,7 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
                 </span>
               );
 
-              const basePillClass = "inline-flex items-center justify-center px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
+              const basePillClass = "w-full md:w-auto inline-flex items-center justify-center px-4 md:px-6 py-2 border font-light cursor-pointer rounded-none outline-none";
 
               // Extract URL from Prismic link field - handle all possible structures
               let linkUrl: string | null = null;
@@ -201,7 +201,6 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
               const isExternalLink = linkUrl && typeof linkUrl === "string" && (linkUrl.startsWith("http://") || linkUrl.startsWith("https://") || linkUrl.startsWith("mailto:"));
 
               const pillStyle: React.CSSProperties = {
-                minWidth: "180px",
                 backgroundColor: "transparent",
                 color: "#000000",
                 borderColor: "#000000",
