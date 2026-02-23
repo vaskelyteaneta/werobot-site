@@ -17,6 +17,7 @@ export type HerotextProps = SliceComponentProps<any>;
  */
 const Herotext = ({ slice }: HerotextProps) => {
   const sectionRef = useRef<HTMLElement>(null);
+  const size = (slice.primary as any).size || "large";
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -46,6 +47,11 @@ const Herotext = ({ slice }: HerotextProps) => {
     };
   }, []);
 
+  // Define size classes based on selection
+  const sizeClasses = size === "large" 
+    ? "text-4xl md:text-5xl lg:text-6xl font-bold"
+    : "text-2xl md:text-3xl font-semibold";
+
   return (
     <section
       ref={sectionRef}
@@ -58,12 +64,12 @@ const Herotext = ({ slice }: HerotextProps) => {
           field={slice.primary.title}
           components={{
             heading1: ({ children }) => (
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a]">
+              <h1 className={`${sizeClasses} text-[#1a1a1a]`}>
                 {children}
               </h1>
             ),
             paragraph: ({ children }) => (
-              <p className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a]">
+              <p className={`${sizeClasses} text-[#1a1a1a]`}>
                 {children}
               </p>
             ),

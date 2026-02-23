@@ -20,6 +20,17 @@
             "allowTargetBlank": true,
             "multi": "heading1,strong"
           }
+        },
+        "size": {
+          "type": "Select",
+          "config": {
+            "label": "Headline Size",
+            "options": [
+              "large",
+              "medium"
+            ],
+            "default_value": "large"
+          }
         }
       },
       "items": {}
