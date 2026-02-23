@@ -69,7 +69,7 @@ const Herotext = ({ slice }: HerotextProps) => {
               </h1>
             ),
             paragraph: ({ children }) => (
-              <p className={`${sizeClasses} text-[#1a1a1a]`}>
+              <p className={`${sizeClasses} text-[#1a1a1a] text-center md:text-left`}>
                 {children}
               </p>
             ),
