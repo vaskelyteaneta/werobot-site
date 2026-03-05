@@ -172,11 +172,11 @@ export default function PageNavigation() {
           margin: 0,
           transform: isVisible ? "translateY(0)" : "translateY(-100%)",
           opacity: isVisible ? 1 : 0,
-          pointerEvents: isVisible ? "auto" : "none",
+          pointerEvents: "none",
         }}
       >
         {/* weROBOT logo - three times bigger than hamburger button */}
-        <Link href="/" aria-label="Home" className="flex items-center">
+        <Link href="/" aria-label="Home" className="flex items-center" style={{ pointerEvents: "auto" }}>
           <img
             src="/metalic-logo.png"
             alt="weROBOT"
@@ -193,6 +193,7 @@ export default function PageNavigation() {
             backgroundColor: "transparent",
             border: "none",
             cursor: "pointer",
+            pointerEvents: "auto",
           }}
         >
           <div className="w-6 h-5 flex flex-col justify-between">
