@@ -229,10 +229,18 @@ export default function Header({ anchorNavigation }: HeaderProps) {
                           const header = document.querySelector('header');
                           const headerHeight = header ? header.getBoundingClientRect().height : 100;
                           
+                          // On mobile, also account for the fixed PageNavigation bar
+                          const isMobile = window.innerWidth < 768;
+                          let mobileNavHeight = 0;
+                          if (isMobile) {
+                            const mobileNav = document.querySelector('nav.md\\:hidden');
+                            mobileNavHeight = mobileNav ? mobileNav.getBoundingClientRect().height : 60;
+                          }
+                          
                           // Large offset to ensure title is fully visible with padding
                           // Increased padding to prevent title from being cut off
                           const extraPadding = 100; // Extra space to ensure title is fully visible
-                          const offset = headerHeight + extraPadding;
+                          const offset = headerHeight + mobileNavHeight + extraPadding;
                           
                           const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                           const offsetPosition = elementPosition - offset;

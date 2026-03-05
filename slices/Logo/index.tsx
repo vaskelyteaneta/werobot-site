@@ -30,7 +30,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className={[
         "w-full",
-        "py-10 px-4",
+        "py-2 px-4",
         useAbsolute
           ? "lg:px-0 relative lg:absolute flex justify-center lg:justify-start"
           : "flex justify-center",
@@ -46,7 +46,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
       }
     >
       <div
-        className="bg-transparent px-4 md:px-10 py-4 md:py-6 flex flex-col items-center gap-3 transition-all duration-300 w-full max-w-[calc(100%-2rem)] md:max-w-[700px]"
+        className="bg-transparent px-4 md:px-10 flex flex-col items-center gap-3 transition-all duration-300 w-full max-w-[calc(100%-2rem)] md:max-w-[700px]"
         style={{
           transform: rotation ? `rotate(${rotation}deg)` : undefined,
           transformOrigin: "center",

@@ -156,7 +156,13 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-12 px-6"
     >
-      <div className="w-full max-w-7xl">
+      <div className={`w-full ${
+        !useCarousel && content.length === 1 
+          ? "max-w-md mx-auto" 
+          : !useCarousel && content.length === 2 
+          ? "max-w-4xl mx-auto" 
+          : "max-w-7xl"
+      }`}>
         {useCarousel ? (
           <>
             {/* Desktop: Show carousel */}
@@ -192,7 +198,13 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className={`grid gap-8 ${
+            content.length === 1
+              ? "grid-cols-1"
+              : content.length === 2 
+              ? "grid-cols-1 md:grid-cols-2" 
+              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          }`}>
             {content.map((item: any, index: number) => renderCard(item, index))}
           </div>
         )}

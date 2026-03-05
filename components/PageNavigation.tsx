@@ -227,22 +227,82 @@ export default function PageNavigation() {
             onClick={(e) => e.stopPropagation()}
           >
             <ul className="flex flex-col items-center gap-8">
-              {validNavItems.map((item, index) => (
-                <li key={index}>
-                  <Link
-                    href={item.linkUrl}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
-                    style={{ 
-                      textDecoration: "none",
-                      color: "#000000",
-                      fontWeight: 400,
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {validNavItems.map((item, index) => {
+                const isAnchorLink = item.linkUrl.startsWith("#");
+                
+                return (
+                  <li key={index}>
+                    <Link
+                      href={item.linkUrl}
+                      onClick={(e) => {
+                        if (isAnchorLink) {
+                          e.preventDefault();
+                          const targetId = item.linkUrl.substring(1);
+                          
+                          // Try to find the element by ID - try multiple variations
+                          let element = document.getElementById(targetId);
+                          
+                          // If not found, try common variations
+                          if (!element) {
+                            // Try with "call-for-" prefix (for papers section)
+                            if (targetId === "papers") {
+                              element = document.getElementById("call-for-papers");
+                            }
+                            // Try with dashes instead of spaces
+                            const dashedId = targetId.replace(/\s+/g, "-");
+                            if (!element && dashedId !== targetId) {
+                              element = document.getElementById(dashedId);
+                            }
+                            // Try finding by data attribute or section
+                            if (!element) {
+                              const sections = document.querySelectorAll(`section[id*="${targetId}"], div[id*="${targetId}"]`);
+                              if (sections.length > 0) {
+                                element = sections[0] as HTMLElement;
+                              }
+                            }
+                          }
+                          
+                          if (element) {
+                            // Find the section title within the section if it exists
+                            const titleElement = element.querySelector('p.text-sm, p.text-base, h1, h2, h3');
+                            const targetElement = titleElement || element;
+                            
+                            // Calculate actual mobile nav height dynamically
+                            const mobileNav = document.querySelector('nav.md\\:hidden');
+                            const navHeight = mobileNav ? mobileNav.getBoundingClientRect().height : 60;
+                            
+                            // Offset to ensure title is fully visible with padding
+                            const extraPadding = 100;
+                            const offset = navHeight + extraPadding;
+                            
+                            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - offset;
+                            
+                            window.scrollTo({
+                              top: Math.max(0, offsetPosition),
+                              behavior: "smooth"
+                            });
+                          } else {
+                            // Debug: log if element not found
+                            console.warn(`Anchor element not found for ID: ${targetId}`);
+                          }
+                        }
+                        
+                        // Close mobile menu after navigation
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
+                      style={{ 
+                        textDecoration: "none",
+                        color: "#000000",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
