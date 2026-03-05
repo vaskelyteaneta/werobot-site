@@ -15,7 +15,6 @@ export async function GET() {
         { 
           header_navigation: [], 
           footer_navigation: [],
-          anchor_navigation: [],
           error: "Invalid settings document type"
         },
         { status: 200 }
@@ -30,21 +29,10 @@ export async function GET() {
     // Page navigation - if it exists, use it; otherwise filter page links from header_navigation
     const pageNav = settingsData.page_navigation || [];
     
-    // Also fetch anchor navigation from homepage
-    let anchorNav: any[] = [];
-    try {
-      const homepage = await client.getSingle("homepage");
-      const homepageData = homepage.data as any;
-      anchorNav = homepageData.anchor_navigation || [];
-    } catch {
-      // Homepage might not exist, that's fine
-    }
-    
     return NextResponse.json({
       header_navigation: headerNav,
       footer_navigation: footerNav,
       page_navigation: pageNav,
-      anchor_navigation: anchorNav,
     });
   } catch (error) {
     // If settings_werobot doesn't exist, return empty navigation
@@ -52,7 +40,6 @@ export async function GET() {
       { 
         header_navigation: [], 
         footer_navigation: [],
-        anchor_navigation: [],
         error: error instanceof Error ? error.message : "Settings document not found"
       },
       { status: 200 }
