@@ -10,6 +10,7 @@ interface NavItem {
 
 export default function PageNavigation() {
   const [pageNav, setPageNav] = useState<NavItem[]>([]);
+  const [anchorNav, setAnchorNav] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -23,6 +24,7 @@ export default function PageNavigation() {
         if (response.ok) {
           const data = await response.json();
           setPageNav(data.page_navigation || []);
+          setAnchorNav(data.anchor_navigation || []);
         }
       } catch (error) {
         // Fail silently
@@ -63,8 +65,8 @@ export default function PageNavigation() {
     return null;
   }
 
-  // If no navigation items, return null
-  if (pageNav.length === 0) {
+  // If no navigation items at all, return null
+  if (pageNav.length === 0 && anchorNav.length === 0) {
     return null;
   }
 
@@ -112,9 +114,56 @@ export default function PageNavigation() {
       
       const label = (item.label as any)?.value || item.label || (item as any).label_text || (item as any).name;
       
-      return { label, linkUrl };
+      return { label, linkUrl, isAnchor: false };
     })
-    .filter((item): item is { label: string; linkUrl: string } => item !== null);
+    .filter((item): item is { label: string; linkUrl: string; isAnchor: boolean } => item !== null);
+
+  // Process anchor navigation items for mobile menu
+  const anchorItems = anchorNav
+    .map((item) => {
+      // Extract label
+      const nameValue = typeof item.name === 'string' ? item.name : item.name?.value;
+      const labelValue = typeof item.label === 'string' ? item.label : item.label?.value;
+      const label = nameValue || labelValue || item.label_text || null;
+      
+      if (!label) return null;
+      
+      // Extract anchor link
+      let linkUrl: string | null = null;
+      if (item.anchor_link) {
+        const anchorLink = item.anchor_link;
+        linkUrl = typeof anchorLink === 'string' ? anchorLink : (anchorLink?.value || null);
+      }
+      if (!linkUrl && item.link) {
+        const link = item.link;
+        if (Array.isArray(link) && link.length > 0) {
+          const sel = link.find((l: any) => l.link_type === 'Web' && l.url) || link[0];
+          linkUrl = sel?.url || sel?.text || null;
+        } else if (link && typeof link === 'object') {
+          linkUrl = link.url || link.text || null;
+        }
+      }
+      
+      if (!linkUrl) return null;
+      
+      // Ensure it starts with #
+      if (!linkUrl.startsWith("#") && !linkUrl.startsWith("http")) {
+        linkUrl = `#${linkUrl}`;
+      }
+      // Normalize anchor: lowercase, dashes
+      if (linkUrl.startsWith("#")) {
+        const normalized = linkUrl.substring(1).toLowerCase().replace(/\s+/g, "-");
+        linkUrl = `#${normalized}`;
+      }
+      
+      if (!linkUrl.startsWith("#")) return null;
+      
+      return { label, linkUrl, isAnchor: true };
+    })
+    .filter((item): item is { label: string; linkUrl: string; isAnchor: boolean } => item !== null);
+
+  // Combine page links and anchor links for mobile menu
+  const allMobileItems = [...anchorItems, ...validNavItems];
 
   return (
     <>
@@ -227,33 +276,38 @@ export default function PageNavigation() {
             onClick={(e) => e.stopPropagation()}
           >
             <ul className="flex flex-col items-center gap-8">
-              {validNavItems.map((item, index) => {
+              {allMobileItems.map((item, index) => {
                 const isAnchorLink = item.linkUrl.startsWith("#");
                 
-                return (
-                  <li key={index}>
-                    <Link
-                      href={item.linkUrl}
-                      onClick={(e) => {
-                        if (isAnchorLink) {
+                if (isAnchorLink) {
+                  return (
+                    <li key={`mobile-nav-${index}`}>
+                      <a
+                        href={item.linkUrl}
+                        onClick={(e) => {
                           e.preventDefault();
+                          // Close menu first
+                          setIsMobileMenuOpen(false);
+                          
+                          // If not on homepage, navigate there with anchor
+                          if (window.location.pathname !== "/") {
+                            window.location.href = `/${item.linkUrl}`;
+                            return;
+                          }
+                          
                           const targetId = item.linkUrl.substring(1);
                           
                           // Try to find the element by ID - try multiple variations
                           let element = document.getElementById(targetId);
                           
-                          // If not found, try common variations
                           if (!element) {
-                            // Try with "call-for-" prefix (for papers section)
                             if (targetId === "papers") {
                               element = document.getElementById("call-for-papers");
                             }
-                            // Try with dashes instead of spaces
                             const dashedId = targetId.replace(/\s+/g, "-");
                             if (!element && dashedId !== targetId) {
                               element = document.getElementById(dashedId);
                             }
-                            // Try finding by data attribute or section
                             if (!element) {
                               const sections = document.querySelectorAll(`section[id*="${targetId}"], div[id*="${targetId}"]`);
                               if (sections.length > 0) {
@@ -263,35 +317,43 @@ export default function PageNavigation() {
                           }
                           
                           if (element) {
-                            // Find the section title within the section if it exists
                             const titleElement = element.querySelector('p.text-sm, p.text-base, h1, h2, h3');
                             const targetElement = titleElement || element;
                             
-                            // Calculate actual mobile nav height dynamically
-                            const mobileNav = document.querySelector('nav.md\\:hidden');
-                            const navHeight = mobileNav ? mobileNav.getBoundingClientRect().height : 60;
-                            
-                            // Offset to ensure title is fully visible with padding
-                            const extraPadding = 100;
-                            const offset = navHeight + extraPadding;
+                            const extraPadding = 40;
+                            const offset = extraPadding;
                             
                             const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                             const offsetPosition = elementPosition - offset;
                             
-                            window.scrollTo({
-                              top: Math.max(0, offsetPosition),
-                              behavior: "smooth"
-                            });
-                          } else {
-                            // Debug: log if element not found
-                            console.warn(`Anchor element not found for ID: ${targetId}`);
+                            // Small delay to let the menu close first
+                            setTimeout(() => {
+                              window.scrollTo({
+                                top: Math.max(0, offsetPosition),
+                                behavior: "smooth"
+                              });
+                            }, 100);
                           }
-                        }
-                        
-                        // Close mobile menu after navigation
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
+                        }}
+                        className="text-xl font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
+                        style={{ 
+                          textDecoration: "none",
+                          color: "#000000",
+                          fontWeight: 400,
+                        }}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  );
+                }
+                
+                return (
+                  <li key={`mobile-nav-${index}`}>
+                    <Link
+                      href={item.linkUrl}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-xl font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
                       style={{ 
                         textDecoration: "none",
                         color: "#000000",
