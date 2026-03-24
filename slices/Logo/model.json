@@ -29,6 +29,13 @@
             "placeholder": "TRALIALIA"
           }
         },
+        "credit": {
+          "type": "Text",
+          "config": {
+            "label": "Credit",
+            "placeholder": ""
+          }
+        },
         "desktop_offset_x": {
           "type": "Number",
           "config": {

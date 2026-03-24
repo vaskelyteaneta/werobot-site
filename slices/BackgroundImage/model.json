@@ -20,6 +20,13 @@
             "thumbnails": []
           }
         },
+        "credit": {
+          "type": "Text",
+          "config": {
+            "label": "Credit",
+            "placeholder": ""
+          }
+        },
         "position": {
           "type": "Select",
           "config": {
@@ -88,6 +95,13 @@
             "label": "Image",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "credit": {
+          "type": "Text",
+          "config": {
+            "label": "Credit",
+            "placeholder": ""
           }
         }
       }

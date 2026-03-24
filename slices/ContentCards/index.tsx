@@ -54,6 +54,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
   // Render card content
   const renderCard = (item: any, index: number) => {
     const image = item.image;
+    const credit = item.credit;
     const title = item.title;
     const name = item.name;
     const date = item.date;
@@ -98,12 +99,17 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
         }}
       >
         {image?.url && (
-          <div className="w-full aspect-square overflow-hidden border border-black">
+          <div className="w-full aspect-square overflow-hidden border border-black relative">
             <img
               src={image.url}
               alt={image.alt || title || "Content card image"}
               className="w-full h-full object-cover"
             />
+            {credit ? (
+              <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                {credit}
+              </div>
+            ) : null}
           </div>
         )}
         

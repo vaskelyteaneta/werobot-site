@@ -26,9 +26,11 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
   const alignClasses = alignmentClasses[alignment] ?? alignmentClasses.center;
   const showShadow = slice.primary.show_shadow ?? false;
   const graphicImage = (slice.primary as any).graphic_image;
+  const graphicCredit = (slice.primary as any).graphic_credit as string | undefined;
   const graphicPosition = (slice.primary as any)?.graphic_position;
   const graphicSize = (slice.primary as any).graphic_size || "small";
   const graphicImage2 = (slice.primary as any).graphic_image_2;
+  const graphicCredit2 = (slice.primary as any).graphic_credit_2 as string | undefined;
   const graphicPosition2 = (slice.primary as any)?.graphic_position_2;
   const graphicSize2 = (slice.primary as any).graphic_size_2 || "small";
   
@@ -262,11 +264,18 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               className="static mt-4 flex justify-center md:hidden"
             >
               <div className="rotate-slow">
-                <img
-                  src={graphicImage.url}
-                  alt={graphicImage.alt || ""}
-                  className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
-                />
+                <div className="relative inline-block">
+                  <img
+                    src={graphicImage.url}
+                    alt={graphicImage.alt || ""}
+                    className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  />
+                  {graphicCredit ? (
+                    <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                      {graphicCredit}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
             {/* Desktop: absolute positioned */}
@@ -275,11 +284,18 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               style={getGraphicStyle(graphicPosition)}
             >
               <div className="rotate-slow">
-                <img
-                  src={graphicImage.url}
-                  alt={graphicImage.alt || ""}
-                  className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
-                />
+                <div className="relative inline-block">
+                  <img
+                    src={graphicImage.url}
+                    alt={graphicImage.alt || ""}
+                    className={`w-full h-auto ${sizeClasses[graphicSize as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  />
+                  {graphicCredit ? (
+                    <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                      {graphicCredit}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </>
@@ -294,11 +310,18 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               className="static mt-4 flex justify-center md:hidden"
             >
               <div className="rotate-slow">
-                <img
-                  src={graphicImage2.url}
-                  alt={graphicImage2.alt || ""}
-                  className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
-                />
+                <div className="relative inline-block">
+                  <img
+                    src={graphicImage2.url}
+                    alt={graphicImage2.alt || ""}
+                    className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  />
+                  {graphicCredit2 ? (
+                    <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                      {graphicCredit2}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
             {/* Desktop: absolute positioned */}
@@ -307,11 +330,18 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
               style={getGraphicStyle(graphicPosition2)}
             >
               <div className="rotate-slow">
-                <img
-                  src={graphicImage2.url}
-                  alt={graphicImage2.alt || ""}
-                  className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
-                />
+                <div className="relative inline-block">
+                  <img
+                    src={graphicImage2.url}
+                    alt={graphicImage2.alt || ""}
+                    className={`w-full h-auto ${sizeClasses[graphicSize2 as keyof typeof sizeClasses] || sizeClasses.small}`}
+                  />
+                  {graphicCredit2 ? (
+                    <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                      {graphicCredit2}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </>

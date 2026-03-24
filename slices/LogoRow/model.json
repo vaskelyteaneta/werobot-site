@@ -25,6 +25,13 @@
                   "constraint": {},
                   "thumbnails": []
                 }
+                },
+                "credit": {
+                  "type": "Text",
+                  "config": {
+                    "label": "Credit",
+                    "placeholder": ""
+                  }
               }
             }
           }

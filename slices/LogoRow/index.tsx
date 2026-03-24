@@ -143,22 +143,28 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
             <div className="logo-content flex items-center gap-6 md:gap-12 h-full" style={{ width: "fit-content" }}>
               {duplicatedLogos.map((item, index) =>
                 item.logo?.url ? (
-                  <img
-                    key={`${item.logo.url}-${index}`}
-                    src={item.logo.url}
-                    alt={item.logo.alt || "Partner logo"}
-                    className="logo-img object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
-                    style={{ 
-                      width: "auto",
-                      filter: "grayscale(100%)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.filter = "grayscale(0%)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.filter = "grayscale(100%)";
-                    }}
-                  />
+                  <div key={`${item.logo.url}-${index}`} className="relative flex-shrink-0 inline-flex">
+                    <img
+                      src={item.logo.url}
+                      alt={item.logo.alt || "Partner logo"}
+                      className="logo-img object-contain flex-shrink-0 transition-all duration-300 cursor-pointer"
+                      style={{
+                        width: "auto",
+                        filter: "grayscale(100%)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = "grayscale(0%)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter = "grayscale(100%)";
+                      }}
+                    />
+                    {(item as any).credit ? (
+                      <div className="absolute bottom-0 left-0 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[9px] leading-tight px-1 py-[1px] rounded-tr-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">
+                        {(item as any).credit}
+                      </div>
+                    ) : null}
+                  </div>
                 ) : null
               )}
             </div>

@@ -13,7 +13,12 @@ export default function ImageGallery({ slices }: ImageGalleryProps) {
     .map((slice: any) => {
       // Check for graphic_image (Graphic slices) or image (BackgroundImage slices)
       const img = slice.primary?.graphic_image || slice.primary?.image;
-      return img?.url ? img : null;
+      const credit =
+        slice.primary?.credit ||
+        slice.primary?.image_credit ||
+        slice.primary?.graphic_credit ||
+        slice.primary?.background_credit;
+      return img?.url ? { url: img.url, alt: img.alt, credit } : null;
     })
     .filter(Boolean);
 
@@ -48,6 +53,11 @@ export default function ImageGallery({ slices }: ImageGalleryProps) {
               alt={img.alt || `Gallery image ${imgIndex + 1}`}
               className="w-full h-auto object-cover block"
             />
+            {img.credit ? (
+              <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                {img.credit}
+              </div>
+            ) : null}
           </div>
         ))}
       </div>

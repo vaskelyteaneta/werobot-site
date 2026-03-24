@@ -17,6 +17,7 @@ const Logo: FC<LogoProps> = ({ slice }) => {
   const zIndex = slice.primary.z_index ?? 1;
   const rotation = slice.primary.rotation ?? 0;
   const hasText = Boolean(slice.primary.text);
+  const creditText = (slice.primary as any).credit as string | undefined;
 
   const useAbsolute =
     typeof rawOffsetX === "number" && typeof rawOffsetY === "number";
@@ -53,15 +54,21 @@ const Logo: FC<LogoProps> = ({ slice }) => {
         }}
       >
         {slice.primary.logo?.url ? (
-          <img
-            src={slice.primary.logo.url}
-            alt={slice.primary.logo.alt || slice.primary.text || "Logo"}
-            className="object-contain"
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
-          />
+          <div className="relative w-full">
+            <img
+              src={slice.primary.logo.url}
+              alt={slice.primary.logo.alt || slice.primary.text || "Logo"}
+              className="object-contain w-full"
+              style={{
+                height: "auto",
+              }}
+            />
+            {creditText ? (
+              <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                {creditText}
+              </div>
+            ) : null}
+          </div>
         ) : (
           <p className="text-sm text-[#6b6b6b] font-light">Upload a logo</p>
         )}

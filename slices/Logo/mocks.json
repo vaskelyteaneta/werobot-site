@@ -31,6 +31,11 @@
 				"value": "already",
 				"type": "Text"
 			},
+			"credit": {
+				"__TYPE__": "FieldContent",
+				"value": "Credit",
+				"type": "Text"
+			},
 			"desktop_offset_x": {
 				"__TYPE__": "FieldContent",
 				"value": 100,

@@ -26,6 +26,13 @@
                   "thumbnails": []
                 }
               },
+                "credit": {
+                  "type": "Text",
+                  "config": {
+                    "label": "Credit",
+                    "placeholder": ""
+                  }
+                },
               "title": {
                 "type": "Text",
                 "config": {

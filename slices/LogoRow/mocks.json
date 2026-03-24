@@ -33,6 +33,14 @@
 									"alt": "purple",
 									"thumbnails": {}
 								}
+							],
+							[
+								"credit",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Credit",
+									"type": "Text"
+								}
 							]
 						]
 					}

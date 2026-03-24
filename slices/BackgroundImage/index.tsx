@@ -8,6 +8,7 @@ export type BackgroundImageProps = SliceComponentProps<SliceLike>;
 const BackgroundImage = ({ slice }: BackgroundImageProps) => {
   const primary = (slice as any).primary;
   const image = primary?.image;
+  const credit = primary?.credit as string | undefined;
   const position = primary?.position || "center";
   const opacity = primary?.opacity || "30";
   const size = primary?.size || "medium";
@@ -16,7 +17,14 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
 
   // Check if we have a gallery (multiple images in items)
   const hasGallery = items && items.length > 0 && items.some((item: any) => item.image?.url);
-  const galleryImages = hasGallery ? items.filter((item: any) => item.image?.url).map((item: any) => item.image) : [];
+  const galleryImages = hasGallery
+    ? items
+        .filter((item: any) => item.image?.url)
+        .map((item: any) => ({
+          image: item.image,
+          credit: item.credit as string | undefined,
+        }))
+    : [];
 
   // Gallery mode: display multiple images in a row
   if (hasGallery && galleryImages.length > 0) {
@@ -27,7 +35,7 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
         className="w-full flex justify-center py-8 px-6"
       >
         <div className="w-full max-w-7xl flex flex-col md:flex-row gap-4 md:gap-6">
-          {galleryImages.map((img: any, index: number) => (
+          {galleryImages.map((entry: any, index: number) => (
             <div
               key={index}
               className="gallery-image-wrapper w-full md:flex-1 relative overflow-hidden border border-black"
@@ -36,10 +44,15 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
               }}
             >
               <img
-                src={img.url}
-                alt={img.alt || `Gallery image ${index + 1}`}
+                src={entry.image.url}
+                alt={entry.image.alt || `Gallery image ${index + 1}`}
                 className="w-full h-auto object-cover"
               />
+              {entry.credit ? (
+                <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+                  {entry.credit}
+                </div>
+              ) : null}
             </div>
           ))}
         </div>
@@ -91,7 +104,7 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
       className="fixed inset-0 pointer-events-none z-[1]"
     >
       <div
-        className={`absolute ${positionClasses[position as keyof typeof positionClasses]} ${sizeClasses[size as keyof typeof sizeClasses]}`}
+        className={`absolute relative ${positionClasses[position as keyof typeof positionClasses]} ${sizeClasses[size as keyof typeof sizeClasses]}`}
       >
         <img
           src={image.url}
@@ -103,6 +116,11 @@ const BackgroundImage = ({ slice }: BackgroundImageProps) => {
             mixBlendMode: "normal",
           }}
         />
+        {credit ? (
+          <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
+            {credit}
+          </div>
+        ) : null}
       </div>
     </section>
   );

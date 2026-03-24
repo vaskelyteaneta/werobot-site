@@ -999,6 +999,28 @@ export interface GraphicSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   size: prismic.SelectField<"small" | "medium" | "large", "filled">;
+
+  /**
+   * Show border field in *Graphic → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: graphic.default.primary.show_border
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  show_border: prismic.BooleanField;
+
+  /**
+   * Hide on mobile field in *Graphic → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: graphic.default.primary.hide_on_mobile
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  hide_on_mobile: prismic.BooleanField;
 }
 
 /**
@@ -1044,6 +1066,17 @@ export interface HeroBannerSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   title: prismic.RichTextField;
+
+  /**
+   * Headline Size field in *Herotext → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: large
+   * - **API ID Path**: hero_banner.default.primary.size
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  size: prismic.SelectField<"large" | "medium", "filled">;
 }
 
 /**

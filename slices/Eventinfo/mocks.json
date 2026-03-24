@@ -12,6 +12,16 @@
 				"__TYPE__": "BooleanContent",
 				"value": false
 			},
+			"graphic_credit": {
+				"__TYPE__": "FieldContent",
+				"value": "Photo credit",
+				"type": "Text"
+			},
+			"graphic_credit_2": {
+				"__TYPE__": "FieldContent",
+				"value": "Photo credit",
+				"type": "Text"
+			},
 			"link": {
 				"__TYPE__": "RepeatableContent",
 				"type": "Link",

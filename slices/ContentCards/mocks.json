@@ -36,6 +36,14 @@
 								}
 							],
 							[
+								"credit",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Photo credit",
+									"type": "Text"
+								}
+							],
+							[
 								"title",
 								{
 									"__TYPE__": "FieldContent",

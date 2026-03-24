@@ -42,6 +42,13 @@
             "thumbnails": []
           }
         },
+        "graphic_credit": {
+          "type": "Text",
+          "config": {
+            "label": "Graphic credit",
+            "placeholder": ""
+          }
+        },
         "graphic_position": {
           "type": "Select",
           "config": {
@@ -79,6 +86,13 @@
             "label": "Graphic image 2",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "graphic_credit_2": {
+          "type": "Text",
+          "config": {
+            "label": "Graphic credit 2",
+            "placeholder": ""
           }
         },
         "graphic_position_2": {

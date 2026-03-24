@@ -37,22 +37,53 @@ const GraphicContent = ({ slice, position, size, showBorder }: {
   // Only apply rotation to absolute positioned graphics (decorative overlays)
   // Gallery graphics (star row) and non-absolute graphics should not rotate
   const shouldRotate = position && (position.startsWith("absolute") || position.includes("absolute"));
+
+  const creditText = (slice.primary as any).credit as string | undefined;
+  const creditBubble = creditText ? (
+    <div
+      className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]"
+    >
+      {creditText}
+    </div>
+  ) : null;
   
   const imageContent = slice.primary.graphic_image?.url ? (
     shouldRotate ? (
       <div className="rotate-slow">
+        {creditText ? (
+          <div className="relative inline-block">
+            <img
+              src={slice.primary.graphic_image.url}
+              alt={slice.primary.graphic_image.alt || ""}
+              className={`h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+            />
+            {creditBubble}
+          </div>
+        ) : (
+          <img
+            src={slice.primary.graphic_image.url}
+            alt={slice.primary.graphic_image.alt || ""}
+            className={`h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+          />
+        )}
+      </div>
+    ) : (
+      creditText ? (
+        <div className="relative inline-block">
+          <img
+            src={slice.primary.graphic_image.url}
+            alt={slice.primary.graphic_image.alt || ""}
+            className={`h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+          />
+          {creditBubble}
+        </div>
+      ) : (
         <img
           src={slice.primary.graphic_image.url}
           alt={slice.primary.graphic_image.alt || ""}
-          className={`w-full h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
+          className={`h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
         />
-      </div>
-    ) : (
-      <img
-        src={slice.primary.graphic_image.url}
-        alt={slice.primary.graphic_image.alt || ""}
-        className={`w-full h-auto ${sizeClasses[size as keyof typeof sizeClasses] || sizeClasses.small}`}
-      />
+      )
     )
   ) : (
     <p style={{ color: "white" }}>No image selected.</p>

@@ -35,6 +35,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "small",
 				"type": "Select"
+			},
+			"credit": {
+				"__TYPE__": "FieldContent",
+				"value": "Photo credit",
+				"type": "Text"
 			}
 		},
 		"items": []
