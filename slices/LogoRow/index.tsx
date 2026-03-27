@@ -22,6 +22,9 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
       ? Math.min(120, Math.max(20, rawGridLogoHeight))
       : 46;
   const gridCellHeightPx = gridLogoHeightPx + 24;
+  const emptyCellsLg = (6 - (logos.length % 6)) % 6;
+  const emptyCellsSm = (3 - (logos.length % 3)) % 3;
+  const emptyCellsXs = (2 - (logos.length % 2)) % 2;
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Tween | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -175,6 +178,28 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
                   </div>
                 ) : null
               )}
+              {/* Fill trailing empty slots so the last row keeps full grid lines */}
+              {Array.from({ length: emptyCellsXs }).map((_, idx) => (
+                <div
+                  key={`empty-xs-${idx}`}
+                  className="sm:hidden border-r border-b border-[#000053]/30"
+                  style={{ height: `${gridCellHeightPx}px` }}
+                />
+              ))}
+              {Array.from({ length: emptyCellsSm }).map((_, idx) => (
+                <div
+                  key={`empty-sm-${idx}`}
+                  className="hidden sm:block lg:hidden border-r border-b border-[#000053]/30"
+                  style={{ height: `${gridCellHeightPx}px` }}
+                />
+              ))}
+              {Array.from({ length: emptyCellsLg }).map((_, idx) => (
+                <div
+                  key={`empty-lg-${idx}`}
+                  className="hidden lg:block border-r border-b border-[#000053]/30"
+                  style={{ height: `${gridCellHeightPx}px` }}
+                />
+              ))}
             </div>
           ) : (
           <div
