@@ -19,17 +19,21 @@
             "repeat": true,
             "fields": {
               "title": {
-                "type": "Text",
+                "type": "StructuredText",
                 "config": {
                   "label": "Title",
-                  "placeholder": ""
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,heading1,heading2,heading3,strong,em"
                 }
               },
               "name": {
-                "type": "Text",
+                "type": "StructuredText",
                 "config": {
                   "label": "Name",
-                  "placeholder": ""
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em,hyperlink"
                 }
               },
               "description": {
@@ -38,7 +42,7 @@
                   "label": "Description",
                   "placeholder": "",
                   "allowTargetBlank": true,
-                  "multi": "paragraph,strong"
+                  "multi": "paragraph,heading1,heading2,heading3,strong,em,hyperlink,list-item,o-list-item"
                 }
               },
               "link": {

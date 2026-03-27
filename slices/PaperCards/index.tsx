@@ -91,20 +91,89 @@ const PaperCards: FC<PaperCardsProps> = ({ slice }) => {
         </div>
         
         {title && (
-          <h3 className="text-lg md:text-xl font-light tracking-[0.05em] text-black">
-            {title}
-          </h3>
+          <div className="text-lg md:text-xl tracking-[0.05em] text-black">
+            {Array.isArray(title) ? (
+              <PrismicRichText
+                field={title}
+                components={{
+                  heading1: ({ children }) => <h3 className="text-xl md:text-2xl font-semibold text-[#000053]">{children}</h3>,
+                  heading2: ({ children }) => <h4 className="text-lg md:text-xl font-semibold text-[#000053]">{children}</h4>,
+                  heading3: ({ children }) => <h5 className="text-base md:text-lg font-semibold text-[#000053]">{children}</h5>,
+                  paragraph: ({ children }) => <p className="font-light">{children}</p>,
+                  strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+                  em: ({ children }) => <em className="italic">{children}</em>,
+                }}
+              />
+            ) : (
+              <h3 className="font-light">{title}</h3>
+            )}
+          </div>
         )}
         
         {name && (
           <div className="text-sm text-[#6b6b6b] font-light tracking-[0.05em]">
-            {name}
+            {Array.isArray(name) ? (
+              <PrismicRichText
+                field={name}
+                components={{
+                  paragraph: ({ children }) => <span>{children}</span>,
+                  strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+                  em: ({ children }) => <em className="italic">{children}</em>,
+                  hyperlink: ({ node, children }) => (
+                    <a
+                      href={(node.data as any)?.url || "#"}
+                      target={(node.data as any)?.target || undefined}
+                      rel={(node.data as any)?.target === "_blank" ? "noopener noreferrer" : undefined}
+                      className="underline"
+                    >
+                      {children}
+                    </a>
+                  ),
+                }}
+              />
+            ) : (
+              name
+            )}
           </div>
         )}
         
         {description && (
           <div className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-black font-light">
-            <PrismicRichText field={description} />
+            <PrismicRichText
+              field={description}
+              components={{
+                heading1: ({ children }) => (
+                  <h3 className="text-xl md:text-2xl font-semibold tracking-[0.03em] text-[#000053]">
+                    {children}
+                  </h3>
+                ),
+                heading2: ({ children }) => (
+                  <h4 className="text-lg md:text-xl font-semibold tracking-[0.03em] text-[#000053]">
+                    {children}
+                  </h4>
+                ),
+                heading3: ({ children }) => (
+                  <h5 className="text-base md:text-lg font-semibold tracking-[0.03em] text-[#000053]">
+                    {children}
+                  </h5>
+                ),
+                paragraph: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+                em: ({ children }) => <em className="italic">{children}</em>,
+                listItem: ({ children }) => <li className="ml-5 list-disc">{children}</li>,
+                oListItem: ({ children }) => <li className="ml-5 list-decimal">{children}</li>,
+                hyperlink: ({ node, children }) => (
+                  <a
+                    href={(node.data as any)?.url || "#"}
+                    target={(node.data as any)?.target || undefined}
+                    rel={(node.data as any)?.target === "_blank" ? "noopener noreferrer" : undefined}
+                    className="underline hover:text-[#000053]/80 transition-colors"
+                  >
+                    {children}
+                  </a>
+                ),
+              }}
+            />
           </div>
         )}
         

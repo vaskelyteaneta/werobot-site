@@ -18,7 +18,7 @@
             "label": "Title",
             "placeholder": "WeRobot 2026",
             "allowTargetBlank": true,
-            "multi": "heading1,strong"
+            "multi": "heading1,heading2,heading3,paragraph,strong,em"
           }
         },
         "size": {
