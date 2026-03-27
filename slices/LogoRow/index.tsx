@@ -15,6 +15,13 @@ export type LogoRowProps = SliceComponentProps<Content.LogoRowSlice>;
  */
 const LogoRow: FC<LogoRowProps> = ({ slice }) => {
   const logos = slice.primary.logo || [];
+  const layout = ((slice.primary as any).layout || "marquee") as "marquee" | "grid";
+  const rawGridLogoHeight = (slice.primary as any).grid_logo_height_px;
+  const gridLogoHeightPx =
+    typeof rawGridLogoHeight === "number" && Number.isFinite(rawGridLogoHeight)
+      ? Math.min(120, Math.max(20, rawGridLogoHeight))
+      : 46;
+  const gridCellHeightPx = gridLogoHeightPx + 24;
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Tween | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -48,6 +55,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
   }, []);
 
   useEffect(() => {
+    if (layout !== "marquee") return;
     if (!containerRef.current || logos.length === 0) return;
 
     const container = containerRef.current;
@@ -114,7 +122,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
         animationRef.current.kill();
       }
     };
-  }, [logos]);
+  }, [logos, layout]);
 
   // Duplicate logos multiple times for seamless infinite scroll
   const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
@@ -133,9 +141,42 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
         }
       `}} />
       <div
-        className="w-full max-w-5xl bg-transparent py-3 md:py-6 overflow-hidden transition-all duration-300 border border-[#000053]"
+        className={`w-full max-w-5xl bg-transparent overflow-hidden transition-all duration-300 border border-[#000053] ${
+          layout === "grid" ? "py-0" : "py-3 md:py-6"
+        }`}
       >
         {logos.length > 0 ? (
+          layout === "grid" ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-t border-l border-[#000053]/30">
+              {logos.map((item: any, index: number) =>
+                item.logo?.url ? (
+                  <div
+                    key={`${item.logo.url}-${index}`}
+                    className="relative border-r border-b border-[#000053]/30 flex items-center justify-center px-3 py-2"
+                    style={{ height: `${gridCellHeightPx}px` }}
+                  >
+                    <img
+                      src={item.logo.url}
+                      alt={item.logo.alt || "Partner logo"}
+                      className="w-auto max-w-full object-contain transition-all duration-300"
+                      style={{ maxHeight: `${gridLogoHeightPx}px`, filter: "grayscale(100%)" }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = "grayscale(0%)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter = "grayscale(100%)";
+                      }}
+                    />
+                    {(item as any).credit ? (
+                      <div className="absolute bottom-0 left-0 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[9px] leading-tight px-1 py-[1px] rounded-tr-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">
+                        {(item as any).credit}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null
+              )}
+            </div>
+          ) : (
           <div
             ref={containerRef}
             className="relative w-full overflow-hidden h-[40px] md:h-[80px]"
@@ -169,6 +210,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
               )}
             </div>
           </div>
+          )
         ) : (
               <p className="text-xs uppercase tracking-[0.25em] text-left text-white opacity-70">
             Add sponsor logos in Prismic

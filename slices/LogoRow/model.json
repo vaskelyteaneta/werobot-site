@@ -12,6 +12,25 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "layout": {
+          "type": "Select",
+          "config": {
+            "label": "Layout",
+            "placeholder": "",
+            "options": [
+              "marquee",
+              "grid"
+            ],
+            "default_value": "marquee"
+          }
+        },
+        "grid_logo_height_px": {
+          "type": "Number",
+          "config": {
+            "label": "Grid logo height (px)",
+            "placeholder": "Default: 46"
+          }
+        },
         "logo": {
           "type": "Group",
           "config": {

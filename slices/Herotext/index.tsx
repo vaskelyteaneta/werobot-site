@@ -73,6 +73,7 @@ const Herotext = ({ slice }: HerotextProps) => {
                 {children}
               </p>
             ),
+            strong: ({ children }) => <strong className="font-bold">{children}</strong>,
           }}
         />
       </div>

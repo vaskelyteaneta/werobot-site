@@ -26,6 +26,44 @@
                   "thumbnails": []
                 }
               },
+              "image_fit": {
+                "type": "Select",
+                "config": {
+                  "label": "Image fit",
+                  "placeholder": "",
+                  "options": [
+                    "cover",
+                    "contain"
+                  ],
+                  "default_value": "cover"
+                }
+              },
+              "image_position": {
+                "type": "Select",
+                "config": {
+                  "label": "Image position",
+                  "placeholder": "",
+                  "options": [
+                    "center",
+                    "top",
+                    "bottom",
+                    "left",
+                    "right",
+                    "top left",
+                    "top right",
+                    "bottom left",
+                    "bottom right"
+                  ],
+                  "default_value": "center"
+                }
+              },
+              "image_zoom_percent": {
+                "type": "Number",
+                "config": {
+                  "label": "Image zoom (%)",
+                  "placeholder": "Default: 100"
+                }
+              },
                 "credit": {
                   "type": "Text",
                   "config": {
@@ -72,6 +110,15 @@
                   "allowTargetBlank": true,
                   "allowText": true,
                   "repeat": false
+                }
+              },
+              "show_learn_more": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Show 'Learn more' link",
+                  "default_value": true,
+                  "placeholder_true": "Show link",
+                  "placeholder_false": "Hide link"
                 }
               }
             }

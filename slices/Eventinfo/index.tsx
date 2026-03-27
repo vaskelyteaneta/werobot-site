@@ -214,6 +214,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
             <PrismicRichText 
               field={slice.primary.text}
               components={{
+                strong: ({ children }) => <strong className="font-bold">{children}</strong>,
                 hyperlink: ({ node, children }) => {
                   const linkField = node.data as any;
                   // Extract URL from linkField

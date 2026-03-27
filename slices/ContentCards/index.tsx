@@ -54,12 +54,27 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
   // Render card content
   const renderCard = (item: any, index: number) => {
     const image = item.image;
+    const imageFit = item.image_fit || "cover";
+    const imagePosition = item.image_position || "center";
+    const rawZoom = item.image_zoom_percent;
+    const parsedZoom =
+      typeof rawZoom === "number"
+        ? rawZoom
+        : typeof rawZoom === "string"
+          ? Number.parseFloat(rawZoom)
+          : NaN;
+    const imageZoomPercent = Number.isFinite(parsedZoom) ? parsedZoom : 100;
+    const clampedZoomPercent = Math.min(300, Math.max(10, imageZoomPercent));
+    const imageZoomScale = clampedZoomPercent / 100;
+    const isShrinkMode = clampedZoomPercent < 100;
+    const shouldShowBlurFill = imageFit === "contain" || isShrinkMode;
     const credit = item.credit;
     const title = item.title;
     const name = item.name;
     const date = item.date;
     const description = item.description;
     const link = item.link;
+    const showLearnMore = item.show_learn_more;
 
     // Format date if it exists
     let formattedDate = "";
@@ -100,10 +115,39 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
       >
         {image?.url && (
           <div className="w-full aspect-square overflow-hidden border border-[#000053] relative">
+            {shouldShowBlurFill && (
+              <img
+                src={image.url}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: imagePosition,
+                  filter: "blur(18px)",
+                  transform: "scale(1.08)",
+                  opacity: 0.7,
+                }}
+              />
+            )}
             <img
               src={image.url}
               alt={image.alt || title || "Content card image"}
-              className="w-full h-full object-cover"
+              className="absolute inset-0"
+              style={{
+                width: isShrinkMode ? `${clampedZoomPercent}%` : "100%",
+                height: isShrinkMode ? `${clampedZoomPercent}%` : "100%",
+                left: "50%",
+                top: "50%",
+                transform: isShrinkMode
+                  ? "translate(-50%, -50%)"
+                  : `translate(-50%, -50%) scale(${imageZoomScale})`,
+                objectFit:
+                  isShrinkMode || imageFit === "contain" ? "contain" : "cover",
+                objectPosition: imagePosition,
+                transformOrigin: imagePosition,
+                transition: "transform 0.2s ease-out",
+              }}
             />
             {credit ? (
               <div className="absolute bottom-1 left-1 pointer-events-none bg-white/45 backdrop-blur-[2px] text-black/80 text-[10px] leading-tight px-1.5 py-0.5 rounded-[6px] border border-white/40 shadow-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[160px]">
@@ -133,7 +177,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
           </div>
         )}
         
-        {link && (
+        {link && (typeof showLearnMore === "boolean" ? showLearnMore : true) && (
           <div className="mt-auto">
             <PrismicLink
               field={link}
