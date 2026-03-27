@@ -1,22 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 export default function IntroScreen() {
   const [isVisible, setIsVisible] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    // Auto-fade after 3 seconds
     const timer = setTimeout(() => {
       if (isVisible) {
         setIsAnimating(true);
-        setTimeout(() => setIsVisible(false), 500); // Wait for animation to complete
+        setTimeout(() => setIsVisible(false), 500);
       }
     }, 3000);
 
-    // Handle scroll
     const handleScroll = () => {
       if (isVisible && window.scrollY > 10) {
         setIsAnimating(true);
@@ -24,7 +21,6 @@ export default function IntroScreen() {
       }
     };
 
-    // Handle click/touch
     const handleInteraction = () => {
       if (isVisible) {
         setIsAnimating(true);
@@ -59,16 +55,11 @@ export default function IntroScreen() {
         setTimeout(() => setIsVisible(false), 700);
       }}
     >
-      <Image
-        src="/metalic-logo.png"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/we-robot-logo-v2.png"
         alt="WeRobot Logo"
-        width={600}
-        height={250}
-        className="max-w-[350px] md:max-w-[600px] h-auto"
-        style={{
-          objectFit: "contain",
-        }}
-        priority
+        className="max-w-[80%] md:max-w-[700px] h-auto px-6"
       />
     </div>
   );
