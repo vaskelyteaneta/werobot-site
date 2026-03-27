@@ -29,6 +29,20 @@
             "allowText": true,
             "repeat": false
           }
+        },
+        "top_spacing_px": {
+          "type": "Number",
+          "config": {
+            "label": "Top spacing (px)",
+            "placeholder": "Default: 12"
+          }
+        },
+        "bottom_spacing_px": {
+          "type": "Number",
+          "config": {
+            "label": "Bottom spacing (px)",
+            "placeholder": "Default: 40"
+          }
         }
       },
       "items": {}

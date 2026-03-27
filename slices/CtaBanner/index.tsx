@@ -16,6 +16,8 @@ export type CtaBannerProps = SliceComponentProps<Content.CtaBannerSlice>;
 const CtaBanner = ({ slice }: CtaBannerProps) => {
   const label = slice.primary.button_text || "GET THE TICKET";
   const link = slice.primary.button_link;
+  const topSpacingPx = (slice.primary as any).top_spacing_px;
+  const bottomSpacingPx = (slice.primary as any).bottom_spacing_px;
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -61,6 +63,10 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
   
   // Force mailto for partner button even if link exists - this takes priority
   const shouldUseMailto = isPartnerButton;
+  const sectionPaddingTop =
+    typeof topSpacingPx === "number" ? topSpacingPx : 12;
+  const sectionPaddingBottom =
+    typeof bottomSpacingPx === "number" ? bottomSpacingPx : 40;
 
   return (
     <section
@@ -71,7 +77,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        padding: "40px 0",
+        padding: `${sectionPaddingTop}px 0 ${sectionPaddingBottom}px`,
       }}
     >
       {shouldUseMailto ? (
