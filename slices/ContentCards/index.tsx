@@ -161,7 +161,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
           <div className="text-base tracking-[0.05em] text-black">
             {Array.isArray(title) ? (
               <PrismicRichText
-                field={title}
+                field={title as any}
                 components={{
                   heading1: ({ children }) => <h3 className="text-xl md:text-2xl font-semibold text-[#000053]">{children}</h3>,
                   heading2: ({ children }) => <h4 className="text-lg md:text-xl font-semibold text-[#000053]">{children}</h4>,
@@ -182,7 +182,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
             {name && (
               Array.isArray(name) ? (
                 <PrismicRichText
-                  field={name}
+                  field={name as any}
                   components={{
                     paragraph: ({ children }) => <span>{children}</span>,
                     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
