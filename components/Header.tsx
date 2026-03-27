@@ -189,7 +189,7 @@ export default function Header({ anchorNavigation }: HeaderProps) {
                     className="text-xs md:text-base font-light tracking-[0.1em] md:tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
                     style={{ 
                       textDecoration: "none",
-                      color: "#000000",
+                      color: "#000053",
                       fontWeight: 400,
                     }}
                     onClick={(e) => {

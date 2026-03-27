@@ -144,7 +144,7 @@ export default function Navigation() {
                       className="text-sm md:text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
                       style={{ 
                         textDecoration: "none",
-                        color: "#000000",
+                        color: "#000053",
                         fontWeight: 400,
                       }}
                       onClick={(e) => {
@@ -232,7 +232,7 @@ export default function Navigation() {
                   <li key={index}>
                     <a
                       href={linkUrl}
-                      className="text-sm md:text-base font-light tracking-[0.1em] uppercase text-[#1a1a1a] hover:text-[#000000] transition-colors duration-200"
+                      className="text-sm md:text-base font-light tracking-[0.1em] uppercase text-[#000053] hover:text-[#000053] transition-colors duration-200"
                       style={{ textDecoration: "none" }}
                       onClick={(e) => {
                         if (isAnchorLink) {

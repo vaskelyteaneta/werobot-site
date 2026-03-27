@@ -8,7 +8,7 @@ html {
 :root {
   /* Refined color palette - clean and minimal */
   --background: #D1E4F6; /* light blue */
-  --foreground: #1a1a1a; /* deep charcoal */
+  --foreground: #000053; /* brand navy */
   --accent: #2d2d2d; /* subtle dark accent */
   --muted: #6b6b6b; /* muted text */
   --border: #e5e5e5; /* subtle borders */
@@ -26,7 +26,7 @@ html {
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #D1E4F6;
-    --foreground: #1a1a1a;
+    --foreground: #000053;
     --accent: #2d2d2d;
     --muted: #6b6b6b;
     --border: #e5e5e5;
@@ -47,7 +47,12 @@ body {
 /* Apply refined typography to all elements */
 * {
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-weight: 400;
+}
+
+/* Keep semantic and utility bold weights working */
+b,
+strong {
+  font-weight: 700;
 }
 
 /* Ensure content is above background */
@@ -56,15 +61,15 @@ main {
   z-index: 10;
   min-height: 100vh;
   background-color: transparent;
-  color: #000000;
+  color: #000053;
 }
 
-/* Ensure all text in main is black by default */
+/* Ensure all text in main uses brand navy by default */
 main * {
   color: inherit;
 }
 
-/* Override any white text to black */
+/* Override any white text to brand navy */
 main p,
 main h1,
 main h2,
@@ -76,7 +81,7 @@ main span,
 main div,
 main li,
 main a:not([class*="text-"]) {
-  color: #000000 !important;
+  color: #000053 !important;
 }
 
 /* Remove any borders or lines from sections and navigation */
@@ -165,8 +170,8 @@ div[style*="unicorn"] {
 /* Splide carousel styling - match design */
 .splide__arrow {
   background: transparent !important;
-  border: 1px solid #000000 !important;
-  color: #000000 !important;
+  border: 1px solid #000053 !important;
+  color: #000053 !important;
   opacity: 1 !important;
   width: 40px !important;
   height: 40px !important;
@@ -174,7 +179,7 @@ div[style*="unicorn"] {
 }
 
 .splide__arrow:hover {
-  background: #000000 !important;
+  background: #000053 !important;
   color: #ffffff !important;
   opacity: 1 !important;
 }
@@ -193,7 +198,7 @@ div[style*="unicorn"] {
 /* Footer navigation - ensure black text */
 footer a,
 footer li a {
-  color: #000000 !important;
+  color: #000053 !important;
 }
 
 /* Slow rotation animation for graphic elements */

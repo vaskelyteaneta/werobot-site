@@ -69,7 +69,7 @@ const Banner: FC<BannerProps> = ({ slice }) => {
             e.preventDefault();
             window.location.href = `mailto:${partnerEmail}?subject=Partner%20with%20WeRobot%202026`;
           }}
-          className="inline-flex border border-black bg-black uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light transition-all duration-300 hover:opacity-80"
+          className="inline-flex border border-[#000053] bg-[#000053] uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light transition-all duration-300 hover:opacity-80"
           style={{
             letterSpacing: "0.2em",
             color: "#ffffff",
@@ -81,11 +81,11 @@ const Banner: FC<BannerProps> = ({ slice }) => {
         </a>
       ) : (
         <div
-          className="inline-flex border border-black bg-transparent uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
+          className="inline-flex border border-[#000053] bg-transparent uppercase px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light"
           style={{
             letterSpacing: "0.2em",
-            color: "#000000",
-            borderColor: "#000000",
+            color: "#000053",
+            borderColor: "#000053",
           }}
         >
           {label}

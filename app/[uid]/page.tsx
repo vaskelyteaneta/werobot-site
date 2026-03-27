@@ -170,7 +170,7 @@ export default async function Page({ params }: PageProps) {
     }
 
     return (
-      <main style={{ color: "#000000" }}>
+      <main style={{ color: "#000053" }}>
         {processedSlices.map((sliceOrGroup, index) => {
           const hideOnMobile = hideOnMobileMap.has(index);
 

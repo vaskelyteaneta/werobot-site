@@ -149,7 +149,7 @@ export default function PageNavigation() {
                   className="text-sm md:text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
                   style={{ 
                     textDecoration: "none",
-                    color: "#000000",
+                    color: "#000053",
                     fontWeight: 400,
                   }}
                 >
@@ -236,7 +236,7 @@ export default function PageNavigation() {
                     className="text-base font-light tracking-[0.15em] uppercase text-black hover:text-[#333333] transition-colors duration-200 cursor-pointer"
                     style={{ 
                       textDecoration: "none",
-                      color: "#000000",
+                      color: "#000053",
                       fontWeight: 400,
                     }}
                   >

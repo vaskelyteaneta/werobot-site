@@ -83,9 +83,9 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
           }}
           className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           style={{
-            backgroundColor: "#000000",
+            backgroundColor: "#000053",
             color: "#ffffff",
-            border: "1px solid #000000",
+            border: "1px solid #000053",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             textDecoration: "none",
@@ -102,9 +102,9 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
           rel="noopener noreferrer"
           className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           style={{
-            backgroundColor: "#000000",
+            backgroundColor: "#000053",
             color: "#ffffff",
-            border: "1px solid #000000",
+            border: "1px solid #000053",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             textDecoration: "none",
@@ -137,9 +137,9 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
           className="transition-all duration-300 hover:opacity-80 inline-block px-8 py-4 md:px-16 md:py-5 text-sm md:text-base font-light rounded-full"
           field={link}
           style={{
-            backgroundColor: "#000000",
+            backgroundColor: "#000053",
             color: "#ffffff",
-            border: "1px solid #000000",
+            border: "1px solid #000053",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             textDecoration: "none",
@@ -155,7 +155,7 @@ const CtaBanner = ({ slice }: CtaBannerProps) => {
           style={{
             backgroundColor: "transparent",
             color: "#6b6b6b",
-            border: "1px solid #000000",
+            border: "1px solid #000053",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             opacity: 0.5,

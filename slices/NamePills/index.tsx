@@ -25,12 +25,12 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
     ? sectionTitle.toLowerCase().replace(/\s+/g, "-")
     : "organizing-committee"; // fallback default
 
-  // Direct hover handlers to guarantee pure black (#000000) background - no CSS involved
+  // Direct hover handlers to guarantee brand navy (#000053) background
   const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const el = e.currentTarget;
-    el.style.setProperty("background-color", "#000000", "important");
-    el.style.setProperty("background", "#000000", "important");
-    el.style.setProperty("border-color", "#000000", "important");
+    el.style.setProperty("background-color", "#000053", "important");
+    el.style.setProperty("background", "#000053", "important");
+    el.style.setProperty("border-color", "#000053", "important");
     el.style.setProperty("color", "#ffffff", "important");
     el.style.setProperty("opacity", "1", "important");
     // Also update all child elements
@@ -43,10 +43,10 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
     const el = e.currentTarget;
     el.style.setProperty("background-color", "transparent", "important");
     el.style.setProperty("background", "transparent", "important");
-    el.style.setProperty("border-color", "#000000", "important");
-    el.style.setProperty("color", "#000000", "important");
+    el.style.setProperty("border-color", "#000053", "important");
+    el.style.setProperty("color", "#000053", "important");
     el.querySelectorAll("*").forEach((child) => {
-      (child as HTMLElement).style.setProperty("color", "#000000", "important");
+      (child as HTMLElement).style.setProperty("color", "#000053", "important");
     });
   }, []);
 
@@ -128,8 +128,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
 
               const pillStyle: React.CSSProperties = {
                 backgroundColor: "transparent",
-                color: "#000000",
-                borderColor: "#000000",
+                color: "#000053",
+                borderColor: "#000053",
                 outline: "none",
                 textDecoration: "none",
               };
@@ -203,8 +203,8 @@ const NamePills: FC<NamePillsProps> = ({ slice }) => {
 
               const pillStyle: React.CSSProperties = {
                 backgroundColor: "transparent",
-                color: "#000000",
-                borderColor: "#000000",
+                color: "#000053",
+                borderColor: "#000053",
                 outline: "none",
                 textDecoration: "none",
               };
