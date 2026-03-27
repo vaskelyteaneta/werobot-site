@@ -30,7 +30,7 @@ export default function ImageGallery({ slices }: ImageGalleryProps) {
         {images.map((img: any, imgIndex: number) => (
           <div
             key={imgIndex}
-            className={`gallery-image-wrapper w-full md:flex-1 relative overflow-hidden transition-all duration-300 border border-black${
+            className={`gallery-image-wrapper w-full md:flex-1 relative overflow-hidden transition-all duration-300 border border-[#000053]${
               isGraphicGallery && imgIndex > 0 ? " mobile-hide-graphic" : ""
             }`}
             style={{

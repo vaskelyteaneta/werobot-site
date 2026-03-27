@@ -260,7 +260,7 @@ const GraphicContent = ({ slice, position, size, showBorder }: {
         data-slice-variation={slice.variation}
         className="w-full flex justify-start px-4 md:px-8 py-4"
       >
-        <div className={showBorder ? "border border-black inline-block" : "inline-block"}>
+        <div className={showBorder ? "border border-[#000053] inline-block" : "inline-block"}>
           {imageContent}
         </div>
       </section>
@@ -274,7 +274,7 @@ const GraphicContent = ({ slice, position, size, showBorder }: {
         data-slice-variation={slice.variation}
         className="w-full flex justify-end px-4 md:px-8 py-4"
       >
-        <div className={showBorder ? "border border-black inline-block" : "inline-block"}>
+        <div className={showBorder ? "border border-[#000053] inline-block" : "inline-block"}>
           {imageContent}
         </div>
       </section>
@@ -288,7 +288,7 @@ const GraphicContent = ({ slice, position, size, showBorder }: {
       data-slice-variation={slice.variation}
       className="w-full flex justify-center py-10 px-4"
     >
-      <div className={showBorder ? "border border-black inline-block" : "inline-block"}>
+      <div className={showBorder ? "border border-[#000053] inline-block" : "inline-block"}>
         {imageContent}
       </div>
     </section>

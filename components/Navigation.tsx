@@ -178,7 +178,7 @@ export default function Navigation() {
 
       {/* Footer Navigation */}
       {footerNav.length > 0 && (
-        <footer className="w-full border-t border-black/10 bg-white/90 backdrop-blur-md mt-auto">
+        <footer className="w-full border-t border-[#000053]/10 bg-white/90 backdrop-blur-md mt-auto">
           <div className="max-w-7xl mx-auto px-4 py-8">
             <ul className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
               {footerNav.map((item, index) => {

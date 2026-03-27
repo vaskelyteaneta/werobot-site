@@ -79,7 +79,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
     return (
       <div
         key={index}
-        className="border border-black bg-transparent p-4 md:p-6 transition-all duration-300 group"
+        className="border border-[#000053] bg-transparent p-4 md:p-6 transition-all duration-300 group"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -99,7 +99,7 @@ const ContentCards: FC<ContentCardsProps> = ({ slice }) => {
         }}
       >
         {image?.url && (
-          <div className="w-full aspect-square overflow-hidden border border-black relative">
+          <div className="w-full aspect-square overflow-hidden border border-[#000053] relative">
             <img
               src={image.url}
               alt={image.alt || title || "Content card image"}

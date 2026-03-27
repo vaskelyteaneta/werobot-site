@@ -62,7 +62,7 @@ const PaperCards: FC<PaperCardsProps> = ({ slice }) => {
     return (
       <div
         key={index}
-        className="border border-black bg-transparent p-4 md:p-6 transition-all duration-300 group"
+        className="border border-[#000053] bg-transparent p-4 md:p-6 transition-all duration-300 group"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -82,7 +82,7 @@ const PaperCards: FC<PaperCardsProps> = ({ slice }) => {
         }}
       >
         {/* Always use the same document icon */}
-        <div className="w-full aspect-square overflow-hidden flex items-center justify-center bg-transparent border border-black">
+        <div className="w-full aspect-square overflow-hidden flex items-center justify-center bg-transparent border border-[#000053]">
           <img
             src="/file image1.png"
             alt="Paper document"

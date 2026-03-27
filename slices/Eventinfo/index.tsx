@@ -198,7 +198,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
         className={[
           containerClasses,
           "px-4 py-4 md:px-12 md:py-10",
-          "border border-black",
+          "border border-[#000053]",
           "bg-transparent",
           "relative",
           "z-0",
@@ -207,7 +207,7 @@ const Eventinfo = ({ slice }: EventinfoProps) => {
           "hover:border-[#1a1a1a]",
           "overflow-visible",
         ].join(" ")}
-        style={{ position: "relative", border: "1px solid #000000" }}
+        style={{ position: "relative", border: "1px solid #000053" }}
       >
         {slice.primary.text ? (
               <div className="text-sm md:text-base tracking-[0.05em] leading-relaxed text-left text-[#1a1a1a] font-light">
