@@ -150,7 +150,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
       >
         {logos.length > 0 ? (
           layout === "grid" ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-t border-l border-[#000053]/30">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
               {logos.map((item: any, index: number) =>
                 item.logo?.url ? (
                   <div
