@@ -145,7 +145,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
       `}} />
       <div
         className={`w-full max-w-5xl bg-transparent overflow-hidden transition-all duration-300 border border-[#000053] ${
-          layout === "grid" ? "py-0" : "py-3 md:py-6"
+          layout === "grid" ? "py-0 border-b-0" : "py-3 md:py-6"
         }`}
       >
         {logos.length > 0 ? (
