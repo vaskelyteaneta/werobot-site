@@ -175,12 +175,12 @@ export default function PageNavigation() {
           pointerEvents: "none",
         }}
       >
-        {/* weROBOT logo - three times bigger than hamburger button */}
+        {/* Mobile logo */}
         <Link href="/" aria-label="Home" className="flex items-center" style={{ pointerEvents: "auto" }}>
           <img
-            src="/metalic-logo.png"
+            src="/we-robot-logo-v2.png"
             alt="weROBOT"
-            className="h-[108px] w-auto object-contain"
+            className="h-[42px] w-auto object-contain"
           />
         </Link>
 
