@@ -180,7 +180,7 @@ export default function PageNavigation() {
           <img
             src="/we-robot-logo-v2.png"
             alt="weROBOT"
-            className="h-[42px] w-auto object-contain"
+            className="h-5 w-auto object-contain"
           />
         </Link>
 
