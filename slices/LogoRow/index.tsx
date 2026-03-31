@@ -155,7 +155,7 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
                 item.logo?.url ? (
                   <div
                     key={`${item.logo.url}-${index}`}
-                    className="relative border-r border-b border-[#000053]/30 flex items-center justify-center px-3 py-2"
+                    className="relative border-r border-b border-[#000053] flex items-center justify-center px-3 py-2"
                     style={{ height: `${gridCellHeightPx}px` }}
                   >
                     <img
@@ -182,21 +182,21 @@ const LogoRow: FC<LogoRowProps> = ({ slice }) => {
               {Array.from({ length: emptyCellsXs }).map((_, idx) => (
                 <div
                   key={`empty-xs-${idx}`}
-                  className="sm:hidden border-r border-b border-[#000053]/30"
+                  className="sm:hidden border-r border-b border-[#000053]"
                   style={{ height: `${gridCellHeightPx}px` }}
                 />
               ))}
               {Array.from({ length: emptyCellsSm }).map((_, idx) => (
                 <div
                   key={`empty-sm-${idx}`}
-                  className="hidden sm:block lg:hidden border-r border-b border-[#000053]/30"
+                  className="hidden sm:block lg:hidden border-r border-b border-[#000053]"
                   style={{ height: `${gridCellHeightPx}px` }}
                 />
               ))}
               {Array.from({ length: emptyCellsLg }).map((_, idx) => (
                 <div
                   key={`empty-lg-${idx}`}
-                  className="hidden lg:block border-r border-b border-[#000053]/30"
+                  className="hidden lg:block border-r border-b border-[#000053]"
                   style={{ height: `${gridCellHeightPx}px` }}
                 />
               ))}
